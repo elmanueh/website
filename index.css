@@ -7,7 +7,7 @@
 
 
 #header {
-	background-color: #404040;
+	background-color: #303030;
 	display: flex;
 	justify-content: space-between;
 	padding: 16px;
@@ -33,17 +33,19 @@
 
 #body {
 	display: flex;
+	background-color: #202020;
+	color: aliceblue;
 }
 
 #body-index {
 	display: flex;
 	align-items: center;
-	background-color: yellowgreen;
-	width: 30%;
+	height: 800px;
+	width: auto;
 }
 
 #body-index-box {
-	background-color: violet;
+	background-color: #404040;
 	border-radius: 20px;
 	padding: 30px;
 	margin-left: 20px;
@@ -53,23 +55,51 @@
 #box-title {
 	font-size: 30px;
 	font-weight: bold;
+	margin-bottom: 20px;
+	text-align: center;
 }
 
-#box-content {
-	
+#body-main {
+	width: 100%;
 }
 
-
-
-#body-content {
-	background-color: yellow;
-	width: 70%;
+#body-box {
+	margin: 40px;
+	border-radius: 30px;
+	height: calc(100% - 120px);
+	padding: 20px;
+	background-color: #404040;
+	font-size: 50px;
+	color: rgb(223, 223, 11);
+	font-weight: bold;
+	text-align: center;
 }
 
+.index-element {
+	margin-bottom: 20px;
+	display: flex;
+	font-weight: bold;
+}
+
+.element-icon {
+	margin-right: 15px;
+}
+
+.element-title {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	color: #e3eaf0;
+}
+
+.element-title:hover {
+	color: #62b1f7;
+}
 
 
 footer {
 	padding: 20px;
 	background-color: #303030;
 	color: aliceblue;
+	text-align: center;
 }
