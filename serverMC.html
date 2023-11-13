@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="index.css">
+		<link rel="stylesheet" href="serverMC.css">
+		<link rel="icon" type="image/x-icon" href="icon.png">
+		<title>Servidor Minecraft</title>
+	</head>
+	<body>
+		<div class="header-page">
+			<div class="header-icon">
+				<a href="http://143.47.53.235/"><img src="icon.png" width="50px"></a>
+			</div>
+			<div class="header-logging">
+				<a href="#" class="button-db">Iniciar Sesion</a>
+				<a href="#" class="button-db">Registrarse</a>
+			</div>
+		</div>
+		<div class="body-page">
+			<div class="left-body">
+				<div class="left-box">
+					<div class="left-title">Indice</div>
+					<div class="left-content">
+						<div class="left-content-type">
+							<div class="left-content-icon"><img src="discord.png" width="30px"></div>
+							<div class="left-content-text"><a class="left-buttons" href="https://discord.gg/byyF3H5zfB" target="_blank">DISCORD</a></div>
+						</div>
+						<hr color="black">
+
+						<div class="left-content-type">
+							<div class="left-content-icon"><img src="minecraft.png" width="30px"></div>
+							<div class="left-content-text"><a class="left-buttons" href="serverMC.html">SERVIDOR MINECRAFT</a></div>
+						</div>
+						<hr color="black">
+
+						<div class="left-content-type">
+							<div class="left-content-icon"><img src="http://143.47.33.188/iconoindex.png" width="30px"></div>
+							<div class="left-content-text"><a class="left-buttons" href="http://143.47.33.188/" target="_blank">WEB VICTOR</a></div>
+						</div>
+						<hr color="black">
+
+						<div class="left-content-type">
+							<div class="left-content-icon"><img src="http://143.47.54.117/icons/ubuntu-logo.png" width="30px"></div>
+							<div class="left-content-text"><a class="left-buttons" href="http://143.47.54.117/" target="_blank">WEB SANTI</a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="center-body">
+				<div class="center-content">
+					<div class="info-server">
+
+						<div class="server-ip">IP: 143.47.53.235</div>
+						<div class="server-status">
+							<div class="server-status2"></div>
+							<div class="server-version"></div>
+							<div class="server-online"></div>
+							<div class="server-userlist"></div>
+						</div>
+						<script src="https://mcapi.us/scripts/minecraft.min.js"></script>
+						<script>
+							MinecraftAPI.getServerStatus('143.47.53.235', function (err, status) {
+								if (err) {
+									return document.querySelector('.server-status').innerHTML = "Status: Offline";
+								}
+			
+								document.querySelector('.server-version').innerHTML = "Server Version: " + status.server.name;
+								document.querySelector('.server-status2').innerHTML = "Status: Online";
+								document.querySelector('.server-online').innerHTML = "Players Online: " + status.players.now + "/" + status.players.max;
+								document.querySelector('.server-userlist').innerHTML = "Players Connected: " + status.players.sample[0].name;
+							});
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer-page">
+			© Copyright 2003-2023 Copyright.es - Todos los Derechos Reservados - Legal
+		</div>
+	</body>
+</html>
