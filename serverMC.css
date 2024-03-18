@@ -1,10 +1,9 @@
 .info-server {
-	padding-top: 30px;
-	padding-left: 20px;
-	font-size: 25px;
+  padding-top: 30px;
+  padding-left: 20px;
+  font-size: 25px;
 }
 
-
 .server-status {
-	color:rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
 }
