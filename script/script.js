@@ -1,5 +1,7 @@
 let playersOriginal;
 let sortTable = {};
+//const route = 'http://127.0.0.1:4321';
+const route = 'http://143.47.53.235:4321';
 
 window.addEventListener('DOMContentLoaded', function () {
   // Search a clan information
@@ -11,7 +13,7 @@ window.addEventListener('DOMContentLoaded', function () {
     try {
       tableHead.innerHTML = '';
       tableBody.innerHTML = '';
-      const response = await fetch(`http://127.0.0.1/clans/clan/${encodeURIComponent(clanTag)}`);
+      const response = await fetch(`${route}/clans/clan/${encodeURIComponent(clanTag)}`);
       if (response.status !== 200) throw -1;
       const players = await response.json();
       playersOriginal = players;
