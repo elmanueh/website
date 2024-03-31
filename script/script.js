@@ -25,7 +25,7 @@ window.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-// Filter table
+// Filter tablee
 function sort(columnName) {
   let a = playersOriginal.slice();
   if (sortTable[columnName] === 'desc' ? (sortTable[columnName] = 'asc') : (sortTable[columnName] = 'desc'));
