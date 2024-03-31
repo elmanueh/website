@@ -51,10 +51,37 @@
 
 .intro {
   background-color: #ccc;
-  height: 90vh;
+  min-height: 90vh;
 }
 
 .info {
   padding-top: 5vh;
   text-align: center;
+}
+
+.search-clan {
+  padding-top: 3vh;
+  justify-content: center;
+  text-align: center;
+  padding-bottom: 5vh;
+}
+
+#table {
+  padding-top: 5vh;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+td,
+th {
+  text-align: center;
+  border-bottom: solid;
+  padding: 1vh;
+}
+
+th {
+  font-size: 20px;
 }

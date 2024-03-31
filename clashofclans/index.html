@@ -6,6 +6,7 @@
     <link rel="icon" type="image/x-icon" href="../favicon.ico" />
     <link rel="stylesheet" href="../css/styles.css" />
     <script src="../script/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
 
   <body>
@@ -41,10 +42,16 @@
       </nav>
     </header>
 
-    <div class="intro">
-      <h1>Dime el tag de un jugador</h1>
-      <input type="text" id="tag" />
-      <button id="enviar">Enviar</button>
-    </div>
+    <main class="intro">
+      <div class="search-clan">
+        <h1>Busca información de un Clan</h1>
+        <input type="text" id="clan-tag" />
+        <button id="enviar">Enviar</button>
+      </div>
+      <table id="table">
+        <thead id="datos-head"></thead>
+        <tbody id="datos-body"></tbody>
+      </table>
+    </main>
   </body>
 </html>
