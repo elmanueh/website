@@ -1,7 +1,7 @@
 let playersOriginal;
 let sortTable = {};
 //const route = 'http://127.0.0.1:4321';
-const route = 'http://143.47.53.235:4321';
+const route = 'https://elmanueh.es:4321';
 
 window.addEventListener('DOMContentLoaded', function () {
   // Search a clan information
