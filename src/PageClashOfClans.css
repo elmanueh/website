@@ -1,0 +1,80 @@
+/* PageClashOfClans */
+
+.coc-page {
+  background-color: #444;
+  padding-top: 10vh;
+  padding-bottom: 6vh;
+}
+
+.coc-header {
+  text-align: center;
+  padding-bottom: 50px;
+}
+
+.coc-header-text {
+  color: #eee;
+  font-size: 30px;
+  padding-bottom: 2vh;
+}
+
+#coc-clanTag {
+  padding: 5px;
+  width: 150px;
+  background-color: #eee;
+  border-radius: 15px;
+  padding-left: 15px;
+  font-weight: bold;
+  border: solid 1px #aaa;
+  outline: none;
+}
+
+#coc-buttonEnviar {
+  margin-left: 20px;
+  font-weight: bold;
+  width: 100px;
+  height: 30px;
+  font-size: 15px;
+  background-color: #eee;
+  border-radius: 8px;
+  border: solid 1px #aaa;
+  cursor: pointer;
+}
+#coc-buttonEnviar:active {
+  background-color: #ccc;
+}
+
+/* PlayerClanTable */
+
+.coc-table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  width: 75%;
+  text-align: center;
+}
+
+.coc-table-head {
+  background-color: #555;
+  color: #eee;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  font-size: 18px;
+}
+
+.coc-table-head:hover {
+  background-color: #666;
+  transition: linear 0.3s;
+  cursor: pointer;
+}
+
+.coc-table-row {
+  background-color: #aaa;
+}
+
+.coc-table-row:nth-child(even) {
+  background-color: #bbb;
+}
+
+.coc-table-row-cell {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
