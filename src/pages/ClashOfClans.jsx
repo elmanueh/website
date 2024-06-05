@@ -1,5 +1,5 @@
-import { PlayerClanTable } from '../components/PlayerClanTable.jsx'
 import { useState } from 'react'
+import { PlayerClanTable } from '../components/PlayerClanTable.jsx'
 import './ClashOfClans.css'
 
 export function ClashOfClans() {
