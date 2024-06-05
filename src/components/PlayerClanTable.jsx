@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 export function PlayerClanTable({ playerClanData }) {
   const [playersData, setPlayersData] = useState(playerClanData)
-  const [columnSorted, setColumnSorted] = useState()
+  const [columnSorted, setColumnSorted] = useState({})
   let id = 0
 
   const rename = {
@@ -27,15 +27,20 @@ export function PlayerClanTable({ playerClanData }) {
 
   function sortPlayers(columnName) {
     let playerSorted = playerClanData.slice()
-    columnSorted !== columnName
-      ? playerSorted.sort((a, b) => {
-          return a[columnName] > b[columnName] ? 1 : -1
-        })
-      : playerSorted.sort((a, b) => {
-          return a[columnName] < b[columnName] ? 1 : -1
-        })
 
-    setColumnSorted(columnName)
+    if (columnSorted[columnName] === true) {
+      playerSorted.sort((a, b) => {
+        return a[columnName] > b[columnName] ? 1 : -1
+      })
+      columnSorted[columnName] = false
+    } else {
+      playerSorted.sort((a, b) => {
+        return a[columnName] < b[columnName] ? 1 : -1
+      })
+      columnSorted[columnName] = true
+    }
+
+    setColumnSorted(columnSorted)
     setPlayersData(playerSorted)
   }
 
