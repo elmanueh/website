@@ -5,16 +5,24 @@ export function PlayerClanTable({ playerClanData }) {
   const [columnSorted, setColumnSorted] = useState()
   let id = 0
 
-  const mapa = {
+  const rename = {
     player: 'IdJugador',
     name: 'Nombre',
     role: 'Rango',
     townHall: 'TH',
-    lootCapital: 'Capital',
-    addCapital: 'Capital2',
+    lootCapital: 'GanadoCapital',
+    addCapital: 'GastadoCapital',
     clanGames: 'JuegosClan',
     warPreference: 'Guerra',
-    warAttacks: 'AtaquesÚltimasGuerras'
+    warAttacks: 'AtaquesÚltimasGuerras',
+
+    member: 'Miembro',
+    admin: 'Veterano',
+    coLeader: 'Colíder',
+    leader: 'Líder',
+
+    in: 'Si',
+    out: 'No'
   }
 
   function sortPlayers(columnName) {
@@ -39,7 +47,7 @@ export function PlayerClanTable({ playerClanData }) {
           {Object.keys(playersData[0]).map((column) => {
             return (
               <th className="coc-table-head" onClick={() => sortPlayers(column)}>
-                {mapa[column]}
+                {rename[column]}
               </th>
             )
           })}
@@ -53,7 +61,7 @@ export function PlayerClanTable({ playerClanData }) {
                 {++id}
               </td>
               {Object.values(player).map((column) => {
-                return <td>{column}</td>
+                return <td>{rename[column] ? rename[column] : column}</td>
               })}
             </tr>
           )
