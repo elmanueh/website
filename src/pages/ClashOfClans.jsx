@@ -1,8 +1,8 @@
-import { PlayerClanTable } from './components/PlayerClanTable.jsx'
+import { PlayerClanTable } from '../components/PlayerClanTable.jsx'
 import { useState } from 'react'
-import './PageClashOfClans.css'
+import './ClashOfClans.css'
 
-export function PageClashOfClans() {
+export function ClashOfClans() {
   const [players, setPlayers] = useState(null)
 
   async function SearchButtonClick() {

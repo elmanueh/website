@@ -1,4 +1,4 @@
-import { HeaderElement } from './components/HeaderElement.jsx'
+import { HeaderElement } from './HeaderElement.jsx'
 
 export function Header() {
   return (

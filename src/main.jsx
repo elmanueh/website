@@ -1,14 +1,14 @@
 import ReactDOM from 'react-dom/client'
-import { Header } from './Header.jsx'
-import { Footer } from './Footer.jsx'
-import { PageHome } from './PageHome.jsx'
-import { PageClashOfClans } from './PageClashOfClans.jsx'
+import { Header } from './components/Header.jsx'
+import { Footer } from './components/Footer.jsx'
+import { Home } from './pages/Home.jsx'
+import { ClashOfClans } from './pages/ClashOfClans.jsx'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <>
     <Header />
-    <PageClashOfClans />
+    <ClashOfClans />
     <Footer />
   </>
 )

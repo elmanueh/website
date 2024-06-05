@@ -1,4 +1,4 @@
-export function PageHome() {
+export function Home() {
   return (
     <>
       <article style={{ padding: 80, backgroundColor: '#ddd' }}>
