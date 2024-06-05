@@ -8,7 +8,7 @@ export function ClashOfClans() {
   async function SearchButtonClick() {
     const clanTag = document.getElementById('coc-clanTag').value
     try {
-      const response = await fetch(`http://elmanueh.es:4321/clans/clan/${encodeURIComponent(clanTag)}`)
+      const response = await fetch(`https://elmanueh.es/v1/clans/clan/${encodeURIComponent(clanTag)}`)
       if (response.status !== 200) throw -1
       setPlayers(await response.json())
     } catch (error) {
