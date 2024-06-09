@@ -1,4 +1,4 @@
-export function Footer() {
+export default function Footer() {
   return (
     <footer className="ft">
       <a className="ft-element" href="https://github.com/elmanueh" target="_black">

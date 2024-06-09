@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { HeaderElement } from './HeaderElement.jsx'
 
-export function Header() {
+export default function Header() {
   return (
     <>
       <header className="hd">

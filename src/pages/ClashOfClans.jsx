@@ -21,7 +21,7 @@ export function ClashOfClans() {
     <section className="coc-page">
       <header className="coc-header">
         <h1 className="coc-header-text">Busca información de un Clan</h1>
-        <input id="coc-clanTag" type="text" value="#2G00G8RP8" placeholder="#2G00G8RP8" />
+        <input id="coc-clanTag" type="text" defaultValue="#2G00G8RP8" placeholder="#2G00G8RP8" />
         <input id="coc-buttonEnviar" type="submit" value="BUSCAR" onClick={async () => await SearchButtonClick()} />
       </header>
       {players && <PlayerClanTable playerClanData={players} />}
