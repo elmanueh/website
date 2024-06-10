@@ -79,3 +79,23 @@
 .ft-element-text:hover {
   color: #62b1f7;
 }
+
+/* Error404 */
+.er {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #444;
+}
+
+.er-title {
+  font-size: 40px;
+  color: #ddd;
+}
+
+.er-text {
+  font-size: 30px;
+  color: #eee;
+}
