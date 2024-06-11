@@ -1,8 +1,33 @@
-# React + Vite
+## Página Web
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Página web personal donde se muestran proyectos desarrollados con diferentes tecnologías.
 
-Currently, two official plugins are available:
+## Para empezar
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Instalación
+
+1. Clona el repositorio
+
+```
+git clone https://github.com/elmanueh/website.git
+```
+
+2. Instala los paquetes NPM necesarios para el correcto funcionamiento
+
+```
+pnpm install
+```
+
+3. Ejecuta el proyecto
+
+```
+pnpm run dev
+```
+
+## 🛠️ Stack
+
+- [**Vite**][vite-url] - Herramienta de compilación que tiene como objetivo proporcionar una experiencia de desarrollo más rápida y ágil para proyectos web modernos.
+- [**React**][react-url] - Biblioteca para interfaces de usuario web y nativas.
+
+[vite-url]: https://vitejs.dev/
+[react-url]: https://react.dev/
