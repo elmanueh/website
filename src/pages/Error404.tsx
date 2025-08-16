@@ -1,4 +1,4 @@
-export function Error404() {
+export default function Error404() {
   return (
     <>
       <article className="er">

@@ -3,7 +3,7 @@
   "editor.formatOnSave": true,
   "editor.tabSize": 2,
   "prettier.singleQuote": true,
-  "prettier.printWidth": 180,
+  "prettier.printWidth": 80,
   "prettier.trailingComma": "none",
   "prettier.semi": false
 }
