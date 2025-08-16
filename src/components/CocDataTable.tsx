@@ -50,38 +50,40 @@ export default function CocDataTable(props: CocDataTableProps) {
   }
 
   return (
-    <table className="m-0 text-center">
-      <thead>
-        <tr>
-          <th className="bg-gray-700 text-white py-2 text-md"></th>
-          {Object.keys(players[0]).map((column) => {
+    <div className="overflow-x-auto">
+      <table className="m-0 text-center min-w-full">
+        <thead>
+          <tr>
+            <th className="bg-gray-700 text-white py-2 text-md"></th>
+            {Object.keys(players[0]).map((column) => {
+              return (
+                <th
+                  className="bg-gray-700 text-white py-2 px-3 text-md hover:text-purple-300 cursor-pointer"
+                  onClick={() => sortPlayers(column)}
+                >
+                  {rename[column]}
+                </th>
+              )
+            })}
+          </tr>
+        </thead>
+        <tbody>
+          {players.map((player) => {
             return (
-              <th
-                className="bg-gray-700 text-white py-2 px-3 text-md hover:text-purple-300 cursor-pointer"
-                onClick={() => sortPlayers(column)}
-              >
-                {rename[column]}
-              </th>
+              <tr className="bg-gray-600 nth-[even]:bg-gray-500">
+                <td className="py-2 px-3 font-medium">{++id}</td>
+                {Object.values(player).map((column) => {
+                  return (
+                    <td className="px-3">
+                      {rename[column] ? rename[column] : column}
+                    </td>
+                  )
+                })}
+              </tr>
             )
           })}
-        </tr>
-      </thead>
-      <tbody>
-        {players.map((player) => {
-          return (
-            <tr className="bg-gray-600 nth-[even]:bg-gray-500">
-              <td className="py-2 px-3 font-medium">{++id}</td>
-              {Object.values(player).map((column) => {
-                return (
-                  <td className="px-3">
-                    {rename[column] ? rename[column] : column}
-                  </td>
-                )
-              })}
-            </tr>
-          )
-        })}
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   )
 }

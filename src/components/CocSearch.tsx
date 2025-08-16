@@ -10,7 +10,7 @@ export default function CocSearch(props: CocSearchProps) {
   }
 
   return (
-    <div className="border-0 rounded-2xl px-20 py-5 w-max bg-gray-700">
+    <div className="border-0 rounded-2xl px-2 sm:px-20 py-5 w-max bg-gray-700">
       <h1 className="text-2xl pb-4 font-medium">
         Consultar información sobre un{' '}
         <span className="text-purple-300 font-bold">clan</span>
