@@ -30,7 +30,7 @@ export default function CocDataTable(props: CocDataTableProps) {
   const [columnSorted, setColumnSorted] = useState<Record<string, boolean>>({})
   let id = 0
 
-  const sortPlayers = (columnName: string) => {
+  const sortPlayers = (columnName: keyof PlayerClan) => {
     const playerSorted = props.playersClan.slice()
 
     if (columnSorted[columnName] === true) {
@@ -59,7 +59,7 @@ export default function CocDataTable(props: CocDataTableProps) {
               return (
                 <th
                   className="bg-gray-700 text-white py-2 px-3 text-md hover:text-purple-300 cursor-pointer"
-                  onClick={() => sortPlayers(column)}
+                  onClick={() => sortPlayers(column as keyof PlayerClan)}
                 >
                   {rename[column]}
                 </th>
