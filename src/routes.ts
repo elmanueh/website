@@ -1,8 +1,8 @@
-import { createBrowserRouter } from 'react-router'
-import Layout from './layouts/Layout'
-import ClashOfClans from './pages/ClashOfClans'
-import Error404 from './pages/Error404'
-import Home from './pages/Home'
+import Layout from '@/layouts/Layout'
+import ClashOfClans from '@/pages/ClashOfClans'
+import Error404 from '@/pages/Error404'
+import Home from '@/pages/Home'
+import { createBrowserRouter } from 'react-router-dom'
 
 export const router = createBrowserRouter([
   {

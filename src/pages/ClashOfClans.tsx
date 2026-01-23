@@ -1,6 +1,6 @@
+import CocDataTable from '@/components/CocDataTable'
+import CocSearch from '@/components/CocSearch'
 import { useState } from 'react'
-import CocDataTable from '../components/CocDataTable.tsx'
-import CocSearch from '../components/CocSearch.tsx'
 
 export default function ClashOfClans() {
   const [players, setPlayers] = useState(null)
@@ -10,7 +10,7 @@ export default function ClashOfClans() {
       const response = await fetch(
         `https://elmanueh.es/v1/clans/clan/${encodeURIComponent(clanTag)}`
       )
-      if (response.status !== 200) throw -1
+      if (response.status !== 200) throw new Error('Failed to fetch clan data')
       setPlayers(await response.json())
     } catch (error) {
       console.log(error)

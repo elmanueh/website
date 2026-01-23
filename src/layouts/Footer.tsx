@@ -3,7 +3,7 @@ interface FooterElementProps {
   link: string
 }
 
-function FooterElement(props: FooterElementProps) {
+function FooterElement(props: Readonly<FooterElementProps>) {
   return (
     <a className="pl-4" href={props.link} target="_black">
       <p className="text-gray-100 font-bold hover:text-purple-300">

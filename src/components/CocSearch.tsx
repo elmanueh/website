@@ -2,7 +2,7 @@ interface CocSearchProps {
   callback: (clanTag: string) => void
 }
 
-export default function CocSearch(props: CocSearchProps) {
+export default function CocSearch(props: Readonly<CocSearchProps>) {
   const handleSearch = () => {
     const clanTag = (document.getElementById('coc-tag') as HTMLInputElement)
       ?.value
