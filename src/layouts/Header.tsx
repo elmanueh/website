@@ -1,8 +1,8 @@
 import { Link } from 'react-router'
-import Favicon from '../images/favicon.svg'
-import AppMusicIcon from '../images/appmusic.png'
-import ClashOfClansIcon from '../images/clashofclans.png'
-import LineTreeIcon from '../images/linetree.svg'
+import Favicon from '../assets/favicon.svg'
+import AppMusicIcon from '../assets/appmusic.png'
+import ClashOfClansIcon from '../assets/clashofclans.png'
+import LineTreeIcon from '../assets/linetree.svg'
 import HeaderElement from './HeaderElement'
 
 export default function Header() {

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { PlayerClan } from '../types/player-clan.type'
+import type { PlayerClan } from '../types/player-clan'
 
 const rename: { [key: string]: string } = {
   player: 'Id',
