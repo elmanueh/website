@@ -1,37 +1,44 @@
-import AppMusicIcon from '@/assets/projects/appmusic.svg'
-import ClashOfClansIcon from '@/assets/projects/clashofclans.png'
-import LineTreeIcon from '@/assets/projects/linetree.svg'
+import AppMusicIcon from '@/assets/appmusic.svg'
+import ClashOfClansIcon from '@/assets/clashofclans.png'
+import LineTreeIcon from '@/assets/linetree.svg'
 import HeaderElement from '@/layouts/HeaderElement'
 import { Link } from 'react-router-dom'
 
 export default function Header() {
   return (
-    <header className="flex bg-gray-900">
-      <Link to="/" className="p-2">
-        <img
-          src={'/favicon.svg'}
-          height={40}
-          width={40}
-          alt="Website favicon"
-        />
-      </Link>
-      <nav className="flex justify-center sm:gap-20  w-full">
-        <HeaderElement
-          image={AppMusicIcon}
-          text="TDS App Music"
-          link="https://elmanueh.es/tds/canciones/"
-        />
-        <HeaderElement
-          image={LineTreeIcon}
-          text="TFG LineTree"
-          link="https://linetree.elmanueh.es"
-        />
-        <HeaderElement
-          image={ClashOfClansIcon}
-          text="API Clash of Clans"
-          link="/clashofclans"
-        />
-      </nav>
+    <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm">
+      <div className="mx-auto flex h-14 max-w-4xl items-center justify-between px-6">
+        <Link to="/" className="flex items-center gap-3">
+          <img
+            src="/favicon.svg"
+            width={26}
+            height={26}
+            alt="Logo"
+            className="opacity-90"
+          />
+          <span className="text-sm font-medium tracking-tight">elmanueh</span>
+        </Link>
+
+        <nav className="flex items-center gap-6">
+          <HeaderElement
+            image={AppMusicIcon}
+            text="TDS App Music"
+            link="https://elmanueh.es/tds/canciones/"
+            external
+          />
+          <HeaderElement
+            image={LineTreeIcon}
+            text="LineTree"
+            link="https://linetree.elmanueh.es"
+            external
+          />
+          <HeaderElement
+            image={ClashOfClansIcon}
+            text="Clash of Clans"
+            link="/clashofclans"
+          />
+        </nav>
+      </div>
     </header>
   )
 }

@@ -4,18 +4,36 @@ interface HeaderElementProps {
   image: string
   text: string
   link: string
+  external?: boolean
 }
 
-export default function HeaderElement(props: Readonly<HeaderElementProps>) {
+export default function HeaderElement({
+  image,
+  text,
+  link,
+  external
+}: Readonly<HeaderElementProps>) {
+  const baseClasses =
+    'flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground'
+
+  const content = (
+    <>
+      <img src={image} width={20} height={20} alt="" className="opacity-80" />
+      <span className="hidden sm:inline">{text}</span>
+    </>
+  )
+
+  if (external) {
+    return (
+      <a href={link} target="_blank" rel="noreferrer" className={baseClasses}>
+        {content}
+      </a>
+    )
+  }
+
   return (
-    <Link
-      className="flex items-center hover:bg-gray-950 transition px-3 sm:px-5"
-      to={props.link}
-    >
-      <img src={props.image} height={25} width={25} alt={props.text} />
-      <p className="text-gray-100 sm:ml-2 font-semibold text-sm hidden sm:block">
-        {props.text}
-      </p>
+    <Link to={link} className={baseClasses}>
+      {content}
     </Link>
   )
 }
