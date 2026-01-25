@@ -1,3 +1,6 @@
+import ClashOfClansIcon from '@/assets/clashofclans.png'
+import LineTreeIcon from '@/assets/linetree.svg'
+
 export type Project = {
   slug: string
   title: string
@@ -12,7 +15,7 @@ export const projects: Project[] = [
     title: 'LineTree',
     subtitle:
       'Aplicación web para la creación y visualización de árboles genealógicos, diseñada para representar relaciones familiares, herencias y vínculos de forma clara y estructurada.',
-    image: '/src/assets/linetree.svg',
+    image: LineTreeIcon,
     tags: ['TFG', 'Aplicación web', 'Arquitectura', 'Modelado de datos']
   },
   {
@@ -20,7 +23,7 @@ export const projects: Project[] = [
     title: 'API Clash of Clans',
     subtitle:
       'API backend para el seguimiento y análisis de la actividad de un clan en Clash of Clans, centralizando métricas de jugadores, guerras, donaciones y eventos.',
-    image: '/src/assets/clashofclans.png',
+    image: ClashOfClansIcon,
     tags: ['API REST', 'Análisis de datos']
   }
 ]
