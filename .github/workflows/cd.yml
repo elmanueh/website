@@ -33,7 +33,7 @@ jobs:
       - name: Deploy dist to VPS (rsync over ssh)
         uses: burnett01/rsync-deployments@v8
         with:
-          switches: -azr --delete --no-times --omit-dir-times
+          switches: -rz --delete --no-perms --no-owner --no-group --no-times --omit-dir-times
           path: dist/
           remote_path: ${{ secrets.VPS_PATH }}/
           remote_host: ${{ secrets.VPS_HOST }}
