@@ -1,4 +1,3 @@
-import AppMusicIcon from '@/assets/appmusic.svg'
 import ClashOfClansIcon from '@/assets/clashofclans.png'
 import LineTreeIcon from '@/assets/linetree.svg'
 import HeaderElement from '@/layouts/HeaderElement'
@@ -20,12 +19,6 @@ export default function Header() {
         </Link>
 
         <nav className="flex items-center gap-6">
-          <HeaderElement
-            image={AppMusicIcon}
-            text="TDS App Music"
-            link="https://elmanueh.es/tds/canciones/"
-            external
-          />
           <HeaderElement
             image={LineTreeIcon}
             text="LineTree"
