@@ -26,6 +26,7 @@ export default function ProjectRowCard({
         transition-colors
         hover:border-border
         hover:bg-muted/20
+        hover:cursor-pointer
         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
       "
     >
