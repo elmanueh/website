@@ -20,14 +20,14 @@ export default function Home() {
 
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-1 text-md">
             <a
-              href="mailto:bernabe2003@gmail.com"
+              href="mailto:contacto@elmanueh.es"
               className="text-muted-foreground underline underline-offset-6 hover:text-foreground hover:no-underline"
             >
-              bernabe2003@gmail.com
+              contacto@elmanueh.es
             </a>
             <span>·</span>
             <a
-              href="https://www.linkedin.com/in/manuel-bernabe-rodriguez/"
+              href="https://www.linkedin.com/in/elmanueh"
               target="_blank"
               rel="noreferrer"
               className="text-muted-foreground underline underline-offset-6 hover:text-foreground hover:no-underline"

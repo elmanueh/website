@@ -10,10 +10,10 @@ export default function Footer() {
         </p>
 
         <div className="flex items-center gap-6 text-sm">
-          <FooterLink href="mailto:bernabe2003@gmail.com" label="Email" />
+          <FooterLink href="mailto:contacto@elmanueh.es" label="Email" />
           <FooterLink href="https://github.com/elmanueh" label="GitHub" />
           <FooterLink
-            href="https://www.linkedin.com/in/manuel-bernabe-rodriguez/"
+            href="https://www.linkedin.com/in/elmanueh"
             label="LinkedIn"
           />
         </div>
