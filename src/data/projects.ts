@@ -1,11 +1,12 @@
 import ClashOfClansIcon from '@/assets/clashofclans.png'
 import LineTreeIcon from '@/assets/linetree.svg'
+import type { ImageMetadata } from 'astro'
 
-export type Project = {
+export interface Project {
   slug: string
   title: string
   subtitle: string
-  image: string
+  image: ImageMetadata
   tags: string[]
 }
 
