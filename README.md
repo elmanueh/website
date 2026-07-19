@@ -1,43 +1,25 @@
-# Astro Starter Kit: Minimal
+<div align="center">
 
-```sh
-pnpm create astro@latest -- --template minimal
-```
+# Portfolio
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+<p><em>Una colección viva de proyectos, procesos e ideas.</em></p>
 
-## 🚀 Project Structure
+</div>
 
-Inside of your Astro project, you'll see the following folders and files:
+---
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## Sobre el proyecto
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Este repositorio contiene mi portfolio personal: un espacio en el que reúno los proyectos que voy desarrollando y les doy el contexto que merecen.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Cada proyecto tendrá su propia página. Además de mostrar el resultado final, la idea es explicar qué problema aborda, cómo se planteó, las decisiones tomadas durante el proceso y las tecnologías utilizadas.
 
-Any static assets, like images, can be placed in the `public/` directory.
+No es una colección cerrada. Irá creciendo con nuevos proyectos, experimentos e ideas a medida que se conviertan en algo real.
 
-## 🧞 Commands
+## Stack tecnológico
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+| Tecnología                                   | Uso                                               |
+| :------------------------------------------- | :------------------------------------------------ |
+| [Astro](https://astro.build)                 | Base del sitio y generación de páginas estáticas. |
+| [Tailwind CSS](https://tailwindcss.com)      | Estilos y diseño de la interfaz.                  |
+| [TypeScript](https://www.typescriptlang.org) | Tipado y código más mantenible.                   |
