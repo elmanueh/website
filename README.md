@@ -1,25 +1,21 @@
-<div align="center">
+# Personal Website
 
-# Portfolio
-
-<p><em>Una colección viva de proyectos, procesos e ideas.</em></p>
-
-</div>
+_A living collection of projects, processes, and ideas._
 
 ---
 
-## Sobre el proyecto
+## About
 
-Este repositorio contiene mi portfolio personal: un espacio en el que reúno los proyectos que voy desarrollando y les doy el contexto que merecen.
+This repository contains my personal portfolio: a space where I bring together the projects I build and give them the context they deserve.
 
-Cada proyecto tendrá su propia página. Además de mostrar el resultado final, la idea es explicar qué problema aborda, cómo se planteó, las decisiones tomadas durante el proceso y las tecnologías utilizadas.
+Each project will have its own page. Beyond showing the final result, the aim is to explain the problem it addresses, how it was approached, the decisions made along the way, and the technologies used.
 
-No es una colección cerrada. Irá creciendo con nuevos proyectos, experimentos e ideas a medida que se conviertan en algo real.
+This is not a finished collection. It will grow with new projects, experiments, and ideas as they become real.
 
-## Stack tecnológico
+## Tech stack
 
-| Tecnología                                   | Uso                                               |
-| :------------------------------------------- | :------------------------------------------------ |
-| [Astro](https://astro.build)                 | Base del sitio y generación de páginas estáticas. |
-| [Tailwind CSS](https://tailwindcss.com)      | Estilos y diseño de la interfaz.                  |
-| [TypeScript](https://www.typescriptlang.org) | Tipado y código más mantenible.                   |
+| Technology                                   | Purpose                                     |
+| :------------------------------------------- | :------------------------------------------ |
+| [Astro](https://astro.build)                 | Site foundation and static-page generation. |
+| [Tailwind CSS](https://tailwindcss.com)      | Interface styling and design.               |
+| [TypeScript](https://www.typescriptlang.org) | Type safety and more maintainable code.     |
