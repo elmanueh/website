@@ -1,0 +1,69 @@
+@import 'tailwindcss';
+
+:root {
+  color-scheme: dark;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background-color: #1c1e24;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+
+  --radius: 0.625rem;
+  --background: oklch(0.22 0 0);
+  --foreground: oklch(0.92 0 0);
+  --card: oklch(0.26 0 0);
+  --card-foreground: var(--foreground);
+  --popover: oklch(0.26 0 0);
+  --popover-foreground: var(--foreground);
+  --primary: oklch(0.9 0 0);
+  --primary-foreground: oklch(0.2 0 0);
+  --secondary: oklch(0.3 0 0);
+  --secondary-foreground: var(--foreground);
+  --muted: oklch(0.28 0 0);
+  --muted-foreground: oklch(0.74 0 0);
+  --accent: oklch(0.3 0 0);
+  --accent-foreground: var(--foreground);
+  --destructive: oklch(0.7 0.19 22.216);
+  --border: oklch(0.75 0 0 / 18%);
+  --input: oklch(0.75 0 0 / 22%);
+  --ring: oklch(0.8 0 0 / 55%);
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+@layer base {
+  body {
+    font-size: 14.5px;
+    line-height: 1.75;
+    letter-spacing: 0.01em;
+    font-variant-ligatures: none;
+  }
+}

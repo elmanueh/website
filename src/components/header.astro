@@ -1,0 +1,60 @@
+---
+import ClashOfClansIcon from '@/assets/clashofclans.png'
+import LineTreeIcon from '@/assets/linetree.svg'
+
+const links = [
+  {
+    image: LineTreeIcon,
+    text: 'LineTree',
+    href: 'https://linetree.elmanueh.es'
+  },
+  {
+    image: ClashOfClansIcon,
+    text: 'Clash of Clans',
+    href: '/clashofclans'
+  }
+]
+
+const isExternalUrl = (href: string) => /^https?:\/\//.test(href)
+---
+
+<header class="sticky top-0 z-50 bg-background/80 backdrop-blur-sm">
+  <div class="mx-auto flex h-14 max-w-4xl items-center justify-between px-6">
+    <a href="/" class="flex items-center gap-3">
+      <img
+        src="/favicon.svg"
+        width="26"
+        height="26"
+        alt="Logo"
+        class="opacity-90"
+      />
+      <span class="text-sm font-medium tracking-tight">elmanueh</span>
+    </a>
+
+    <nav class="flex items-center gap-6">
+      {
+        links.map(({ image, text, href }) => {
+          const external = isExternalUrl(href)
+
+          return (
+            <a
+              href={href}
+              target={external ? '_blank' : undefined}
+              rel={external ? 'noreferrer' : undefined}
+              class="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <img
+                src={image.src}
+                width="20"
+                height="20"
+                alt=""
+                class="opacity-80"
+              />
+              <span class="hidden sm:inline">{text}</span>
+            </a>
+          )
+        })
+      }
+    </nav>
+  </div>
+</header>
