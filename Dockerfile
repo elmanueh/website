@@ -10,6 +10,8 @@ RUN pnpm install --frozen-lockfile
 COPY . .
 RUN pnpm run build
 
-FROM scratch
+FROM nginx:alpine
 
-COPY --from=build /app/dist /dist
+COPY --from=build /app/dist /usr/share/nginx/html
+
+EXPOSE 80
