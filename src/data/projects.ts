@@ -7,6 +7,7 @@ import type { ImageMetadata } from 'astro'
 
 export interface Project {
   slug: string
+  href: string
   title: string
   subtitle: string
   image: ImageMetadata
@@ -16,6 +17,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     slug: 'belen-david-boda',
+    href: 'https://belenydavidsecasan.es/',
     title: 'Web de boda · Belén y David',
     subtitle:
       'Experiencia web personalizada para invitados con acceso privado, itinerario, galería, información práctica, confirmación de asistencia y panel de gestión de invitaciones.',
@@ -24,6 +26,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'solidarianid',
+    href: 'https://github.com/elmanueh/solidarianid',
     title: 'SolidarianID',
     subtitle:
       'Plataforma para gestionar voluntariado y causas solidarias, con identidad digital, comunidades, eventos y acciones benéficas sobre una arquitectura de microservicios orientada a eventos.',
@@ -32,6 +35,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'ariadne',
+    href: 'https://github.com/elmanueh/ariadne',
     title: 'Ariadne',
     subtitle:
       'Herramienta de línea de comandos desarrollada como TFM para validar fuentes de datos, analizar ontologías y mappings, evaluar reglas de calidad y generar grafos RDF mediante un pipeline modular.',
@@ -40,6 +44,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'linetree',
+    href: 'https://linetree.elmanueh.es/',
     title: 'LineTree',
     subtitle:
       'Aplicación web para la creación y visualización de árboles genealógicos, diseñada para representar relaciones familiares, herencias y vínculos de forma clara y estructurada.',
@@ -48,6 +53,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'clash-of-clans-api',
+    href: '/clashofclans',
     title: 'API Clash of Clans',
     subtitle:
       'API backend para el seguimiento y análisis de la actividad de un clan en Clash of Clans, centralizando métricas de jugadores, guerras, donaciones y eventos.',

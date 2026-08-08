@@ -2,18 +2,21 @@
 import type { ImageMetadata } from 'astro'
 
 interface Props {
+  href: string
   title: string
   subtitle: string
   image: ImageMetadata
   tags: string[]
 }
 
-const { title, subtitle, image, tags } = Astro.props
+const { href, title, subtitle, image, tags } = Astro.props
+const isExternal = /^https?:\/\//.test(href)
 ---
 
-<div
-  role="button"
-  tabindex="0"
+<a
+  href={href}
+  target={isExternal ? '_blank' : undefined}
+  rel={isExternal ? 'noreferrer' : undefined}
   class="group relative flex flex-col gap-6 overflow-hidden rounded-2xl border border-border/60 bg-background py-6 shadow-sm transition-colors hover:cursor-pointer hover:border-border hover:bg-muted/20 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
 >
   <div class="absolute inset-0">
@@ -53,4 +56,4 @@ const { title, subtitle, image, tags } = Astro.props
       </div>
     </div>
   </div>
-</div>
+</a>
