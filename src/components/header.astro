@@ -1,5 +1,6 @@
 ---
 import { projects } from '@/data/projects'
+import { Image } from 'astro:assets'
 
 const isExternalUrl = (href: string) => /^https?:\/\//.test(href)
 ---
@@ -34,11 +35,13 @@ const isExternalUrl = (href: string) => /^https?:\/\//.test(href)
                   title={title}
                   class="flex size-7 items-center justify-center overflow-hidden rounded-full border border-border/60 bg-background/70 transition hover:border-border hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none sm:size-8"
                 >
-                  <img
-                    src={headerImage.src}
-                    width="24"
-                    height="24"
+                  <Image
+                    src={headerImage}
+                    width="64"
+                    height="64"
                     alt=""
+                    loading="eager"
+                    quality={90}
                     class="size-full object-cover opacity-85 transition-opacity hover:opacity-100"
                   />
                 </a>
