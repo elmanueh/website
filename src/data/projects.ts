@@ -3,6 +3,7 @@ import BelenDavidBodaImage from '@/assets/belen-david-boda.jpg'
 import ClashOfClansIcon from '@/assets/clashofclans.png'
 import LineTreeIcon from '@/assets/linetree.svg'
 import SolidarianIdImage from '@/assets/solidarianid.png'
+import SolidarianIdIcon from '@/assets/solidarian-logo.png'
 import type { ImageMetadata } from 'astro'
 
 export interface Project {
@@ -11,6 +12,7 @@ export interface Project {
   title: string
   subtitle: string
   image: ImageMetadata
+  icon?: ImageMetadata
   tags: string[]
 }
 
@@ -31,6 +33,7 @@ export const projects: Project[] = [
     subtitle:
       'Plataforma para gestionar voluntariado y causas solidarias, con identidad digital, comunidades, eventos y acciones benéficas sobre una arquitectura de microservicios orientada a eventos.',
     image: SolidarianIdImage,
+    icon: SolidarianIdIcon,
     tags: ['Microservicios', 'DDD', 'NestJS', 'Apache Kafka']
   },
   {

@@ -20,8 +20,9 @@ const isExternalUrl = (href: string) => /^https?:\/\//.test(href)
     <nav aria-label="Accesos directos a proyectos">
       <ul class="flex items-center gap-1 sm:gap-3">
         {
-          projects.map(({ href, image, title }) => {
+          projects.map(({ href, image, icon, title }) => {
             const external = isExternalUrl(href)
+            const headerImage = icon ?? image
 
             return (
               <li>
@@ -34,7 +35,7 @@ const isExternalUrl = (href: string) => /^https?:\/\//.test(href)
                   class="flex size-7 items-center justify-center overflow-hidden rounded-full border border-border/60 bg-background/70 transition hover:border-border hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none sm:size-8"
                 >
                   <img
-                    src={image.src}
+                    src={headerImage.src}
                     width="24"
                     height="24"
                     alt=""
