@@ -25,7 +25,7 @@ jobs:
   version:
     name: Detect version change
     needs: ci
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       changed: ${{ steps.version.outputs.changed }}
       full_sha: ${{ steps.version.outputs.full_sha }}
@@ -81,7 +81,7 @@ jobs:
       - ci
       - version
     if: needs.version.outputs.changed == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: write
       packages: write
