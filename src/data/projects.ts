@@ -6,6 +6,11 @@ import SolidarianIdImage from '@/assets/solidarianid.png'
 import SolidarianIdIcon from '@/assets/solidarian-logo.png'
 import type { ImageMetadata } from 'astro'
 
+export enum ProjectLinkLabel {
+  Website = 'Ver web',
+  GitHub = 'Código en GitHub'
+}
+
 export interface Project {
   slug: string
   href: string
@@ -14,6 +19,7 @@ export interface Project {
   image: ImageMetadata
   icon?: ImageMetadata
   tags: string[]
+  linkLabel: ProjectLinkLabel
 }
 
 export const projects: Project[] = [
@@ -24,7 +30,8 @@ export const projects: Project[] = [
     subtitle:
       'Experiencia web personalizada para invitados con acceso privado, itinerario, galería, información práctica, confirmación de asistencia y panel de gestión de invitaciones.',
     image: BelenDavidBodaImage,
-    tags: ['Aplicación web', 'Astro', 'React', 'Diseño responsive']
+    tags: ['Aplicación web', 'Astro', 'React', 'Diseño responsive'],
+    linkLabel: ProjectLinkLabel.Website
   },
   {
     slug: 'solidarianid',
@@ -34,16 +41,18 @@ export const projects: Project[] = [
       'Plataforma para gestionar voluntariado y causas solidarias, con identidad digital, comunidades, eventos y acciones benéficas sobre una arquitectura de microservicios orientada a eventos.',
     image: SolidarianIdImage,
     icon: SolidarianIdIcon,
-    tags: ['Microservicios', 'DDD', 'NestJS', 'Apache Kafka']
+    tags: ['Microservicios', 'DDD', 'NestJS', 'Apache Kafka'],
+    linkLabel: ProjectLinkLabel.GitHub
   },
   {
     slug: 'ariadne',
     href: 'https://github.com/elmanueh/ariadne',
     title: 'Ariadne',
     subtitle:
-      'Herramienta de línea de comandos desarrollada como TFM para validar fuentes de datos, analizar ontologías y mappings, evaluar reglas de calidad y generar grafos RDF mediante un pipeline modular.',
+      'Herramienta de línea de comandos desarrollada como TFM para validar datos, analizar ontologías y mappings, evaluar calidad y generar grafos RDF mediante un pipeline modular.',
     image: AriadneIcon,
-    tags: ['TFM', 'Python', 'Grafos de conocimiento', 'Arquitectura hexagonal']
+    tags: ['TFM', 'Python', 'Grafos de conocimiento', 'Arquitectura hexagonal'],
+    linkLabel: ProjectLinkLabel.GitHub
   },
   {
     slug: 'linetree',
@@ -52,7 +61,8 @@ export const projects: Project[] = [
     subtitle:
       'Aplicación web para la creación y visualización de árboles genealógicos, diseñada para representar relaciones familiares, herencias y vínculos de forma clara y estructurada.',
     image: LineTreeIcon,
-    tags: ['TFG', 'Aplicación web', 'Arquitectura', 'Modelado de datos']
+    tags: ['TFG', 'Aplicación web', 'Arquitectura', 'Modelado de datos'],
+    linkLabel: ProjectLinkLabel.Website
   },
   {
     slug: 'clash-of-clans-api',
@@ -61,6 +71,7 @@ export const projects: Project[] = [
     subtitle:
       'API backend para el seguimiento y análisis de la actividad de un clan en Clash of Clans, centralizando métricas de jugadores, guerras, donaciones y eventos.',
     image: ClashOfClansIcon,
-    tags: ['API REST', 'Análisis de datos']
+    tags: ['API REST', 'Análisis de datos'],
+    linkLabel: ProjectLinkLabel.Website
   }
 ]

@@ -1,87 +1,26 @@
 ---
+import Hero from '@/components/hero.astro'
 import ProjectCard from '@/components/project-card.astro'
 import { projects } from '@/data/projects'
 import Layout from '@/layouts/layout.astro'
-
-interface ContactLink {
-  href: string
-  label: string
-  newTab?: boolean
-}
-
-const contactLinks: ContactLink[] = [
-  {
-    href: 'mailto:contacto@elmanueh.es',
-    label: 'contacto@elmanueh.es'
-  },
-  {
-    href: 'https://www.linkedin.com/in/elmanueh',
-    label: 'LinkedIn',
-    newTab: true
-  },
-  {
-    href: '/CV_Manuel_Bernabe_Rodriguez.pdf',
-    label: 'CV',
-    newTab: true
-  }
-]
-
-const contactLinkClass =
-  'text-muted-foreground underline underline-offset-6 hover:text-foreground hover:no-underline'
 ---
 
 <Layout>
-  <main class="mx-auto max-w-4xl px-6 py-12">
-    <section>
-      <div class="space-y-5">
-        <p class="text-sm text-muted-foreground">Alicante / Murcia</p>
+  <main>
+    <div class="mx-auto w-full max-w-[1020px] px-6 max-[680px]:px-4">
+      <Hero />
 
-        <h1 class="text-4xl font-medium tracking-tight sm:text-5xl">
-          Manuel Bernabé Rodríguez
-        </h1>
+      <section id="proyectos" class="border-t border-border py-28 max-[680px]:py-20" aria-labelledby="projects-title">
+        <header class="mb-8 max-w-[680px]">
+          <p class="m-0 mb-2 font-mono text-[.7rem] font-semibold tracking-[.13em] text-[#b8d47a] uppercase">Portfolio</p>
+          <h2 id="projects-title" class="m-0 mb-3 text-[clamp(2rem,5vw,3.3rem)] leading-[1.12] font-semibold tracking-[-.035em] text-foreground">Proyectos</h2>
+          <p class="m-0 text-muted-foreground">Trabajos académicos y personales centrados en backend, arquitectura, datos y aplicaciones web.</p>
+        </header>
 
-        <p
-          class="max-w-prose text-base leading-relaxed text-muted-foreground sm:text-lg"
-        >
-          Ingeniero de Software backend .NET, apasionado por la arquitectura del
-          software y el diseño de sistemas que escalan y se mantienen en el
-          tiempo.
-        </p>
-
-        <div class="text-md flex flex-wrap items-center gap-x-6 gap-y-2 pt-1">
-          {
-            contactLinks.map(({ href, label, newTab }, index) => (
-              <>
-                {index > 0 && <span>·</span>}
-                <a
-                  href={href}
-                  target={newTab ? '_blank' : undefined}
-                  rel={newTab ? 'noreferrer' : undefined}
-                  class={contactLinkClass}
-                >
-                  {label}
-                </a>
-              </>
-            ))
-          }
+        <div class="flex flex-col gap-4">
+          {projects.map((project) => <ProjectCard project={project} />)}
         </div>
-      </div>
-    </section>
-
-    <section id="projects" class="mt-14">
-      <div class="mt-6 space-y-6">
-        {
-          projects.map((project) => (
-            <ProjectCard
-              href={project.href}
-              title={project.title}
-              subtitle={project.subtitle}
-              image={project.image}
-              tags={project.tags}
-            />
-          ))
-        }
-      </div>
-    </section>
+      </section>
+    </div>
   </main>
 </Layout>

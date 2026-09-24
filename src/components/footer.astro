@@ -1,36 +1,12 @@
 ---
 const year = new Date().getFullYear()
 
-const links = [
-  { href: 'mailto:contacto@elmanueh.es', label: 'Email' },
-  { href: 'https://github.com/elmanueh', label: 'GitHub' },
-  { href: 'https://www.linkedin.com/in/elmanueh', label: 'LinkedIn' }
-]
+import SocialLinks from '@/components/social-links.astro'
 ---
 
-<footer class="mt-20">
-  <div
-    class="mx-auto flex max-w-4xl flex-col gap-6 px-6 py-10 sm:flex-row sm:items-center sm:justify-between"
-  >
-    <p class="text-sm font-medium text-foreground">
-      © {year} Manuel Bernabé Rodríguez <span class="text-muted-foreground"
-        >(elmanueh)</span
-      >
-    </p>
-
-    <div class="flex items-center gap-6 text-sm">
-      {
-        links.map(({ href, label }) => (
-          <a
-            href={href}
-            target="_blank"
-            rel="noreferrer"
-            class="text-muted-foreground transition-colors hover:text-foreground"
-          >
-            {label}
-          </a>
-        ))
-      }
-    </div>
+<footer class="border-t border-border">
+  <div class="mx-auto flex min-h-[110px] w-full max-w-[1020px] items-center justify-between gap-8 px-6 max-[680px]:flex-col max-[680px]:items-center max-[680px]:gap-4 max-[680px]:px-4 max-[680px]:py-7">
+    <p class="m-0 text-sm text-muted-foreground max-[680px]:text-center">© {year} Manuel Bernabé Rodríguez <span class="opacity-70">· elmanueh</span></p>
+    <SocialLinks compact />
   </div>
 </footer>

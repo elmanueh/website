@@ -1,55 +1,22 @@
 ---
-import { projects } from '@/data/projects'
-import { Image } from 'astro:assets'
-
-const isExternalUrl = (href: string) => /^https?:\/\//.test(href)
+const links = [
+  { href: '/#inicio', label: 'Inicio' },
+  { href: '/#proyectos', label: 'Proyectos' }
+]
 ---
 
-<header class="sticky top-0 z-50 bg-background/80 backdrop-blur-sm">
-  <div class="mx-auto flex h-14 max-w-4xl items-center justify-between px-6">
-    <a href="/" class="flex items-center gap-3">
-      <img
-        src="/favicon.svg"
-        width="26"
-        height="26"
-        alt="Logo"
-        class="opacity-90"
-      />
-      <span class="text-sm font-medium tracking-tight">elmanueh</span>
+<header class="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
+  <div class="mx-auto flex h-16 w-full max-w-[1020px] items-center justify-between px-6 max-[680px]:px-4">
+    <a href="/" class="inline-flex items-center gap-2.5 text-sm font-semibold tracking-tight text-foreground no-underline" aria-label="elmanueh — Inicio">
+      <img src="/favicon.svg" alt="" class="size-[30px]" aria-hidden="true" />
+      <span>elmanueh</span>
     </a>
 
-    <nav aria-label="Accesos directos a proyectos">
-      <ul class="flex items-center gap-1 sm:gap-3">
-        {
-          projects.map(({ href, image, icon, title }) => {
-            const external = isExternalUrl(href)
-            const headerImage = icon ?? image
-
-            return (
-              <li>
-                <a
-                  href={href}
-                  target={external ? '_blank' : undefined}
-                  rel={external ? 'noreferrer' : undefined}
-                  aria-label={`Abrir ${title}`}
-                  title={title}
-                  class="flex size-7 items-center justify-center overflow-hidden rounded-full border border-border/60 bg-background/70 transition hover:border-border hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none sm:size-8"
-                >
-                  <Image
-                    src={headerImage}
-                    width="64"
-                    height="64"
-                    alt=""
-                    loading="eager"
-                    quality={90}
-                    class="size-full object-cover opacity-85 transition-opacity hover:opacity-100"
-                  />
-                </a>
-              </li>
-            )
-          })
-        }
+    <nav class="max-[820px]:hidden" aria-label="Navegación principal">
+      <ul class="m-0 flex list-none gap-6 p-0">
+        {links.map(({ href, label }) => <li><a class="text-[.84rem] text-muted-foreground no-underline transition-colors duration-200 hover:text-foreground" href={href}>{label}</a></li>)}
       </ul>
     </nav>
+
   </div>
 </header>

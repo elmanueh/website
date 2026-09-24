@@ -1,0 +1,24 @@
+---
+import { Icon } from 'astro-icon/components'
+import { socialLinks } from '@/data/social-links'
+
+interface Props { compact?: boolean }
+const { compact = false } = Astro.props
+const icons = {
+  github: 'simple-icons:github',
+  linkedin: 'simple-icons:linkedin',
+  mail: 'lucide:mail'
+} as const
+---
+
+<div class="flex items-center gap-2">
+  {socialLinks.map((link) => {
+    const iconName = icons[link.icon]
+    return (
+      <a class:list={['inline-flex items-center justify-center rounded-full border border-border text-muted-foreground transition-colors duration-200 hover:border-ring hover:bg-card hover:text-foreground', compact ? 'size-[34px]' : 'size-10']} href={link.href} aria-label={link.label} title={link.label}
+        target={link.external ? '_blank' : undefined} rel={link.external ? 'noopener noreferrer' : undefined}>
+        <Icon name={iconName} size={compact ? 16 : 18} aria-hidden="true" />
+      </a>
+    )
+  })}
+</div>

@@ -4,7 +4,8 @@ import ClanSearch from '@/components/clashofclans/clan-search.astro'
 import Layout from '@/layouts/layout.astro'
 ---
 
-<Layout>
+<Layout title="API Clash of Clans | elmanueh">
+  <main>
   <section class="pt-20 pb-16">
     <header class="flex flex-col items-center gap-10 pb-12">
       <p class="text-4xl font-bold text-purple-300">Clash Of Clans</p>
@@ -155,4 +156,5 @@ import Layout from '@/layouts/layout.astro'
       handlePlayers(clanTagInput?.value ?? '')
     })
   </script>
+  </main>
 </Layout>
