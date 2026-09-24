@@ -18,7 +18,7 @@ import { profile } from '@/data/profile'
       <span class="block">Rodríguez</span>
     </h1>
 
-    <p class="m-0 mb-4 text-[clamp(1.1rem,2vw,1.35rem)] font-semibold text-[#b8d47a]">{profile.role}</p>
+    <p class="m-0 mb-4 text-[clamp(1.1rem,2vw,1.35rem)] font-semibold text-brand">{profile.role}</p>
     <p class="m-0 mb-8 max-w-[650px] text-base leading-relaxed text-muted-foreground">
       {profile.summary} Mi stack principal es <strong class="font-semibold text-foreground">{profile.stack.join(', ')}</strong>.
     </p>
@@ -35,7 +35,7 @@ import { profile } from '@/data/profile'
   <aside class="w-full max-w-[340px] justify-self-end overflow-hidden rounded-xl border border-border bg-card max-[820px]:order-1 max-[820px]:max-w-[132px] max-[820px]:justify-self-start" aria-label="Perfil de Manuel Bernabé Rodríguez">
     <Image src={ProfileImage} alt="Retrato de Manuel Bernabé Rodríguez" widths={[160, 320, 480, 640]} sizes="(max-width: 820px) 132px, 340px" class="aspect-square w-full object-cover" loading="eager" quality={88} />
     <div class="p-5 max-[820px]:hidden">
-      <p class="m-0 mb-2 font-mono text-[.7rem] font-semibold tracking-[.13em] text-[#b8d47a] uppercase">Enfoque</p>
+      <p class="m-0 mb-2 font-mono text-[.7rem] font-semibold tracking-[.13em] text-brand uppercase">Enfoque</p>
       <h2 class="m-0 mb-2 text-lg leading-tight font-semibold tracking-[-.02em] text-foreground">Backend y arquitectura</h2>
       <p class="m-0 text-sm text-muted-foreground">Servicios mantenibles, integración entre sistemas y automatización del ciclo de entrega.</p>
     </div>

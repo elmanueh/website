@@ -29,6 +29,9 @@
   --border: oklch(0.75 0 0 / 18%);
   --input: oklch(0.75 0 0 / 22%);
   --ring: oklch(0.8 0 0 / 55%);
+  --brand: #b8d47a;
+  --brand-hover: #c6df91;
+  --brand-foreground: #151a0e;
 }
 
 @theme inline {
@@ -57,6 +60,9 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-brand-foreground: var(--brand-foreground);
 }
 
 @layer base {
