@@ -8,7 +8,7 @@ import Layout from '@/layouts/layout.astro'
   <main>
   <section class="pt-20 pb-16">
     <header class="flex flex-col items-center gap-10 pb-12">
-      <p class="text-4xl font-bold text-purple-300">Clash Of Clans</p>
+      <p class="text-4xl font-bold text-brand">Clash Of Clans</p>
       <ClanSearch />
     </header>
 
@@ -21,17 +21,20 @@ import Layout from '@/layouts/layout.astro'
     type PlayerColumn = keyof PlayerClan
     type PlayerValue = PlayerClan[PlayerColumn]
 
-    const rename: Record<string, string> = {
-      player: 'Id',
-      name: 'Nombre',
-      role: 'Rango',
-      townHall: 'TH',
-      lootCapital: 'Capital +',
-      addCapital: 'Capital -',
-      clanGames: 'Juegos',
-      warPreference: 'Guerra',
-      warAttacks: 'Guerra Atq.',
+    const columnLabels: Record<PlayerColumn, string> = {
+      Clan: 'Clan',
+      Player: 'Jugador',
+      Name: 'Nombre',
+      Role: 'Rango',
+      TownHall: 'TH',
+      LootCapital: 'Capital +',
+      AddCapital: 'Capital -',
+      ClanGames: 'Juegos',
+      WarPreference: 'Guerra',
+      WarAttacks: 'Guerra Atq.'
+    }
 
+    const valueLabels: Record<string, string> = {
       member: 'Miembro',
       admin: 'Veterano',
       coLeader: 'Colíder',
@@ -72,7 +75,7 @@ import Layout from '@/layouts/layout.astro'
         Object.values(player).forEach((value) => {
           const cell = document.createElement('td')
           cell.className = 'px-3'
-          cell.textContent = rename[String(value)] ?? String(value)
+          cell.textContent = valueLabels[String(value)] ?? String(value)
           row.append(cell)
         })
 
@@ -107,8 +110,8 @@ import Layout from '@/layouts/layout.astro'
       columns.forEach((column) => {
         const header = document.createElement('th')
         header.className =
-          'cursor-pointer bg-gray-700 px-3 py-2 text-md text-white hover:text-purple-300'
-        header.textContent = rename[column]
+          'cursor-pointer bg-gray-700 px-3 py-2 text-md text-white hover:text-brand'
+        header.textContent = columnLabels[column]
 
         header.addEventListener('click', () => {
           const sortedPlayers = originalPlayers.slice()

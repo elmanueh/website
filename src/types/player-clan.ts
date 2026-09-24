@@ -1,11 +1,12 @@
 export interface PlayerClan {
-  player: string
-  name: string
-  role: string
-  townHall: number
-  lootCapital: number
-  addCapital: number
-  clanGames: number
-  warPreference: string
-  warAttacks: string
+  Clan: string
+  Player: string
+  Name: string
+  Role: string
+  TownHall: number
+  LootCapital: number
+  AddCapital: number
+  ClanGames: number
+  WarPreference: string
+  WarAttacks: string
 }
