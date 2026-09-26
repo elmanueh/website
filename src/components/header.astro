@@ -18,14 +18,14 @@ const languageLinks = i18n.languageLinks()
       <span>elmanueh</span>
     </a>
 
-    <div class="flex items-center gap-6">
+    <div class="flex items-center gap-8">
       <nav class="max-[820px]:hidden" aria-label={t.header.navigationAria}>
         <ul class="m-0 flex list-none gap-6 p-0">
           {links.map(({ href, label }) => <li><a class="text-[.84rem] text-muted-foreground no-underline transition-colors duration-200 hover:text-foreground" href={href}>{label}</a></li>)}
         </ul>
       </nav>
 
-      <nav aria-label={t.header.languageSelectorAria}>
+      <nav class="rounded-md bg-muted/70 px-1 py-0.5" aria-label={t.header.languageSelectorAria}>
         <ul class="m-0 flex list-none items-center gap-1 p-0 font-mono text-xs font-semibold">
           {languageLinks.map((link, index) => (
             <li class="flex items-center gap-1">
