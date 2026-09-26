@@ -6,9 +6,9 @@ import SolidarianIdImage from '@/assets/solidarianid.png'
 import SolidarianIdIcon from '@/assets/solidarian-logo.png'
 import type { ImageMetadata } from 'astro'
 
-export enum ProjectLinkLabel {
-  Website = 'Ver web',
-  GitHub = 'Código en GitHub'
+export enum ProjectLinkType {
+  Website = 'website',
+  GitHub = 'github'
 }
 
 export interface Project {
@@ -18,60 +18,68 @@ export interface Project {
   subtitle: string
   image: ImageMetadata
   icon?: ImageMetadata
+  linkType: ProjectLinkType
   tags: string[]
-  linkLabel: ProjectLinkLabel
+  linkLabel: string
 }
 
-export const projects: Project[] = [
+export type ProjectTranslation = Pick<Project, 'subtitle' | 'tags'>
+
+export interface ProjectsTranslations {
+  linkLabels: Record<ProjectLinkType, string>
+  items: Record<string, ProjectTranslation>
+}
+
+type ProjectDefinition = Omit<Project, 'subtitle' | 'tags' | 'linkLabel'>
+
+const projectDefinitions: ProjectDefinition[] = [
   {
     slug: 'belen-david-boda',
     href: 'https://belenydavidsecasan.es/',
     title: 'Web de boda · Belén y David',
-    subtitle:
-      'Experiencia web personalizada para invitados con acceso privado, itinerario, galería, información práctica, confirmación de asistencia y panel de gestión de invitaciones.',
     image: BelenDavidBodaImage,
-    tags: ['Aplicación web', 'Astro', 'React', 'Diseño responsive'],
-    linkLabel: ProjectLinkLabel.Website
+    linkType: ProjectLinkType.Website
   },
   {
     slug: 'solidarianid',
     href: 'https://github.com/elmanueh/solidarianid',
     title: 'SolidarianID',
-    subtitle:
-      'Plataforma para gestionar voluntariado y causas solidarias, con identidad digital, comunidades, eventos y acciones benéficas sobre una arquitectura de microservicios orientada a eventos.',
     image: SolidarianIdImage,
     icon: SolidarianIdIcon,
-    tags: ['Microservicios', 'DDD', 'NestJS', 'Apache Kafka'],
-    linkLabel: ProjectLinkLabel.GitHub
+    linkType: ProjectLinkType.GitHub
   },
   {
     slug: 'ariadne',
     href: 'https://github.com/elmanueh/ariadne',
     title: 'Ariadne',
-    subtitle:
-      'Herramienta de línea de comandos desarrollada como TFM para validar datos, analizar ontologías y mappings, evaluar calidad y generar grafos RDF mediante un pipeline modular.',
     image: AriadneIcon,
-    tags: ['TFM', 'Python', 'Grafos de conocimiento', 'Arquitectura hexagonal'],
-    linkLabel: ProjectLinkLabel.GitHub
+    linkType: ProjectLinkType.GitHub
   },
   {
     slug: 'linetree',
     href: 'https://linetree.elmanueh.es/',
     title: 'LineTree',
-    subtitle:
-      'Aplicación web para la creación y visualización de árboles genealógicos, diseñada para representar relaciones familiares, herencias y vínculos de forma clara y estructurada.',
     image: LineTreeIcon,
-    tags: ['TFG', 'Aplicación web', 'Arquitectura', 'Modelado de datos'],
-    linkLabel: ProjectLinkLabel.Website
+    linkType: ProjectLinkType.Website
   },
   {
     slug: 'clash-of-clans-api',
     href: '/clashofclans',
     title: 'API Clash of Clans',
-    subtitle:
-      'API backend para el seguimiento y análisis de la actividad de un clan en Clash of Clans, centralizando métricas de jugadores, guerras, donaciones y eventos.',
     image: ClashOfClansIcon,
-    tags: ['API REST', 'Análisis de datos'],
-    linkLabel: ProjectLinkLabel.Website
+    linkType: ProjectLinkType.Website
   }
 ]
+
+export function getProjects(translations: ProjectsTranslations): Project[] {
+  return projectDefinitions.map((project) => {
+    const content = translations.items[project.slug]
+
+    return {
+      ...project,
+      subtitle: content.subtitle,
+      tags: content.tags,
+      linkLabel: translations.linkLabels[project.linkType]
+    }
+  })
+}

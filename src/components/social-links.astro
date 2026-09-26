@@ -1,9 +1,12 @@
 ---
 import { Icon } from 'astro-icon/components'
-import { socialLinks } from '@/data/social-links'
+import { getSocialLinks } from '@/data/social-links'
+import { I18n } from '@/i18n'
 
 interface Props { compact?: boolean }
 const { compact = false } = Astro.props
+const { t } = I18n.from(Astro)
+const socialLinks = getSocialLinks(t.social)
 const icons = {
   github: 'simple-icons:github',
   linkedin: 'simple-icons:linkedin',

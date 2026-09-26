@@ -1,22 +1,26 @@
 ---
 import { Icon } from 'astro-icon/components'
+import { I18n } from '@/i18n'
 import Layout from '@/layouts/layout.astro'
+
+const i18n = I18n.from(Astro)
+const { t } = i18n
 ---
 
-<Layout title="Página no encontrada | elmanueh">
+<Layout title={t.meta.notFound.title} description={t.meta.notFound.description}>
   <main class="mx-auto flex min-h-[calc(100vh-4rem-110px)] w-full max-w-[1020px] items-center px-6 py-16 max-[680px]:px-4 max-[680px]:py-12">
     <section class="mx-auto w-full max-w-[700px] max-[680px]:text-center" aria-labelledby="error-title">
       <div class="mb-10 flex items-center text-[9rem] leading-[.75] font-light tracking-[-.075em] text-foreground/[.07] max-[680px]:justify-center max-[680px]:text-[7rem]" aria-hidden="true">
         <span>404</span>
       </div>
 
-      <p class="m-0 mb-5 font-mono text-xs font-semibold tracking-[.13em] text-brand uppercase">Página no encontrada</p>
-      <h1 id="error-title" class="m-0 mb-5 text-[clamp(2.5rem,6vw,4rem)] leading-[1.04] font-semibold tracking-[-.05em] text-foreground">Esta página no existe.</h1>
-      <p class="m-0 mb-9 max-w-[580px] text-base leading-relaxed text-muted-foreground max-[680px]:mx-auto">Puede que se haya movido o que la dirección no sea correcta. En cualquier caso, aquí no hay nada que mostrar.</p>
+      <p class="m-0 mb-5 font-mono text-xs font-semibold tracking-[.13em] text-brand uppercase">{t.notFound.eyebrow}</p>
+      <h1 id="error-title" class="m-0 mb-5 text-[clamp(2.5rem,6vw,4rem)] leading-[1.04] font-semibold tracking-[-.05em] text-foreground">{t.notFound.heading}</h1>
+      <p class="m-0 mb-9 max-w-[580px] text-base leading-relaxed text-muted-foreground max-[680px]:mx-auto">{t.notFound.description}</p>
 
-      <nav class="font-mono text-sm" aria-label="Opción para continuar">
-        <a class="inline-flex items-center gap-2 text-foreground no-underline transition-colors duration-200 hover:text-brand" href="/">
-          Volver al inicio
+      <nav class="font-mono text-sm" aria-label={t.notFound.navigationAria}>
+        <a class="inline-flex items-center gap-2 text-foreground no-underline transition-colors duration-200 hover:text-brand" href={i18n.path()}>
+          {t.notFound.backHome}
           <Icon name="lucide:arrow-right" size={16} aria-hidden="true" />
         </a>
       </nav>

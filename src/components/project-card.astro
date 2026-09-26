@@ -2,20 +2,24 @@
 import { Image } from 'astro:assets'
 import { Icon } from 'astro-icon/components'
 import type { Project } from '@/data/projects'
+import { I18n } from '@/i18n'
 
 interface Props {
   project: Project
 }
 
 const { project } = Astro.props
+const i18n = I18n.from(Astro)
+const { t } = i18n
 const isExternal = /^https?:\/\//.test(project.href)
+const href = isExternal ? project.href : i18n.path(project.href)
 ---
 
 <article class="grid h-[230px] grid-cols-[minmax(0,34fr)_minmax(0,66fr)] gap-5 overflow-hidden rounded-xl border border-border bg-card p-4 transition-colors duration-200 hover:border-ring hover:bg-muted max-[680px]:h-auto max-[680px]:grid-cols-1">
   <div class="h-full min-h-0 overflow-hidden rounded-lg bg-background max-[680px]:h-auto max-[680px]:aspect-video">
     <Image
       src={project.image}
-      alt={`Vista previa de ${project.title}`}
+      alt={`${t.projects.previewAlt} ${project.title}`}
       widths={[360, 560, 760]}
       sizes="(max-width: 680px) calc(100vw - 3rem), 320px"
       class="h-full w-full object-cover"
@@ -26,16 +30,16 @@ const isExternal = /^https?:\/\//.test(project.href)
 
   <div class="flex min-w-0 flex-col items-start py-1 pr-1 max-[680px]:p-1">
     <div>
-      <p class="m-0 mb-2 font-mono text-[.7rem] font-semibold tracking-[.13em] text-brand uppercase">Proyecto</p>
+      <p class="m-0 mb-2 font-mono text-[.7rem] font-semibold tracking-[.13em] text-brand uppercase">{t.projects.cardEyebrow}</p>
       <h3 class="m-0 mb-2 text-[1.35rem] leading-tight font-semibold tracking-[-.03em] text-foreground">{project.title}</h3>
       <p class="m-0 mb-4 text-sm leading-relaxed text-muted-foreground">{project.subtitle}</p>
     </div>
 
-    <ul class="mt-auto mb-4 flex list-none flex-wrap gap-1.5 p-0" aria-label={`Tecnologías de ${project.title}`}>
+    <ul class="mt-auto mb-4 flex list-none flex-wrap gap-1.5 p-0" aria-label={`${t.projects.technologiesLabel} ${project.title}`}>
       {project.tags.map((tag) => <li class="rounded-md border border-border bg-background px-2 py-1 font-mono text-[.69rem] leading-snug text-muted-foreground">{tag}</li>)}
     </ul>
 
-    <a class="inline-flex items-center gap-1.5 text-sm font-semibold text-foreground underline decoration-border underline-offset-4 hover:text-brand hover:decoration-brand" href={project.href} target={isExternal ? '_blank' : undefined}
+    <a class="inline-flex items-center gap-1.5 text-sm font-semibold text-foreground underline decoration-border underline-offset-4 hover:text-brand hover:decoration-brand" href={href} target={isExternal ? '_blank' : undefined}
       rel={isExternal ? 'noopener noreferrer' : undefined}>
       {project.linkLabel}<Icon name="lucide:arrow-up-right" size={16} aria-hidden="true" />
     </a>

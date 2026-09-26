@@ -1,8 +1,12 @@
+---
+import { I18n } from '@/i18n'
+
+const { t } = I18n.from(Astro)
+---
+
 <div class="w-max rounded-2xl border-0 bg-gray-700 px-2 py-5 sm:px-20">
   <h1 class="pb-4 text-2xl font-medium">
-    Consultar información sobre un <span class="font-bold text-brand"
-      >clan</span
-    >
+    {t.clashOfClans.searchPrefix} <span class="font-bold text-brand">{t.clashOfClans.searchHighlight}</span>
   </h1>
   <div class="flex justify-center gap-3">
     <input
@@ -17,7 +21,7 @@
       type="button"
       class="cursor-pointer rounded-lg border border-brand bg-brand px-3 font-bold text-brand-foreground transition-colors duration-200 hover:border-brand-hover hover:bg-brand-hover"
     >
-      BUSCAR
+      {t.clashOfClans.searchButton}
     </button>
   </div>
 </div>
