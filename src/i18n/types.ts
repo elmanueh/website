@@ -7,9 +7,9 @@ export type Locale = 'es' | 'en'
 
 export interface Translations {
   meta: {
-    home: { title: string; description: string }
-    clashOfClans: { title: string; description: string }
-    notFound: { title: string; description: string }
+    home: { title: string }
+    clashOfClans: { title: string }
+    notFound: { title: string }
   }
   header: {
     home: string
@@ -35,6 +35,15 @@ export interface Translations {
     cardEyebrow: string
     previewAlt: string
     technologiesLabel: string
+  }
+  projectDetail: {
+    eyebrow: string
+    overview: string
+    onThisPage: string
+    firstCommit: string
+    lastCommit: string
+    backToProjects: string
+    openCaseStudy: string
   }
   social: SocialLabels
   notFound: {

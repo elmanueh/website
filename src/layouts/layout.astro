@@ -2,21 +2,16 @@
 import Footer from '@/components/footer.astro'
 import Header from '@/components/header.astro'
 import { I18n } from '@/i18n'
+import { ClientRouter } from 'astro:transitions'
 import '@/styles/global.css'
 
 interface Props {
   title?: string
-  description?: string
 }
 
 const i18n = I18n.from(Astro)
 const { locale, t } = i18n
-const { title = t.meta.home.title, description = t.meta.home.description } = Astro.props
-const canonicalUrl = new URL(i18n.currentPath(), Astro.site)
-const alternateUrls = I18n.locales.map((alternateLocale) => ({
-  locale: alternateLocale,
-  url: new URL(i18n.currentPath(alternateLocale), Astro.site)
-}))
+const { title = t.meta.home.title } = Astro.props
 ---
 
 <!doctype html>
@@ -26,10 +21,7 @@ const alternateUrls = I18n.locales.map((alternateLocale) => ({
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={canonicalUrl} />
-    {alternateUrls.map(({ locale: alternateLocale, url }) => <link rel="alternate" hreflang={alternateLocale} href={url} />)}
-    <link rel="alternate" hreflang="x-default" href={new URL(i18n.currentPath(I18n.defaultLocale), Astro.site)} />
+    <ClientRouter />
   </head>
   <body>
     <Header />

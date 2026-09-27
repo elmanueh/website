@@ -1,19 +1,15 @@
-import { ProjectLinkType } from '@/data/projects'
 import type { Translations } from '@/i18n/types'
 
 export const es = {
   meta: {
     home: {
-      title: 'elmanueh | Software Engineer',
-      description: 'Portfolio de Manuel Bernabé Rodríguez, Backend Software Engineer especializado en .NET, APIs REST y arquitectura de software.'
+      title: 'elmanueh | Software Engineer'
     },
     clashOfClans: {
-      title: 'API Clash of Clans | elmanueh',
-      description: 'Consulta métricas y actividad de jugadores de un clan de Clash of Clans.'
+      title: 'API Clash of Clans | elmanueh'
     },
     notFound: {
-      title: 'Página no encontrada | elmanueh',
-      description: 'La página solicitada no existe o ha cambiado de dirección.'
+      title: 'Página no encontrada | elmanueh'
     }
   },
   header: {
@@ -43,8 +39,8 @@ export const es = {
     previewAlt: 'Vista previa de',
     technologiesLabel: 'Tecnologías de',
     linkLabels: {
-      [ProjectLinkType.Website]: 'Ver web',
-      [ProjectLinkType.GitHub]: 'Código en GitHub'
+      source: 'Ver código fuente',
+      app: 'Ver aplicación'
     },
     items: {
       'belen-david-boda': {
@@ -68,6 +64,15 @@ export const es = {
         tags: ['API REST', 'Análisis de datos']
       }
     }
+  },
+  projectDetail: {
+    eyebrow: 'Caso de estudio',
+    overview: 'Resumen',
+    onThisPage: 'En esta página',
+    firstCommit: 'Creado',
+    lastCommit: 'Última actualización',
+    backToProjects: 'Volver a proyectos',
+    openCaseStudy: 'Ver caso de estudio de'
   },
   social: {
     github: 'GitHub de Manuel',

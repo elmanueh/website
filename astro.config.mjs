@@ -1,5 +1,6 @@
 // @ts-check
 import tailwindcss from '@tailwindcss/vite'
+import react from '@astrojs/react'
 import { defineConfig } from 'astro/config'
 import icon from 'astro-icon'
 
@@ -12,7 +13,7 @@ export default defineConfig({
       prefixDefaultLocale: false
     }
   },
-  integrations: [icon({ iconDir: 'public' })],
+  integrations: [react(), icon({ iconDir: 'public' })],
   vite: {
     plugins: [tailwindcss()]
   }

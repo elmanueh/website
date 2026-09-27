@@ -1,19 +1,15 @@
-import { ProjectLinkType } from '@/data/projects'
 import type { Translations } from '@/i18n/types'
 
 export const en = {
   meta: {
     home: {
-      title: 'elmanueh | Software Engineer',
-      description: 'Portfolio of Manuel Bernabé Rodríguez, a Backend Software Engineer specialising in .NET, REST APIs and software architecture.'
+      title: 'elmanueh | Software Engineer'
     },
     clashOfClans: {
-      title: 'Clash of Clans API | elmanueh',
-      description: 'Explore player activity and metrics for a Clash of Clans clan.'
+      title: 'Clash of Clans API | elmanueh'
     },
     notFound: {
-      title: 'Page not found | elmanueh',
-      description: 'The requested page does not exist or has moved.'
+      title: 'Page not found | elmanueh'
     }
   },
   header: {
@@ -43,8 +39,8 @@ export const en = {
     previewAlt: 'Preview of',
     technologiesLabel: 'Technologies used in',
     linkLabels: {
-      [ProjectLinkType.Website]: 'View website',
-      [ProjectLinkType.GitHub]: 'View on GitHub'
+      source: 'View source code',
+      app: 'View application'
     },
     items: {
       'belen-david-boda': {
@@ -68,6 +64,15 @@ export const en = {
         tags: ['REST API', 'Data analysis']
       }
     }
+  },
+  projectDetail: {
+    eyebrow: 'Case study',
+    overview: 'Overview',
+    onThisPage: 'On this page',
+    firstCommit: 'Created',
+    lastCommit: 'Last updated',
+    backToProjects: 'Back to projects',
+    openCaseStudy: 'View case study for'
   },
   social: {
     github: "Manuel's GitHub profile",

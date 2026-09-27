@@ -1,0 +1,60 @@
+---
+import { Image } from 'astro:assets'
+import { Icon } from 'astro-icon/components'
+import GithubDates from '@/components/projects/github-dates'
+import type { Project } from '@/data/projects'
+import { I18n } from '@/i18n'
+
+interface Props {
+  project: Project
+}
+
+const { project } = Astro.props
+const i18n = I18n.from(Astro)
+const { locale, t } = i18n
+const heroImage = project.icon ?? project.image
+const isLogo = Boolean(project.icon) || heroImage.format === 'svg'
+const localizeHref = (href: string) => {
+  if (/^https?:\/\//.test(href)) return href
+  const [path, fragment] = href.split('#', 2)
+  return `${i18n.path(path)}${fragment ? `#${fragment}` : ''}`
+}
+interface ProjectAction {
+  href: string
+  label: string
+  icon: string
+  external: boolean
+}
+const actions: ProjectAction[] = []
+if (project.links.source) actions.push({ href: localizeHref(project.links.source), label: t.projects.linkLabels.source, icon: 'simple-icons:github', external: /^https?:\/\//.test(project.links.source) })
+if (project.links.app) actions.push({ href: localizeHref(project.links.app), label: t.projects.linkLabels.app, icon: 'lucide:app-window', external: /^https?:\/\//.test(project.links.app) })
+---
+
+<header class="border-b border-border pb-10 max-[680px]:pb-8">
+  <div class="grid grid-cols-[minmax(0,1fr)_150px] items-start gap-10 max-[680px]:grid-cols-1 max-[680px]:gap-5">
+    <div class="min-w-0">
+      <p class="m-0 mb-3 font-mono text-[.7rem] font-semibold tracking-[.13em] text-brand uppercase">{t.projectDetail.eyebrow}</p>
+      <h1 transition:name={`project-title-${project.slug}`} class="m-0 mb-4 text-[clamp(2.35rem,5vw,3.6rem)] leading-none font-semibold tracking-tighter text-foreground">{project.title}</h1>
+      <p class="m-0 mb-5 max-w-170 text-base leading-relaxed text-muted-foreground">{project.subtitle}</p>
+
+      <ul class="m-0 mb-6 flex list-none flex-wrap gap-1.5 p-0" aria-label={`${t.projects.technologiesLabel} ${project.title}`}>
+        {project.tags.map((tag) => <li class="rounded-md border border-border bg-background px-2.5 py-1 font-mono text-[.7rem] leading-snug text-muted-foreground">{tag}</li>)}
+      </ul>
+
+      {actions.length > 0 && <div class="flex flex-wrap gap-2.5">
+        {actions.map((action) => <a class="inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-semibold text-muted-foreground no-underline transition-colors duration-200 hover:border-ring hover:bg-card hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring" href={action.href} target={action.external ? '_blank' : undefined} rel={action.external ? 'noopener noreferrer' : undefined}>
+          <Icon name={action.icon} size={16} aria-hidden="true" />
+          {action.label}
+        </a>)}
+      </div>}
+    </div>
+
+    <div class:list={['justify-self-end max-[680px]:row-start-1 max-[680px]:justify-self-start', isLogo ? 'flex size-37.5 items-center justify-center max-[680px]:size-24' : 'aspect-4/3 w-45 overflow-hidden rounded-xl max-[680px]:w-32']}>
+      <Image transition:name={project.icon ? undefined : `project-image-${project.slug}`} src={heroImage} alt={`${t.projects.previewAlt} ${project.title}`} widths={[96, 150, 300]} sizes="(max-width: 680px) 96px, 150px" class:list={isLogo ? 'max-h-full max-w-full object-contain' : 'h-full w-full object-cover'} loading="eager" quality={88} />
+    </div>
+  </div>
+
+  {project.links.source && (
+    <GithubDates client:load source={project.links.source} locale={locale} createdLabel={t.projectDetail.firstCommit} updatedLabel={t.projectDetail.lastCommit} />
+  )}
+</header>
