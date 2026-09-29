@@ -2,8 +2,6 @@ name: ci
 
 on:
   push:
-    branches:
-      - "**"
   pull_request:
   workflow_call:
 
@@ -17,22 +15,14 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v6
+      - name: Set up pnpm and Node
+        uses: pnpm/setup@v3
         with:
-          version: 11.14.0
-
-      - name: Setup Node
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24
-          cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
-
-      - name: Install
-        run: pnpm install --frozen-lockfile
+          runtime: node@24
+          cache: true
+          require-lockfile: true
 
       - name: Check
         run: pnpm run check
@@ -48,5 +38,6 @@ jobs:
         with:
           context: .
           push: false
+          platforms: linux/amd64
           cache-from: type=gha
           cache-to: type=gha,mode=max

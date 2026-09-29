@@ -1,11 +1,7 @@
 name: release
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - package.json
+  workflow_dispatch:
 
 concurrency:
   group: release
@@ -14,83 +10,55 @@ concurrency:
 permissions:
   contents: read
 
-env:
-  IMAGE_NAME: ghcr.io/${{ github.repository }}
-
 jobs:
   ci:
-    name: Validate repository
+    name: Validate source
     uses: ./.github/workflows/ci.yml
 
-  version:
-    name: Detect version change
+  release:
+    name: Publish semantic release
     needs: ci
-    runs-on: ubuntu-24.04
-    outputs:
-      changed: ${{ steps.version.outputs.changed }}
-      full_sha: ${{ steps.version.outputs.full_sha }}
-      short_sha: ${{ steps.version.outputs.short_sha }}
-      tag: ${{ steps.version.outputs.tag }}
-      version: ${{ steps.version.outputs.version }}
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-
-      - name: Detect and validate version
-        id: version
-        env:
-          BEFORE_SHA: ${{ github.event.before }}
-        run: |
-          current_version="$(node -p "require('./package.json').version")"
-
-          if git cat-file -e "$BEFORE_SHA:package.json" 2>/dev/null; then
-            previous_version="$(git show "$BEFORE_SHA:package.json" | node -e "let input = ''; process.stdin.on('data', chunk => input += chunk); process.stdin.on('end', () => process.stdout.write(JSON.parse(input).version));")"
-          else
-            previous_version=""
-          fi
-
-          if [[ "$current_version" == "$previous_version" ]]; then
-            echo "The package version has not changed ($current_version); skipping release."
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-
-          if [[ ! "$current_version" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
-            echo "Invalid release version: $current_version" >&2
-            exit 1
-          fi
-
-          release_tag="v$current_version"
-          if git rev-parse --verify --quiet "refs/tags/$release_tag"; then
-            echo "The tag $release_tag already exists. Update package.json to a new version." >&2
-            exit 1
-          fi
-
-          echo "changed=true" >> "$GITHUB_OUTPUT"
-          echo "full_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
-          echo "short_sha=$(git rev-parse --short=7 HEAD)" >> "$GITHUB_OUTPUT"
-          echo "tag=$release_tag" >> "$GITHUB_OUTPUT"
-          echo "version=$current_version" >> "$GITHUB_OUTPUT"
-
-  publish-image:
-    name: Publish Docker image
-    needs:
-      - ci
-      - version
-    if: needs.version.outputs.changed == 'true'
     runs-on: ubuntu-24.04
     permissions:
       contents: write
       packages: write
-
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      IMAGE_NAME: ghcr.io/${{ github.repository }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      - name: Checkout complete history
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
+
+      - name: Set up pnpm and Node
+        uses: pnpm/setup@v3
+        with:
+          runtime: node@24
+          cache: true
+          require-lockfile: true
+
+      - name: Analyze commits and publish the release
+        run: pnpm exec semantic-release
+
+      - name: Resolve the published release version
+        id: release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          tag="$(git tag --points-at HEAD --list 'v[0-9]*.[0-9]*.[0-9]*' --sort=-v:refname | head -n 1)"
+          if [[ -z "$tag" ]]; then
+            echo "semantic-release did not create a release for this revision." >&2
+            exit 1
+          fi
+          gh release view "$tag" --json tagName >/dev/null
+          version="${tag#v}"
+          if [[ ! "$version" =~ ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
+            echo "Invalid stable release version: $version" >&2
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "tag=v$version" >> "$GITHUB_OUTPUT"
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4
@@ -102,34 +70,51 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Reject an existing immutable image
+        env:
+          RELEASE_TAG: ${{ steps.release.outputs.tag }}
+        run: |
+          if docker manifest inspect "${IMAGE_NAME}:${RELEASE_TAG}" >/dev/null 2>&1; then
+            echo "${IMAGE_NAME}:${RELEASE_TAG} already exists; it will not be overwritten." >&2
+            exit 1
+          fi
+
       - name: Generate Docker metadata
-        id: meta
+        id: metadata
         uses: docker/metadata-action@v6
         with:
           images: ${{ env.IMAGE_NAME }}
-          tags: |
-            type=raw,value=${{ needs.version.outputs.version }}
-            type=raw,value=sha-${{ needs.version.outputs.short_sha }}
+          tags: type=raw,value=${{ steps.release.outputs.tag }}
           labels: |
             org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
-            org.opencontainers.image.revision=${{ needs.version.outputs.full_sha }}
-            org.opencontainers.image.version=${{ needs.version.outputs.version }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.version=${{ steps.release.outputs.version }}
 
-      - name: Build and publish image
+      - name: Build and publish release image
+        id: image
         uses: docker/build-push-action@v7
         with:
           context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          platforms: linux/amd64,linux/arm64
+          tags: ${{ steps.metadata.outputs.tags }}
+          labels: ${{ steps.metadata.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Create Git tag
+      - name: Verify the published image digest
         env:
-          RELEASE_TAG: ${{ needs.version.outputs.tag }}
+          RELEASE_TAG: ${{ steps.release.outputs.tag }}
+          EXPECTED_DIGEST: ${{ steps.image.outputs.digest }}
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git tag --annotate "$RELEASE_TAG" --message "Release $RELEASE_TAG"
-          git push origin "$RELEASE_TAG"
+          published_digest="$(docker buildx imagetools inspect "${IMAGE_NAME}:${RELEASE_TAG}" --format '{{json .Manifest.Digest}}' | tr -d '"')"
+          if [[ "$published_digest" != "$EXPECTED_DIGEST" ]]; then
+            echo "Published digest mismatch: expected $EXPECTED_DIGEST, got $published_digest" >&2
+            exit 1
+          fi
+          {
+            echo "### Published image"
+            echo '```text'
+            echo "${IMAGE_NAME}:${RELEASE_TAG}@${published_digest}"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
