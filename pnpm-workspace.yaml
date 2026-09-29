@@ -1,5 +1,6 @@
 allowBuilds:
   esbuild: true
   sharp: true
+pmOnFail: error
 minimumReleaseAgeExclude:
   - astro@7.3.5
