@@ -43,6 +43,10 @@ export const en = {
       app: 'View application'
     },
     items: {
+      'cloud-platform': {
+        subtitle: 'A personal infrastructure platform that follows GitOps principles to host, publish and update applications from versioned, reproducible configuration that can be applied automatically, independently of the cloud provider.',
+        tags: ['Ansible', 'Docker', 'Nginx', 'Certbot']
+      },
       'belen-david-boda': {
         subtitle: 'A bespoke private experience for wedding guests, featuring the schedule, gallery, practical information, RSVP flow and an invitation management dashboard.',
         tags: ['Web application', 'Astro', 'React', 'Responsive design']

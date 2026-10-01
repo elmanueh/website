@@ -25,7 +25,8 @@
     flex: 0 0 auto;
     min-width: 2rem;
     color: var(--brand);
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 0.95rem;
     font-weight: 600;
     letter-spacing: 0.13em;
@@ -50,6 +51,33 @@
 
   .case-study-sections p {
     margin: 0 0 1.4rem;
+  }
+
+  .case-study-sections ul,
+  .case-study-sections ol {
+    margin: 0 0 1.4rem;
+    padding-left: 1.5rem;
+    list-style-position: outside;
+  }
+
+  .case-study-sections ul {
+    list-style-type: disc;
+  }
+  .case-study-sections ol {
+    list-style-type: decimal;
+  }
+  .case-study-sections li + li {
+    margin-top: 0.5rem;
+  }
+
+  .case-study-sections li::marker {
+    color: var(--brand);
+  }
+
+  .case-study-sections li > ul,
+  .case-study-sections li > ol {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
   }
 
   .case-study-sections h3 {
@@ -93,6 +121,7 @@
     max-width: 100%;
     overflow-x: auto;
     border-collapse: collapse;
+    margin: 2rem 0;
   }
 
   .case-study-sections th,
@@ -100,5 +129,136 @@
     padding: 0.75rem;
     border: 1px solid var(--border);
     text-align: left;
+  }
+
+  .case-study-sections strong {
+    color: var(--foreground);
+    font-weight: 600;
+  }
+
+  .case-study-sections :not(pre) > code {
+    padding: 0.15em 0.4em;
+    border-radius: 0.3rem;
+    background: color-mix(in srgb, var(--brand) 8%, transparent);
+    color: var(--foreground);
+    font-size: 0.88em;
+    overflow-wrap: anywhere;
+  }
+
+  .case-study-table {
+    max-width: 100%;
+    overflow-x: auto;
+    margin: 2rem 0;
+  }
+
+  .case-study-sections .case-study-table > table {
+    display: table;
+    margin: 0 auto;
+  }
+
+  .case-study-sections .case-study-flow {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.25rem;
+    margin: 2rem 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .case-study-sections .case-study-flow > li {
+    position: relative;
+    margin: 0;
+    padding: 1rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    text-align: center;
+  }
+
+  .case-study-flow strong,
+  .case-study-flow span {
+    display: block;
+  }
+
+  .case-study-flow span {
+    margin-top: 0.35rem;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+
+  .case-study-flow > li:not(:last-child)::after {
+    position: absolute;
+    top: 50%;
+    right: -1.1rem;
+    color: var(--brand);
+    content: '→';
+    transform: translateY(-50%);
+  }
+
+  .case-study-steps > ol {
+    counter-reset: deployment-step;
+    margin: 2rem 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .case-study-steps > ol > li {
+    position: relative;
+    min-height: 3rem;
+    margin: 0;
+    padding: 0.25rem 0 1.5rem 3.5rem;
+    counter-increment: deployment-step;
+  }
+
+  .case-study-steps > ol > li::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: grid;
+    width: 2.5rem;
+    height: 2.5rem;
+    place-items: center;
+    border: 1px solid color-mix(in srgb, var(--brand) 35%, var(--border));
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--brand) 8%, transparent);
+    color: var(--brand);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.8rem;
+    content: counter(deployment-step, decimal-leading-zero);
+  }
+
+  .case-study-steps > ol > li:not(:last-child)::after {
+    position: absolute;
+    top: 2.7rem;
+    bottom: 0.2rem;
+    left: 1.25rem;
+    width: 1px;
+    background: var(--border);
+    content: '';
+  }
+
+  .case-study-sections th {
+    color: var(--foreground);
+    background: color-mix(in srgb, var(--foreground) 4%, transparent);
+  }
+
+  .case-study-sections td {
+    color: var(--muted-foreground);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 600px) {
+    .case-study-sections .case-study-flow {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.5rem;
+    }
+
+    .case-study-flow > li:not(:last-child)::after {
+      top: auto;
+      right: 50%;
+      bottom: -1.55rem;
+      content: '↓';
+      transform: translateX(50%);
+    }
   }
 }

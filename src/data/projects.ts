@@ -1,4 +1,6 @@
 import AriadneIcon from '@/assets/ariadne.svg'
+import CloudPlatformImage from '@/assets/cloud-platform.png'
+import CloudPlatformIcon from '@/assets/cloud-platform-icon.png'
 import BelenDavidBodaImage from '@/assets/belen-david-boda.jpg'
 import ClashOfClansIcon from '@/assets/clashofclans.png'
 import LineTreeIcon from '@/assets/linetree.svg'
@@ -26,6 +28,13 @@ export interface ProjectsTranslations {
 type ProjectDefinition = Omit<Project, 'subtitle' | 'tags'>
 
 const projectDefinitions: ProjectDefinition[] = [
+  {
+    slug: 'cloud-platform',
+    title: 'Cloud Platform',
+    image: CloudPlatformImage,
+    icon: CloudPlatformIcon,
+    links: {}
+  },
   {
     slug: 'belen-david-boda',
     title: 'Web de boda · Belén y David',

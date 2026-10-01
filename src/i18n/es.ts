@@ -43,6 +43,10 @@ export const es = {
       app: 'Ver aplicación'
     },
     items: {
+      'cloud-platform': {
+        subtitle: 'Plataforma personal de infraestructura que sigue principios de GitOps para alojar, publicar y actualizar aplicaciones desde una configuración versionada, reproducible y automatizable, independiente del proveedor cloud.',
+        tags: ['Ansible', 'Docker', 'Nginx', 'Certbot']
+      },
       'belen-david-boda': {
         subtitle: 'Experiencia web personalizada para invitados con acceso privado, itinerario, galería, información práctica, confirmación de asistencia y panel de gestión de invitaciones.',
         tags: ['Aplicación web', 'Astro', 'React', 'Diseño responsive']
