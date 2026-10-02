@@ -12,7 +12,6 @@ const languageLinks = i18n.languageLinks()
         {index > 0 && <span class="text-border" aria-hidden="true">/</span>}
         <a
           href={link.href}
-          data-language-link
           class:list={['rounded px-1.5 py-1 no-underline outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-ring', link.locale === locale ? 'text-brand' : 'text-muted-foreground hover:text-foreground']}
           aria-current={link.locale === locale ? 'page' : undefined}
           aria-label={link.label}
@@ -23,18 +22,3 @@ const languageLinks = i18n.languageLinks()
     ))}
   </ul>
 </nav>
-
-<script>
-  function updateLanguageLinks() {
-    document.querySelectorAll<HTMLAnchorElement>('[data-language-link]').forEach((link) => {
-      const url = new URL(link.href)
-      url.search = window.location.search
-      url.hash = ''
-      link.href = url.href
-    })
-  }
-
-  updateLanguageLinks()
-  document.addEventListener('astro:page-load', updateLanguageLinks)
-  document.addEventListener('click', updateLanguageLinks, { capture: true })
-</script>

@@ -10,7 +10,7 @@ interface Props {
 
 const { project } = Astro.props
 const i18n = I18n.from(Astro)
-const { t } = i18n
+const { locale, t } = i18n
 const projectHref = i18n.path(`projects/${project.slug}`)
 const localizeHref = (href: string) => {
   if (/^https?:\/\//.test(href)) return href
@@ -29,9 +29,10 @@ if (project.links.app) actions.push({ href: localizeHref(project.links.app), lab
 ---
 
 <article class="group relative grid h-57.5 grid-cols-[minmax(0,34fr)_minmax(0,66fr)] gap-5 overflow-hidden rounded-xl border border-border bg-card p-4 transition-[border-color,background-color,box-shadow] duration-300 hover:border-ring hover:bg-muted hover:shadow-[0_14px_34px_rgb(0_0_0/.18)] focus-within:border-ring focus-within:ring-2 focus-within:ring-ring motion-reduce:transition-none max-[680px]:h-auto max-[680px]:grid-cols-1">
+  <a class="absolute inset-0 z-10 rounded-xl focus-visible:outline-none" href={projectHref} aria-label={`${t.projectDetail.openCaseStudy} ${project.title}`}><span class="sr-only">{t.projectDetail.openCaseStudy} {project.title}</span></a>
   <div class="h-full min-h-0 overflow-hidden rounded-lg bg-background max-[680px]:h-auto max-[680px]:aspect-video">
     <Image
-      transition:name={`project-image-${project.slug}`}
+      transition:name={`project-image-${locale}-${project.slug}`}
       src={project.image}
       alt={`${t.projects.previewAlt} ${project.title}`}
       widths={[360, 560, 760]}
@@ -45,19 +46,18 @@ if (project.links.app) actions.push({ href: localizeHref(project.links.app), lab
   <div class="flex min-w-0 flex-col items-start py-1 pr-1 max-[680px]:p-1">
     <div>
       <p class="m-0 mb-2 font-mono text-[.7rem] font-semibold tracking-[.13em] text-brand uppercase">{t.projects.cardEyebrow}</p>
-      <h3 transition:name={`project-title-${project.slug}`} class="m-0 mb-2 text-[1.35rem] leading-tight font-semibold tracking-[-.03em] text-foreground transition-colors duration-200 group-hover:text-brand">
+      <h3 transition:name={`project-title-${locale}-${project.slug}`} class="m-0 mb-2 text-[1.35rem] leading-tight font-semibold tracking-[-.03em] text-foreground transition-colors duration-200 group-hover:text-brand">
         {project.title}
-        <a class="absolute inset-0 z-0 rounded-xl focus-visible:outline-none" href={projectHref} aria-label={`${t.projectDetail.openCaseStudy} ${project.title}`}><span class="sr-only">{t.projectDetail.openCaseStudy} {project.title}</span></a>
       </h3>
-      <p class="m-0 text-sm leading-relaxed text-muted-foreground">{project.subtitle}</p>
+      <p transition:name={`project-description-${locale}-${project.slug}`} class="m-0 text-sm leading-relaxed text-muted-foreground">{project.subtitle}</p>
     </div>
 
     <div class="mt-auto flex w-full items-end justify-between gap-4 pt-4">
-      <ul class="m-0 flex min-w-0 list-none flex-wrap gap-1.5 p-0" aria-label={`${t.projects.technologiesLabel} ${project.title}`}>
+      <ul transition:name={`project-tags-${locale}-${project.slug}`} class="m-0 flex min-w-0 list-none flex-wrap gap-1.5 p-0" aria-label={`${t.projects.technologiesLabel} ${project.title}`}>
         {project.tags.map((tag) => <li class="rounded-md border border-border bg-background px-2 py-1 font-mono text-[.69rem] leading-snug text-muted-foreground">{tag}</li>)}
       </ul>
 
-      <div class="relative z-10 flex shrink-0 items-center gap-2">
+      <div class="relative z-20 flex shrink-0 items-center gap-2">
         {actions.map((action) => (
           <a
             class="inline-flex size-9 items-center justify-center rounded-full border border-border text-muted-foreground no-underline transition-colors duration-200 hover:border-ring hover:bg-card hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
