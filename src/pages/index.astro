@@ -1,12 +1,12 @@
 ---
 import Hero from '@/components/hero.astro'
 import ProjectCard from '@/components/project-card.astro'
-import { getProjects } from '@/data/projects'
+import { getProjects } from '@/services/projects'
 import { I18n } from '@/i18n'
 import Layout from '@/layouts/layout.astro'
 
-const { t } = I18n.from(Astro)
-const projects = getProjects(t.projects)
+const { locale, t } = I18n.from(Astro)
+const projects = await getProjects(locale)
 ---
 
 <Layout title={t.meta.home.title}>
@@ -14,7 +14,7 @@ const projects = getProjects(t.projects)
     <div class="mx-auto w-full max-w-255 px-6 max-[680px]:px-4">
       <Hero />
 
-      <section id="proyectos" class="border-t border-border py-28 max-[680px]:py-20" aria-labelledby="projects-title">
+      <section id={t.anchors.projects} class="border-t border-border py-28 max-[680px]:py-20" aria-labelledby="projects-title">
         <header class="mb-8 max-w-170">
           <p class="m-0 mb-2 font-mono text-[.7rem] font-semibold tracking-[.13em] text-brand uppercase">{t.projects.eyebrow}</p>
           <h2 id="projects-title" class="m-0 mb-3 text-[clamp(2rem,5vw,3.3rem)] leading-[1.12] font-semibold tracking-[-.035em] text-foreground">{t.projects.title}</h2>

@@ -1,6 +1,7 @@
 import type { Translations } from '@/i18n/types'
 
 export const es = {
+  anchors: { home: 'inicio', projects: 'proyectos', overview: 'resumen' },
   meta: {
     home: {
       title: 'elmanueh | Software Engineer'
@@ -41,32 +42,6 @@ export const es = {
     linkLabels: {
       source: 'Ver código fuente',
       app: 'Ver aplicación'
-    },
-    items: {
-      'cloud-platform': {
-        subtitle: 'Plataforma personal de infraestructura que sigue principios de GitOps para alojar, publicar y actualizar aplicaciones desde una configuración versionada, reproducible y automatizable, independiente del proveedor cloud.',
-        tags: ['Ansible', 'Docker', 'Nginx', 'Certbot']
-      },
-      'belen-david-boda': {
-        subtitle: 'Experiencia web personalizada para invitados con acceso privado, itinerario, galería, información práctica, confirmación de asistencia y panel de gestión de invitaciones.',
-        tags: ['Aplicación web', 'Astro', 'React', 'Diseño responsive']
-      },
-      solidarianid: {
-        subtitle: 'Plataforma para gestionar voluntariado y causas solidarias, con identidad digital, comunidades, eventos y acciones benéficas sobre una arquitectura de microservicios orientada a eventos.',
-        tags: ['Microservicios', 'DDD', 'NestJS', 'Apache Kafka']
-      },
-      ariadne: {
-        subtitle: 'Herramienta de línea de comandos desarrollada como TFM para validar datos, analizar ontologías y mappings, evaluar calidad y generar grafos RDF mediante un pipeline modular.',
-        tags: ['TFM', 'Python', 'Grafos de conocimiento', 'Arquitectura hexagonal']
-      },
-      linetree: {
-        subtitle: 'Aplicación web para la creación y visualización de árboles genealógicos, diseñada para representar relaciones familiares, herencias y vínculos de forma clara y estructurada.',
-        tags: ['TFG', 'Aplicación web', 'Arquitectura', 'Modelado de datos']
-      },
-      'clash-of-clans-api': {
-        subtitle: 'API backend para el seguimiento y análisis de la actividad de un clan en Clash of Clans, centralizando métricas de jugadores, guerras, donaciones y eventos.',
-        tags: ['API REST', 'Análisis de datos']
-      }
     }
   },
   projectDetail: {

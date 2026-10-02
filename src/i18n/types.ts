@@ -1,11 +1,12 @@
-import type { ProjectsTranslations } from '@/data/projects'
 import type { ProfileTranslation } from '@/data/profile'
 import type { SocialLabels } from '@/data/social-links'
 import type { PlayerClan } from '@/types/player-clan'
 
 export type Locale = 'es' | 'en'
+export type FragmentTranslations = Partial<Record<Locale, Record<string, string>>>
 
 export interface Translations {
+  anchors: Record<'home' | 'projects' | 'overview', string>
   meta: {
     home: { title: string }
     clashOfClans: { title: string }
@@ -28,7 +29,8 @@ export interface Translations {
     focusTitle: string
     focusDescription: string
   }
-  projects: ProjectsTranslations & {
+  projects: {
+    linkLabels: { source: string; app: string }
     eyebrow: string
     title: string
     description: string

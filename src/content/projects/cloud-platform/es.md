@@ -1,3 +1,13 @@
+---
+title: 'Cloud Platform'
+description: 'Plataforma personal de infraestructura que sigue principios de GitOps para alojar, publicar y actualizar aplicaciones desde una configuración versionada, reproducible y automatizable, independiente del proveedor cloud.'
+tags:
+  - 'Ansible'
+  - 'Docker'
+  - 'Nginx'
+  - 'Certbot'
+---
+
 ## Infraestructura reproducible
 
 Cloud Platform nace de una necesidad concreta: poder cambiar de servidor, formatearlo o recuperarme de un problema y volver a desplegar mis servicios desde una configuración conocida. Quiero que la infraestructura sea algo que puedo reconstruir y entender, sin depender de recordar cada ajuste que hice en una máquina.
@@ -80,11 +90,11 @@ Cada aplicación reúne su manifiesto, su definición de Docker Compose y, cuand
 
 <div class="case-study-table">
 
-| Configuración | Responsabilidad |
-| --- | --- |
-| Manifiesto de la aplicación | Describe cómo se integra la aplicación en la plataforma. |
-| Definición de Docker Compose | Define el entorno de ejecución de la aplicación. |
-| Plantilla de Nginx | Configura el acceso público al servicio. |
+| Configuración                | Responsabilidad                                          |
+| ---------------------------- | -------------------------------------------------------- |
+| Manifiesto de la aplicación  | Describe cómo se integra la aplicación en la plataforma. |
+| Definición de Docker Compose | Define el entorno de ejecución de la aplicación.         |
+| Plantilla de Nginx           | Configura el acceso público al servicio.                 |
 
 </div>
 

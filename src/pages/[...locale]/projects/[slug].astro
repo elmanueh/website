@@ -1,30 +1,22 @@
 ---
 import type { GetStaticPaths } from 'astro'
-import { getEntry, render } from 'astro:content'
-import { getProjectBySlug, getProjectSlugs } from '@/data/projects'
+import { getProjectCaseStudy, getProjectSlugs } from '@/services/projects'
 import { I18n } from '@/i18n'
 import CaseStudyLayout from '@/layouts/case-study-layout.astro'
 import Layout from '@/layouts/layout.astro'
 
-export const getStaticPaths = (() => getProjectSlugs().flatMap((slug) => [
+export const getStaticPaths = (async () => (await getProjectSlugs()).flatMap((slug) => [
   { params: { locale: undefined, slug } },
   { params: { locale: 'en', slug } }
 ])) satisfies GetStaticPaths
 
 const i18n = I18n.from(Astro)
-const { locale, t } = i18n
+const { locale } = i18n
 const slug = Astro.params.slug ?? ''
-const project = getProjectBySlug(slug, t.projects)
-
-if (!project) throw new Error(`Unknown project: ${slug}`)
-
-const content = await getEntry('projects', `${locale}/${slug}`)
-if (!content) throw new Error(`Missing ${locale} case study content for: ${slug}`)
-
-const { Content, headings } = await render(content)
+const { project, Content, headings, fragmentTranslations } = await getProjectCaseStudy(slug, locale)
 ---
 
-<Layout title={`${project.title} | elmanueh`}>
+<Layout title={`${project.title} | elmanueh`} description={project.subtitle} fragmentTranslations={fragmentTranslations}>
   <CaseStudyLayout project={project} headings={headings}>
     <Content />
   </CaseStudyLayout>

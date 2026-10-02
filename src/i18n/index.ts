@@ -1,7 +1,7 @@
 import { getRelativeLocaleUrl } from 'astro:i18n'
 import { en } from '@/i18n/en'
 import { es } from '@/i18n/es'
-import type { Locale, Translations } from '@/i18n/types'
+import type { FragmentTranslations, Locale, Translations } from '@/i18n/types'
 
 const locales = ['es', 'en'] as const satisfies readonly Locale[]
 const defaultLocale: Locale = 'es'
@@ -34,11 +34,15 @@ export class I18n {
   readonly locale: Locale
   readonly t: Translations
   readonly equivalentPath: string
+  private readonly search: string
+  private readonly hash: string
 
   private constructor(context: AstroI18nContext) {
     this.locale = normalizeLocale(context.currentLocale)
     this.t = dictionaries[this.locale]
     this.equivalentPath = getEquivalentPath(context.url.pathname)
+    this.search = context.url.search
+    this.hash = context.url.hash
   }
 
   static from(context: AstroI18nContext): I18n {
@@ -50,14 +54,20 @@ export class I18n {
   }
 
   currentPath(locale: Locale = this.locale): string {
-    return this.path(this.equivalentPath, locale)
+    return `${this.path(this.equivalentPath, locale)}${this.search}${this.hash}`
   }
 
-  languageLinks() {
+  languageLinks(fragmentTranslations: FragmentTranslations = {}) {
     return locales.map((locale) => ({
       locale,
       href: this.currentPath(locale),
-      label: this.t.header.switchTo[locale]
+      label: this.t.header.switchTo[locale],
+      fragments: {
+        ...Object.fromEntries((Object.keys(this.t.anchors) as (keyof Translations['anchors'])[]).map((key) => [
+          `#${this.t.anchors[key]}`, `#${dictionaries[locale].anchors[key]}`
+        ])),
+        ...fragmentTranslations[locale]
+      }
     }))
   }
 }

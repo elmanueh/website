@@ -2,16 +2,19 @@
 import Footer from '@/components/footer.astro'
 import Header from '@/components/header.astro'
 import { I18n } from '@/i18n'
+import type { FragmentTranslations } from '@/i18n/types'
 import { ClientRouter } from 'astro:transitions'
 import '@/styles/global.css'
 
 interface Props {
   title?: string
+  description?: string
+  fragmentTranslations?: FragmentTranslations
 }
 
 const i18n = I18n.from(Astro)
 const { locale, t } = i18n
-const { title = t.meta.home.title } = Astro.props
+const { title = t.meta.home.title, description, fragmentTranslations } = Astro.props
 ---
 
 <!doctype html>
@@ -21,10 +24,11 @@ const { title = t.meta.home.title } = Astro.props
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
+    {description && <meta name="description" content={description} />}
     <ClientRouter />
   </head>
   <body>
-    <Header />
+    <Header fragmentTranslations={fragmentTranslations} />
     <slot />
     <Footer />
   </body>

@@ -1,20 +1,27 @@
 ---
 import { I18n } from '@/i18n'
+import LanguageSwitcher from '@/components/language-switcher.astro'
+import type { FragmentTranslations } from '@/i18n/types'
+
+interface Props {
+  fragmentTranslations?: FragmentTranslations
+}
+
+const { fragmentTranslations } = Astro.props
 
 const i18n = I18n.from(Astro)
-const { locale, t, equivalentPath } = i18n
+const { t } = i18n
 const homeHref = i18n.path()
 const links = [
-  { href: `${homeHref}#inicio`, label: t.header.home },
-  { href: `${homeHref}#proyectos`, label: t.header.projects }
+  { href: `${homeHref}#${t.anchors.home}`, label: t.header.home },
+  { href: `${homeHref}#${t.anchors.projects}`, label: t.header.projects }
 ]
-const languageLinks = i18n.languageLinks()
 ---
 
 <header class="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
-  <div class="mx-auto flex h-16 w-full max-w-[1020px] items-center justify-between px-6 max-[680px]:px-4">
+  <div class="mx-auto flex h-16 w-full max-w-255 items-center justify-between px-6 max-[680px]:px-4">
     <a href={homeHref} class="inline-flex items-center gap-2.5 text-sm font-semibold tracking-tight text-foreground no-underline" aria-label={t.header.homeAria}>
-      <span class="size-[30px] bg-brand [mask-image:url('/favicon.svg')] [mask-position:center] [mask-repeat:no-repeat] [mask-size:contain]" aria-hidden="true"></span>
+      <span class="size-7.5 bg-brand mask-[url('/favicon.svg')] mask-center mask-no-repeat mask-contain" aria-hidden="true"></span>
       <span>elmanueh</span>
     </a>
 
@@ -25,34 +32,7 @@ const languageLinks = i18n.languageLinks()
         </ul>
       </nav>
 
-      <nav class="rounded-md bg-muted/70 px-1 py-0.5" aria-label={t.header.languageSelectorAria}>
-        <ul class="m-0 flex list-none items-center gap-1 p-0 font-mono text-xs font-semibold">
-          {languageLinks.map((link, index) => (
-            <li class="flex items-center gap-1">
-              {index > 0 && <span class="text-border" aria-hidden="true">/</span>}
-              <a
-                href={link.href}
-                data-language-link
-                data-preserve-fragment={equivalentPath === '' ? 'true' : undefined}
-                class:list={['rounded px-1.5 py-1 no-underline outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-ring', link.locale === locale ? 'text-brand' : 'text-muted-foreground hover:text-foreground']}
-                aria-current={link.locale === locale ? 'page' : undefined}
-                aria-label={link.label}
-                lang={link.locale}
-                hreflang={link.locale}
-              >{link.locale.toUpperCase()}</a>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <LanguageSwitcher fragmentTranslations={fragmentTranslations} />
     </div>
   </div>
 </header>
-
-<script>
-  const fragment = window.location.hash
-  if (fragment) {
-    document.querySelectorAll<HTMLAnchorElement>('[data-language-link][data-preserve-fragment="true"]').forEach((link) => {
-      link.href = `${link.href.split('#')[0]}${fragment}`
-    })
-  }
-</script>

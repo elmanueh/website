@@ -1,6 +1,7 @@
 import type { Translations } from '@/i18n/types'
 
 export const en = {
+  anchors: { home: 'home', projects: 'projects', overview: 'overview' },
   meta: {
     home: {
       title: 'elmanueh | Software Engineer'
@@ -41,32 +42,6 @@ export const en = {
     linkLabels: {
       source: 'View source code',
       app: 'View application'
-    },
-    items: {
-      'cloud-platform': {
-        subtitle: 'A personal infrastructure platform that follows GitOps principles to host, publish and update applications from versioned, reproducible configuration that can be applied automatically, independently of the cloud provider.',
-        tags: ['Ansible', 'Docker', 'Nginx', 'Certbot']
-      },
-      'belen-david-boda': {
-        subtitle: 'A bespoke private experience for wedding guests, featuring the schedule, gallery, practical information, RSVP flow and an invitation management dashboard.',
-        tags: ['Web application', 'Astro', 'React', 'Responsive design']
-      },
-      solidarianid: {
-        subtitle: 'A platform for managing volunteering and charitable causes, with digital identity, communities, events and social initiatives built on an event-driven microservices architecture.',
-        tags: ['Microservices', 'DDD', 'NestJS', 'Apache Kafka']
-      },
-      ariadne: {
-        subtitle: 'A command-line tool created as a master’s thesis project to validate data, analyse ontologies and mappings, assess quality and generate RDF graphs through a modular pipeline.',
-        tags: ["Master's thesis", 'Python', 'Knowledge graphs', 'Hexagonal architecture']
-      },
-      linetree: {
-        subtitle: 'A web application for creating and visualising family trees, designed to represent family relationships, inheritance and connections in a clear, structured way.',
-        tags: ["Bachelor's thesis", 'Web application', 'Architecture', 'Data modelling']
-      },
-      'clash-of-clans-api': {
-        subtitle: 'A backend API for tracking and analysing clan activity in Clash of Clans, bringing together player, war, donation and event metrics.',
-        tags: ['REST API', 'Data analysis']
-      }
     }
   },
   projectDetail: {

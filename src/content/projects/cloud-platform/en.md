@@ -1,3 +1,13 @@
+---
+title: "Cloud Platform"
+description: "A personal infrastructure platform that follows GitOps principles to host, publish and update applications from versioned, reproducible configuration that can be applied automatically, independently of the cloud provider."
+tags:
+  - "Ansible"
+  - "Docker"
+  - "Nginx"
+  - "Certbot"
+---
+
 ## Reproducible infrastructure
 
 Cloud Platform starts with a concrete need: being able to replace a server, reinstall it or recover from a problem and deploy my services again from a known configuration. I want infrastructure I can rebuild and understand without relying on remembering every adjustment I made to a machine.

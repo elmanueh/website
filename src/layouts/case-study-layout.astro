@@ -2,7 +2,7 @@
 import { Icon } from 'astro-icon/components'
 import ProjectHero from '@/components/projects/project-hero.astro'
 import ProjectTableOfContents from '@/components/projects/project-table-of-contents.astro'
-import type { Project } from '@/data/projects'
+import type { Project } from '@/types/project'
 import { I18n } from '@/i18n'
 import '@/styles/case-study.css'
 
@@ -20,12 +20,12 @@ interface Props {
 const { project, headings } = Astro.props
 const i18n = I18n.from(Astro)
 const { t } = i18n
-const tocItems = [{ slug: 'overview', text: t.projectDetail.overview }, ...headings.filter(({ depth }) => depth === 2)]
+const tocItems = [{ slug: t.anchors.overview, text: t.projectDetail.overview }, ...headings.filter(({ depth }) => depth === 2)]
 ---
 
 <main>
   <article class="mx-auto w-full max-w-255 px-6 py-12 max-[680px]:px-4 max-[680px]:py-6">
-    <a class="mb-8 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground no-underline transition-colors duration-200 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring" href={`${i18n.path()}#proyectos`}>
+    <a class="mb-8 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground no-underline transition-colors duration-200 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring" href={`${i18n.path()}#${t.anchors.projects}`}>
       <Icon name="lucide:arrow-left" size={16} aria-hidden="true" />
       {t.projectDetail.backToProjects}
     </a>
@@ -36,8 +36,8 @@ const tocItems = [{ slug: 'overview', text: t.projectDetail.overview }, ...headi
       <ProjectTableOfContents items={tocItems} />
 
       <div class="case-study-sections min-w-0">
-        <section aria-labelledby="overview">
-          <h2 id="overview">{t.projectDetail.overview}</h2>
+        <section aria-labelledby={t.anchors.overview}>
+          <h2 id={t.anchors.overview}>{t.projectDetail.overview}</h2>
           <p>{project.subtitle}</p>
         </section>
         <slot />
