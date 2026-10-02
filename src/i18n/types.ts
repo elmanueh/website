@@ -3,7 +3,6 @@ import type { SocialLabels } from '@/data/social-links'
 import type { PlayerClan } from '@/types/player-clan'
 
 export type Locale = 'es' | 'en'
-export type FragmentTranslations = Partial<Record<Locale, Record<string, string>>>
 
 export interface Translations {
   anchors: Record<'home' | 'projects' | 'overview', string>

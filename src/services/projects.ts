@@ -1,6 +1,6 @@
 import { getCollection, render, type CollectionEntry } from 'astro:content'
 import { projectDefinitions } from '@/data/projects'
-import type { FragmentTranslations, Locale } from '@/i18n/types'
+import type { Locale } from '@/i18n/types'
 import type { Project, ProjectDefinition } from '@/types/project'
 
 const projectLocales = ['es', 'en'] as const satisfies readonly Locale[]
@@ -71,21 +71,5 @@ export async function getProjectCaseStudy(slug: string, locale: Locale) {
 
   const content = contentById.get(`${slug}/${locale}`)!
   const rendered = await render(content)
-  const fragmentTranslations: FragmentTranslations = {}
-
-  for (const targetLocale of projectLocales) {
-    if (targetLocale === locale) continue
-    const translated = await render(contentById.get(`${slug}/${targetLocale}`)!)
-    const headings = rendered.headings
-    if (headings.length !== translated.headings.length || headings.some((heading, index) =>
-      heading.depth !== translated.headings[index].depth
-    )) {
-      throw new Error(`Case study translations must keep the same heading structure: ${slug}`)
-    }
-    fragmentTranslations[targetLocale] = Object.fromEntries(headings.map((heading, index) => [
-      `#${encodeURIComponent(heading.slug)}`, `#${encodeURIComponent(translated.headings[index].slug)}`
-    ]))
-  }
-
-  return { project: toProject(definition, content), ...rendered, fragmentTranslations }
+  return { project: toProject(definition, content), ...rendered }
 }

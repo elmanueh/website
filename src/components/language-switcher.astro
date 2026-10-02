@@ -1,15 +1,8 @@
 ---
 import { I18n } from '@/i18n'
-import type { FragmentTranslations } from '@/i18n/types'
-
-interface Props {
-  fragmentTranslations?: FragmentTranslations
-}
-
-const { fragmentTranslations } = Astro.props
 const i18n = I18n.from(Astro)
 const { locale, t } = i18n
-const languageLinks = i18n.languageLinks(fragmentTranslations)
+const languageLinks = i18n.languageLinks()
 ---
 
 <nav class="rounded-md bg-muted/70 px-1 py-0.5" aria-label={t.header.languageSelectorAria}>
@@ -20,7 +13,7 @@ const languageLinks = i18n.languageLinks(fragmentTranslations)
         <a
           href={link.href}
           data-language-link
-          data-fragment-translations={JSON.stringify(link.fragments)}
+          data-astro-reload
           class:list={['rounded px-1.5 py-1 no-underline outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-ring', link.locale === locale ? 'text-brand' : 'text-muted-foreground hover:text-foreground']}
           aria-current={link.locale === locale ? 'page' : undefined}
           aria-label={link.label}
@@ -34,18 +27,15 @@ const languageLinks = i18n.languageLinks(fragmentTranslations)
 
 <script>
   function updateLanguageLinks() {
-    const fragment = window.location.hash
     document.querySelectorAll<HTMLAnchorElement>('[data-language-link]').forEach((link) => {
       const url = new URL(link.href)
-      const fragments: Record<string, string> = JSON.parse(link.dataset.fragmentTranslations ?? '{}')
       url.search = window.location.search
-      url.hash = fragments[fragment] ?? fragment
+      url.hash = ''
       link.href = url.href
     })
   }
 
   updateLanguageLinks()
   document.addEventListener('astro:page-load', updateLanguageLinks)
-  window.addEventListener('hashchange', updateLanguageLinks)
   document.addEventListener('click', updateLanguageLinks, { capture: true })
 </script>

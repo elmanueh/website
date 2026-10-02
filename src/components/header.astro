@@ -1,13 +1,6 @@
 ---
 import { I18n } from '@/i18n'
 import LanguageSwitcher from '@/components/language-switcher.astro'
-import type { FragmentTranslations } from '@/i18n/types'
-
-interface Props {
-  fragmentTranslations?: FragmentTranslations
-}
-
-const { fragmentTranslations } = Astro.props
 
 const i18n = I18n.from(Astro)
 const { t } = i18n
@@ -32,7 +25,7 @@ const links = [
         </ul>
       </nav>
 
-      <LanguageSwitcher fragmentTranslations={fragmentTranslations} />
+      <LanguageSwitcher />
     </div>
   </div>
 </header>
