@@ -15,12 +15,12 @@ const { t } = I18n.from(Astro)
 ---
 
 <aside class="max-[900px]:hidden">
-  <nav class="sticky top-24" aria-label={t.projectDetail.onThisPage}>
+  <nav data-project-toc class="sticky top-24" aria-label={t.projectDetail.onThisPage}>
     <p class="m-0 mb-4 font-mono text-[.68rem] font-semibold tracking-[.13em] text-muted-foreground uppercase">{t.projectDetail.onThisPage}</p>
     <ol class="m-0 list-none border-l border-border p-0">
       {items.map((item, index) => (
         <li>
-          <a class="grid grid-cols-[1.6rem_1fr] items-baseline gap-2 border-l border-transparent py-2 pl-4 text-sm leading-5 text-muted-foreground no-underline transition-colors duration-200 hover:border-brand hover:text-foreground focus-visible:border-brand focus-visible:text-foreground focus-visible:outline-none" href={`#${item.slug}`}>
+          <a class="-ml-px grid grid-cols-[1.6rem_1fr] items-baseline gap-2 border-l border-transparent py-2 pl-4 text-sm leading-5 text-muted-foreground no-underline transition-colors duration-200 hover:border-foreground hover:text-foreground focus-visible:border-foreground focus-visible:text-foreground focus-visible:outline-none" href={`#${item.slug}`}>
             <span class="font-mono text-[.7rem] leading-5 text-brand">{String(index + 1).padStart(2, '0')}</span>
             <span class="leading-5">{item.text}</span>
           </a>
@@ -29,3 +29,41 @@ const { t } = I18n.from(Astro)
     </ol>
   </nav>
 </aside>
+
+<style>
+  a[aria-current='location'] {
+    border-left-color: var(--brand);
+    color: var(--foreground);
+  }
+</style>
+
+<script>
+  let sections: { link: HTMLAnchorElement; heading: HTMLElement }[] = []
+
+  function updateActiveSection() {
+    if (!sections.length) return
+    const offset = parseFloat(getComputedStyle(sections[0].heading).scrollMarginTop) + 1
+    const atBottom = window.scrollY > 0 && window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2
+    const active = atBottom
+      ? sections.at(-1)
+      : sections.findLast(({ heading }) => heading.getBoundingClientRect().top <= offset) ?? sections[0]
+
+    for (const section of sections) {
+      if (section === active) section.link.setAttribute('aria-current', 'location')
+      else section.link.removeAttribute('aria-current')
+    }
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    sections = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-project-toc] a'))
+      .flatMap((link) => {
+        const heading = document.getElementById(decodeURIComponent(link.hash.slice(1)))
+        return heading ? [{ link, heading }] : []
+      })
+    updateActiveSection()
+  })
+
+  window.addEventListener('scroll', updateActiveSection, { passive: true })
+  window.addEventListener('resize', updateActiveSection)
+  window.addEventListener('load', updateActiveSection)
+</script>
