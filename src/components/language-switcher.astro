@@ -13,7 +13,6 @@ const languageLinks = i18n.languageLinks()
         <a
           href={link.href}
           data-language-link
-          data-astro-reload
           class:list={['rounded px-1.5 py-1 no-underline outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-ring', link.locale === locale ? 'text-brand' : 'text-muted-foreground hover:text-foreground']}
           aria-current={link.locale === locale ? 'page' : undefined}
           aria-label={link.label}
