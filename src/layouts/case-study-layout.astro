@@ -20,7 +20,7 @@ interface Props {
 const { project, headings } = Astro.props
 const i18n = I18n.from(Astro)
 const { t } = i18n
-const tocItems = [{ slug: t.anchors.overview, text: t.projectDetail.overview }, ...headings.filter(({ depth }) => depth === 2)]
+const tocItems = headings.filter(({ depth }) => depth === 2)
 ---
 
 <main>
@@ -36,10 +36,6 @@ const tocItems = [{ slug: t.anchors.overview, text: t.projectDetail.overview }, 
       <ProjectTableOfContents items={tocItems} />
 
       <div class="case-study-sections min-w-0">
-        <section aria-labelledby={t.anchors.overview}>
-          <h2 id={t.anchors.overview}>{t.projectDetail.overview}</h2>
-          <p>{project.subtitle}</p>
-        </section>
         <slot />
       </div>
     </div>

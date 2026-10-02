@@ -5,7 +5,7 @@ import type { PlayerClan } from '@/types/player-clan'
 export type Locale = 'es' | 'en'
 
 export interface Translations {
-  anchors: Record<'home' | 'projects' | 'overview', string>
+  anchors: Record<'home' | 'projects', string>
   meta: {
     home: { title: string }
     clashOfClans: { title: string }
@@ -39,7 +39,6 @@ export interface Translations {
   }
   projectDetail: {
     eyebrow: string
-    overview: string
     onThisPage: string
     firstCommit: string
     lastCommit: string

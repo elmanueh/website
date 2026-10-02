@@ -1,7 +1,7 @@
 import type { Translations } from '@/i18n/types'
 
 export const es = {
-  anchors: { home: 'inicio', projects: 'proyectos', overview: 'resumen' },
+  anchors: { home: 'inicio', projects: 'proyectos' },
   meta: {
     home: {
       title: 'elmanueh | Software Engineer'
@@ -46,7 +46,6 @@ export const es = {
   },
   projectDetail: {
     eyebrow: 'Caso de estudio',
-    overview: 'Resumen',
     onThisPage: 'En esta página',
     firstCommit: 'Creado',
     lastCommit: 'Última actualización',
