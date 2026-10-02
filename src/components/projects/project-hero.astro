@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets'
 import { Icon } from 'astro-icon/components'
-import GithubDates from '@/components/projects/github-dates'
+import GithubDate from '@/components/projects/github-date'
 import type { Project } from '@/types/project'
 import { I18n } from '@/i18n'
 
@@ -54,6 +54,9 @@ if (project.links.app) actions.push({ href: localizeHref(project.links.app), lab
   </div>
 
   {project.links.source && (
-    <GithubDates client:load source={project.links.source} locale={locale} createdLabel={t.projectDetail.firstCommit} updatedLabel={t.projectDetail.lastCommit} />
+    <div class="mt-7 flex flex-wrap gap-x-8 gap-y-3">
+      <GithubDate client:load source={project.links.source} locale={locale} type="created" />
+      <GithubDate client:load source={project.links.source} locale={locale} type="updated" />
+    </div>
   )}
 </header>
