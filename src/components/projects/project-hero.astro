@@ -13,7 +13,6 @@ const { project } = Astro.props
 const i18n = I18n.from(Astro)
 const { locale, t } = i18n
 const heroImage = project.icon ?? project.image
-const isLogo = Boolean(project.icon) || heroImage.format === 'svg'
 const localizeHref = (href: string) => {
   if (/^https?:\/\//.test(href)) return href
   const [path, fragment] = href.split('#', 2)
@@ -31,7 +30,7 @@ if (project.links.app) actions.push({ href: localizeHref(project.links.app), lab
 ---
 
 <header class="border-b border-border pb-10 max-[680px]:pb-8">
-  <div class="grid grid-cols-[minmax(0,1fr)_150px] items-start gap-10 max-[680px]:grid-cols-1 max-[680px]:gap-5">
+  <div class="grid grid-cols-[minmax(0,1fr)_112px] items-start gap-10 max-[680px]:grid-cols-1 max-[680px]:gap-5">
     <div class="min-w-0">
       <p class="m-0 mb-3 font-mono text-[.7rem] font-semibold tracking-[.13em] text-brand uppercase">{t.projectDetail.eyebrow}</p>
       <h1 transition:name={`project-title-${locale}-${project.slug}`} class="m-0 mb-4 text-[clamp(2.35rem,5vw,3.6rem)] leading-none font-semibold tracking-tighter text-foreground">{project.title}</h1>
@@ -49,8 +48,8 @@ if (project.links.app) actions.push({ href: localizeHref(project.links.app), lab
       </div>}
     </div>
 
-    <div class:list={['justify-self-end max-[680px]:row-start-1 max-[680px]:justify-self-start', isLogo ? 'flex size-37.5 items-center justify-center max-[680px]:size-24' : 'aspect-4/3 w-45 overflow-hidden rounded-xl max-[680px]:w-32']}>
-      <Image transition:name={`project-image-${locale}-${project.slug}`} src={heroImage} alt={`${t.projects.previewAlt} ${project.title}`} widths={[96, 150, 300]} sizes="(max-width: 680px) 96px, 150px" class:list={isLogo ? 'max-h-full max-w-full object-contain' : 'h-full w-full object-cover'} loading="eager" quality={88} />
+    <div class="flex size-28 items-center justify-center justify-self-end max-[680px]:row-start-1 max-[680px]:size-20 max-[680px]:justify-self-start">
+      <Image transition:name={`project-image-${locale}-${project.slug}`} src={heroImage} alt={`${t.projects.previewAlt} ${project.title}`} widths={[80, 112, 224]} sizes="(max-width: 680px) 80px, 112px" class="h-full w-full object-contain" loading="eager" quality={88} />
     </div>
   </div>
 

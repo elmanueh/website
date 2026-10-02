@@ -1,11 +1,14 @@
-import AriadneIcon from '@/assets/ariadne.svg'
-import CloudPlatformImage from '@/assets/cloud-platform.png'
-import CloudPlatformIcon from '@/assets/cloud-platform-icon.png'
-import BelenDavidBodaImage from '@/assets/belen-david-boda.jpg'
-import ClashOfClansIcon from '@/assets/clashofclans.png'
-import LineTreeIcon from '@/assets/linetree.svg'
-import SolidarianIdImage from '@/assets/solidarianid.png'
-import SolidarianIdIcon from '@/assets/solidarian-logo.png'
+import AriadneImage from '@/assets/projects/ariadne-banner.png'
+import AriadneIcon from '@/assets/projects/ariadne-logo.png'
+import CloudPlatformImage from '@/assets/projects/cloud-platform-banner.png'
+import CloudPlatformIcon from '@/assets/projects/cloud-platform-logo.png'
+import BelenDavidBodaImage from '@/assets/projects/belen-david-boda-banner.jpg'
+import BelenDavidBodaIcon from '@/assets/projects/belen-david-boda-logo.png'
+import ClashOfClansIcon from '@/assets/projects/clash-of-clans-api-logo.png'
+import ClashOfClansImage from '@/assets/projects/clash-of-clans-api-banner.png'
+import LineTreeIcon from '@/assets/projects/linetree-logo.svg'
+import SolidarianIdImage from '@/assets/projects/solidarianid-banner.png'
+import SolidarianIdIcon from '@/assets/projects/solidarianid-logo.png'
 import type { ProjectDefinition } from '@/types/project'
 
 export const projectDefinitions: ProjectDefinition[] = [
@@ -18,6 +21,7 @@ export const projectDefinitions: ProjectDefinition[] = [
   {
     slug: 'belen-david-boda',
     image: BelenDavidBodaImage,
+    icon: BelenDavidBodaIcon,
     links: { app: 'https://belenydavidsecasan.es/' }
   },
   {
@@ -28,7 +32,8 @@ export const projectDefinitions: ProjectDefinition[] = [
   },
   {
     slug: 'ariadne',
-    image: AriadneIcon,
+    image: AriadneImage,
+    icon: AriadneIcon,
     links: { source: 'https://github.com/elmanueh/ariadne' }
   },
   {
@@ -41,7 +46,8 @@ export const projectDefinitions: ProjectDefinition[] = [
   },
   {
     slug: 'clash-of-clans-api',
-    image: ClashOfClansIcon,
+    image: ClashOfClansImage,
+    icon: ClashOfClansIcon,
     links: {
       source: 'https://github.com/elmanueh/api-clashofclans.js',
       app: '/clashofclans'

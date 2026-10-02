@@ -27,7 +27,7 @@ The architecture has two paths: deploying changes and handling a visit to the we
 - **Nginx** receives visits and routes them to the appropriate application according to the domain.
 - **Certbot and IONOS** obtain and renew the certificates Nginx uses to provide HTTPS.
 
-![Cloud Platform architecture: GitHub Actions runs Ansible over SSH, the server hosts Docker applications behind Nginx, and Certbot manages certificates through IONOS](../../../assets/cloud-platform.png)
+![Cloud Platform architecture: GitHub Actions runs Ansible over SSH, the server hosts Docker applications behind Nginx, and Certbot manages certificates through IONOS](../../../assets/projects/cloud-platform-banner.png)
 
 A container image is the package used to distribute an application. Cloud Platform downloads images already published to GitHub Container Registry (GHCR). Building the code belongs to each application's repository. This separation allows a service to be updated without combining its development with infrastructure configuration.
 
