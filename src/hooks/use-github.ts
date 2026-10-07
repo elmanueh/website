@@ -11,7 +11,9 @@ const pending = new Map<string, Promise<RepositoryMetadata>>()
 function loadMetadata(slug: string): Promise<RepositoryMetadata> {
   const existing = pending.get(slug)
   if (existing) return existing
-  const request = fetch(`/api/projects/${encodeURIComponent(slug)}`)
+  const request = fetch(`/api/projects/${encodeURIComponent(slug)}`, {
+    signal: AbortSignal.timeout(60_000)
+  })
     .then((response) => {
       if (!response.ok) throw new Error('Metadata unavailable')
       return response.json() as Promise<RepositoryMetadata>

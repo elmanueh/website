@@ -40,17 +40,24 @@ export interface Translations {
   projectDetail: {
     eyebrow: string
     onThisPage: string
+    backToProjects: string
+    openCaseStudy: string
+    emptyTitle: string
+    emptyDescription: string
+  }
+  github: {
     lastCommit: string
+    loadingData: string
+    dataUnavailable: string
+    activityUnavailable: string
+    valueUnavailable: string
+    noCommits: string
     activityPeriod: string
     publicRepository: string
     repository: string
     privateRepository: string
     latestRelease: string
     noReleases: string
-    backToProjects: string
-    openCaseStudy: string
-    emptyTitle: string
-    emptyDescription: string
   }
   social: SocialLabels
   notFound: {

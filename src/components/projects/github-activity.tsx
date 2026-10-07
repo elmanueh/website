@@ -21,7 +21,7 @@ export default function GithubActivity({
 }>) {
   const { current, isSelected, previewMonth, resetSelection, handleKeyDown } =
     useGithubActivity(months.length)
-  const labels = (locale === 'en' ? en : es).projectDetail
+  const labels = (locale === 'en' ? en : es).github
   const numbers = new Intl.NumberFormat(locale)
   const dates = new Intl.DateTimeFormat(locale, {
     month: 'short',

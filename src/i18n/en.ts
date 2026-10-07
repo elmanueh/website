@@ -47,17 +47,24 @@ export const en = {
   projectDetail: {
     eyebrow: 'Case study',
     onThisPage: 'On this page',
+    backToProjects: 'Back to projects',
+    openCaseStudy: 'View case study for',
+    emptyTitle: 'Coming soon',
+    emptyDescription: 'More details about this project.'
+  },
+  github: {
     lastCommit: 'Last updated',
+    loadingData: 'Loading project data',
+    dataUnavailable: 'Project data could not be loaded. Reload the page to try again.',
+    activityUnavailable: 'Project activity could not be loaded.',
+    valueUnavailable: 'Unavailable',
+    noCommits: 'No commits',
     activityPeriod: 'Last 12 months',
     repository: 'Repository',
     publicRepository: 'Public',
     privateRepository: 'Private',
     latestRelease: 'Version',
     noReleases: 'No version',
-    backToProjects: 'Back to projects',
-    openCaseStudy: 'View case study for',
-    emptyTitle: 'Coming soon',
-    emptyDescription: 'More details about this project.'
   },
   social: {
     github: "Manuel's GitHub profile",
