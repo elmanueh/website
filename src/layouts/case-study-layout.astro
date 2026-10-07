@@ -15,9 +15,10 @@ interface Heading {
 interface Props {
   project: Project
   headings: Heading[]
+  hasContent: boolean
 }
 
-const { project, headings } = Astro.props
+const { project, headings, hasContent } = Astro.props
 const i18n = I18n.from(Astro)
 const { t } = i18n
 const tocItems = headings.filter(({ depth }) => depth === 2)
@@ -33,7 +34,7 @@ const hasTocItems = tocItems.length > 0
 
     <ProjectHero project={project} />
 
-    <div class:list={[
+    {hasContent ? <div class:list={[
       'mt-16 grid justify-center gap-18 max-[900px]:mt-12 max-[900px]:grid-cols-1',
       hasTocItems ? 'grid-cols-[180px_minmax(0,720px)]' : 'grid-cols-[minmax(0,720px)]',
     ]}>
@@ -42,6 +43,12 @@ const hasTocItems = tocItems.length > 0
       <div class="case-study-sections min-w-0">
         <slot />
       </div>
-    </div>
+    </div> : <section class="px-4 pt-10 pb-2 text-center" aria-labelledby="project-empty-title">
+      <p class="m-0 text-sm leading-relaxed text-muted-foreground">
+        <span id="project-empty-title" class="font-medium text-brand">{t.projectDetail.emptyTitle}</span>
+        <span class="mx-2" aria-hidden="true">·</span>
+        {t.projectDetail.emptyDescription}
+      </p>
+    </section>}
   </article>
 </main>

@@ -70,6 +70,7 @@ export async function getProjectCaseStudy(slug: string, locale: Locale) {
   if (!definition) throw new Error(`Unknown project: ${slug}`)
 
   const content = contentById.get(`${slug}/${locale}`)!
+  const hasContent = Boolean(content.body?.replace(/<!--[\s\S]*?-->/g, '').trim())
   const rendered = await render(content)
-  return { project: toProject(definition, content), ...rendered }
+  return { project: toProject(definition, content), hasContent, ...rendered }
 }

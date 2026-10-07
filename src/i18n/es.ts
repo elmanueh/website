@@ -50,7 +50,9 @@ export const es = {
     firstCommit: 'Creado',
     lastCommit: 'Última actualización',
     backToProjects: 'Volver a proyectos',
-    openCaseStudy: 'Ver caso de estudio de'
+    openCaseStudy: 'Ver caso de estudio de',
+    emptyTitle: 'Próximamente',
+    emptyDescription: 'Más detalles de este proyecto.'
   },
   social: {
     github: 'GitHub de Manuel',

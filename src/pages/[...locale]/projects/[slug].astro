@@ -13,11 +13,11 @@ export const getStaticPaths = (async () => (await getProjectSlugs()).flatMap((sl
 const i18n = I18n.from(Astro)
 const { locale } = i18n
 const slug = Astro.params.slug ?? ''
-const { project, Content, headings } = await getProjectCaseStudy(slug, locale)
+const { project, Content, headings, hasContent } = await getProjectCaseStudy(slug, locale)
 ---
 
 <Layout title={`${project.title} | elmanueh`} description={project.subtitle}>
-  <CaseStudyLayout project={project} headings={headings}>
+  <CaseStudyLayout project={project} headings={headings} hasContent={hasContent}>
     <Content />
   </CaseStudyLayout>
 </Layout>

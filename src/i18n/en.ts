@@ -50,7 +50,9 @@ export const en = {
     firstCommit: 'Created',
     lastCommit: 'Last updated',
     backToProjects: 'Back to projects',
-    openCaseStudy: 'View case study for'
+    openCaseStudy: 'View case study for',
+    emptyTitle: 'Coming soon',
+    emptyDescription: 'More details about this project.'
   },
   social: {
     github: "Manuel's GitHub profile",

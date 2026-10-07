@@ -44,6 +44,8 @@ export interface Translations {
     lastCommit: string
     backToProjects: string
     openCaseStudy: string
+    emptyTitle: string
+    emptyDescription: string
   }
   social: SocialLabels
   notFound: {
