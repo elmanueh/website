@@ -40,14 +40,12 @@ export const projectDefinitions: ProjectDefinition[] = [
   {
     slug: 'linetree',
     repository: 'elmanueh/linetree',
-    image: LineTreeIcon,
-    appUrl: 'https://linetree.elmanueh.es/'
+    image: LineTreeIcon
   },
   {
     slug: 'clash-of-clans-api',
     repository: 'elmanueh/api-clashofclans.js',
     image: ClashOfClansImage,
-    icon: ClashOfClansIcon,
-    appUrl: '/clashofclans'
+    icon: ClashOfClansIcon
   }
 ]

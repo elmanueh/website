@@ -1,5 +1,8 @@
 ---
 import ClashOfClansPage from '@/pages/clashofclans.astro'
+
+export const prerender = false
+Astro.response.status = 404
 ---
 
 <ClashOfClansPage />

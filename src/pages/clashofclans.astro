@@ -1,8 +1,12 @@
 ---
+import NotFoundPage from '@/pages/404.astro'
 import ClanInfo from '@/components/clashofclans/clan-info.astro'
 import ClanSearch from '@/components/clashofclans/clan-search.astro'
 import { I18n } from '@/i18n'
 import Layout from '@/layouts/layout.astro'
+
+export const prerender = false
+Astro.response.status = 404
 
 const { t } = I18n.from(Astro)
 const clientTranslations = JSON.stringify({
@@ -12,7 +16,9 @@ const clientTranslations = JSON.stringify({
 })
 ---
 
-<Layout title={t.meta.clashOfClans.title}>
+<NotFoundPage />
+
+{false && <Layout title={t.meta.clashOfClans.title}>
   <main>
     <section class="pt-20 pb-16">
       <header class="flex flex-col items-center gap-10 pb-12">
@@ -128,4 +134,4 @@ const clientTranslations = JSON.stringify({
       searchButton?.addEventListener('click', () => handlePlayers(clanTagInput?.value ?? ''))
     </script>
   </main>
-</Layout>
+</Layout>}
