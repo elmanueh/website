@@ -40,8 +40,13 @@ export interface Translations {
   projectDetail: {
     eyebrow: string
     onThisPage: string
-    firstCommit: string
     lastCommit: string
+    activityPeriod: string
+    publicRepository: string
+    repository: string
+    privateRepository: string
+    latestRelease: string
+    noReleases: string
     backToProjects: string
     openCaseStudy: string
     emptyTitle: string

@@ -1,0 +1,59 @@
+---
+import { Icon } from 'astro-icon/components'
+import GithubButton from '@/components/projects/github-button'
+import GithubStats from '@/components/projects/github-stats'
+import { I18n } from '@/i18n'
+import type { Project } from '@/types/project'
+
+interface Props {
+  project: Pick<Project, 'slug' | 'repository' | 'appUrl'>
+}
+
+const { project } = Astro.props
+const i18n = I18n.from(Astro)
+const { locale, t } = i18n
+const externalApp = /^https?:\/\//.test(project.appUrl ?? '')
+const localizeHref = (href: string) => {
+  if (externalApp) return href
+  const [path, fragment] = href.split('#', 2)
+  return `${i18n.path(path)}${fragment ? `#${fragment}` : ''}`
+}
+const linkClass = 'flex min-h-12 min-w-0 flex-1 items-center gap-2 px-5 py-3 text-xs font-medium text-muted-foreground no-underline transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring max-[680px]:px-4'
+---
+
+{(project.repository || project.appUrl) && (
+  <div class="mt-2 overflow-hidden rounded-xl border border-border bg-card">
+    {project.repository && (
+      <div class="px-5 py-6 max-[680px]:px-4">
+        <GithubStats client:load slug={project.slug} locale={locale} />
+      </div>
+    )}
+    <div class:list={['flex flex-wrap bg-background/30 [&>astro-island]:contents', { 'border-t border-border': project.repository }]}>
+      {project.repository && (
+        <GithubButton
+          client:load
+          slug={project.slug}
+          aria-label={t.projects.linkLabels.source}
+          title={t.projects.linkLabels.source}
+          className={linkClass}
+        >
+          <Icon name="simple-icons:github" is:inline size={15} aria-hidden="true" />
+          {t.projects.linkLabels.source}
+          <Icon name="lucide:arrow-up-right" is:inline size={14} class="ml-auto shrink-0" aria-hidden="true" />
+        </GithubButton>
+      )}
+      {project.appUrl && (
+        <a
+          class={linkClass}
+          href={localizeHref(project.appUrl)}
+          target={externalApp ? '_blank' : undefined}
+          rel={externalApp ? 'noopener noreferrer' : undefined}
+        >
+          <Icon name="lucide:app-window" is:inline size={15} aria-hidden="true" />
+          {t.projects.linkLabels.app}
+          <Icon name="lucide:arrow-up-right" is:inline size={14} class="ml-auto shrink-0" aria-hidden="true" />
+        </a>
+      )}
+    </div>
+  </div>
+)}

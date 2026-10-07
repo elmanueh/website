@@ -1,7 +1,6 @@
 ---
 import { Image } from 'astro:assets'
-import { Icon } from 'astro-icon/components'
-import GithubDate from '@/components/projects/github-date'
+import ProjectMetadataCard from '@/components/projects/project-metadata-card.astro'
 import type { Project } from '@/types/project'
 import { I18n } from '@/i18n'
 
@@ -13,20 +12,6 @@ const { project } = Astro.props
 const i18n = I18n.from(Astro)
 const { locale, t } = i18n
 const heroImage = project.icon ?? project.image
-const localizeHref = (href: string) => {
-  if (/^https?:\/\//.test(href)) return href
-  const [path, fragment] = href.split('#', 2)
-  return `${i18n.path(path)}${fragment ? `#${fragment}` : ''}`
-}
-interface ProjectAction {
-  href: string
-  label: string
-  icon: string
-  external: boolean
-}
-const actions: ProjectAction[] = []
-if (project.links.source) actions.push({ href: localizeHref(project.links.source), label: t.projects.linkLabels.source, icon: 'simple-icons:github', external: /^https?:\/\//.test(project.links.source) })
-if (project.links.app) actions.push({ href: localizeHref(project.links.app), label: t.projects.linkLabels.app, icon: 'lucide:app-window', external: /^https?:\/\//.test(project.links.app) })
 ---
 
 <header class="border-b border-border pb-10 max-[680px]:pb-8">
@@ -40,12 +25,6 @@ if (project.links.app) actions.push({ href: localizeHref(project.links.app), lab
         {project.tags.map((tag) => <li class="rounded-md border border-border bg-background px-2.5 py-1 font-mono text-[.7rem] leading-snug text-muted-foreground">{tag}</li>)}
       </ul>
 
-      {actions.length > 0 && <div class="flex flex-wrap gap-2.5">
-        {actions.map((action) => <a class="inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-semibold text-muted-foreground no-underline transition-colors duration-200 hover:border-ring hover:bg-card hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring" href={action.href} target={action.external ? '_blank' : undefined} rel={action.external ? 'noopener noreferrer' : undefined}>
-          <Icon name={action.icon} size={16} aria-hidden="true" />
-          {action.label}
-        </a>)}
-      </div>}
     </div>
 
     <div class="flex size-28 items-center justify-center justify-self-end max-[680px]:row-start-1 max-[680px]:size-20 max-[680px]:justify-self-start">
@@ -53,10 +32,5 @@ if (project.links.app) actions.push({ href: localizeHref(project.links.app), lab
     </div>
   </div>
 
-  {project.links.source && (
-    <div class="mt-7 flex flex-wrap gap-x-8 gap-y-3">
-      <GithubDate client:load source={project.links.source} locale={locale} type="created" />
-      <GithubDate client:load source={project.links.source} locale={locale} type="updated" />
-    </div>
-  )}
+  <ProjectMetadataCard project={project} />
 </header>

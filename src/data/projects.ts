@@ -14,43 +14,40 @@ import type { ProjectDefinition } from '@/types/project'
 export const projectDefinitions: ProjectDefinition[] = [
   {
     slug: 'cloud-platform',
+    repository: 'elmanueh/cloud-platform',
     image: CloudPlatformImage,
-    icon: CloudPlatformIcon,
-    links: {}
+    icon: CloudPlatformIcon
   },
   {
     slug: 'belen-david-boda',
+    repository: 'elmanueh/belendavid-boda-web',
     image: BelenDavidBodaImage,
     icon: BelenDavidBodaIcon,
-    links: { app: 'https://belenydavidsecasan.es/' }
+    appUrl: 'https://belenydavidsecasan.es/'
   },
   {
     slug: 'solidarianid',
+    repository: 'elmanueh/solidarianid',
     image: SolidarianIdImage,
-    icon: SolidarianIdIcon,
-    links: { source: 'https://github.com/elmanueh/solidarianid' }
+    icon: SolidarianIdIcon
   },
   {
     slug: 'ariadne',
+    repository: 'elmanueh/ariadne',
     image: AriadneImage,
-    icon: AriadneIcon,
-    links: { source: 'https://github.com/elmanueh/ariadne' }
+    icon: AriadneIcon
   },
   {
     slug: 'linetree',
+    repository: 'elmanueh/linetree',
     image: LineTreeIcon,
-    links: {
-      source: 'https://github.com/elmanueh/linetree',
-      app: 'https://linetree.elmanueh.es/'
-    }
+    appUrl: 'https://linetree.elmanueh.es/'
   },
   {
     slug: 'clash-of-clans-api',
+    repository: 'elmanueh/api-clashofclans.js',
     image: ClashOfClansImage,
     icon: ClashOfClansIcon,
-    links: {
-      source: 'https://github.com/elmanueh/api-clashofclans.js',
-      app: '/clashofclans'
-    }
+    appUrl: '/clashofclans'
   }
 ]
