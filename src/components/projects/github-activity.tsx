@@ -91,12 +91,13 @@ export default function GithubActivity({
               <ReferenceLine
                 x={month.month}
                 stroke="var(--brand)"
+                strokeWidth={2}
                 strokeOpacity={0.5}
               />
               <ReferenceDot
                 x={month.month}
                 y={month.commits}
-                r={2.5}
+                r={4}
                 fill="var(--brand)"
                 stroke="var(--card)"
               />
