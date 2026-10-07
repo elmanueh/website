@@ -59,7 +59,7 @@ export const es = {
     activityUnavailable: 'No se ha podido cargar la actividad del proyecto.',
     valueUnavailable: 'No disponible',
     noCommits: 'Sin commits',
-    activityPeriod: 'Últimos 12 meses',
+    activityPeriod: 'Actividad de los últimos 12 meses',
     repository: 'Repositorio',
     publicRepository: 'Público',
     privateRepository: 'Privado',

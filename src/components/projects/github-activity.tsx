@@ -47,23 +47,21 @@ export default function GithubActivity({
       onPointerLeave={resetSelection}
       onKeyDown={handleKeyDown}
     >
-      <div className="flex min-h-9 items-center justify-between gap-4">
-        <div className="flex flex-col gap-1">
-          <span className="text-xs leading-4 text-muted-foreground">
-            {labels.activityPeriod}
-          </span>
-          <span className="font-mono text-xs leading-4 text-foreground">
-            {monthLabel}
-          </span>
-        </div>
+      <div className="flex min-h-5 flex-wrap items-center justify-between gap-x-4 gap-y-2">
+        <span className="font-mono text-xs leading-4 text-foreground">
+          {monthLabel}
+        </span>
         <span className="flex shrink-0 items-baseline gap-2 whitespace-nowrap">
-          <span className="font-mono text-2xl leading-none text-foreground tabular-nums">
+          <span className="font-mono text-lg leading-none text-foreground tabular-nums">
             {count}
           </span>
           <span className="text-xs text-muted-foreground">commits</span>
         </span>
       </div>
-      <div className="h-10 w-full min-w-0 shrink-0 touch-pan-y" aria-hidden="true">
+      <div
+        className="h-10 w-full min-w-0 shrink-0 touch-pan-y"
+        aria-hidden="true"
+      >
         <AreaChart
           responsive
           height={40}
@@ -106,6 +104,9 @@ export default function GithubActivity({
           )}
         </AreaChart>
       </div>
+      <span className="text-xs leading-4 text-muted-foreground">
+        {labels.activityPeriod}
+      </span>
     </div>
   )
 }
