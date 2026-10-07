@@ -35,7 +35,7 @@ export default function GithubActivity({
 
   return (
     <div
-      className="inline-grid w-full min-w-0 grid-cols-[64px_minmax(0,1fr)] gap-x-3 gap-y-2 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+      className="flex w-full min-w-0 flex-col gap-3 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
       tabIndex={0}
       role="slider"
       aria-label={labels.activityPeriod}
@@ -47,20 +47,27 @@ export default function GithubActivity({
       onPointerLeave={resetSelection}
       onKeyDown={handleKeyDown}
     >
-      <span className="col-span-2 flex items-center justify-between gap-3 text-xs text-muted-foreground">
-        <span className="font-mono">{monthLabel}</span>
-        <span>{labels.activityPeriod}</span>
-      </span>
-      <span className="flex flex-col justify-end pb-0.5">
-        <span className="font-mono text-lg leading-none text-foreground tabular-nums">
-          {count}
+      <div className="flex min-h-9 items-center justify-between gap-4">
+        <div className="flex flex-col gap-1">
+          <span className="text-xs leading-4 text-muted-foreground">
+            {labels.activityPeriod}
+          </span>
+          <span className="font-mono text-xs leading-4 text-foreground">
+            {monthLabel}
+          </span>
+        </div>
+        <span className="flex shrink-0 items-baseline gap-2 whitespace-nowrap">
+          <span className="font-mono text-2xl leading-none text-foreground tabular-nums">
+            {count}
+          </span>
+          <span className="text-xs text-muted-foreground">commits</span>
         </span>
-        <span className="mt-1 text-xs text-muted-foreground">commits</span>
-      </span>
-      <div className="h-9.5 min-w-0 touch-pan-y" aria-hidden="true">
+      </div>
+      <div className="h-10 w-full min-w-0 shrink-0 touch-pan-y" aria-hidden="true">
         <AreaChart
           responsive
-          style={{ width: '100%', height: '100%' }}
+          height={40}
+          style={{ width: '100%', height: 40 }}
           data={months}
           margin={{ top: 4, right: 3, bottom: 3, left: 3 }}
           accessibilityLayer={false}
