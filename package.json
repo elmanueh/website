@@ -11,8 +11,8 @@
     "dev": "astro dev",
     "check": "astro check",
     "build": "astro build",
-    "format": "prettier --write .",
-    "preview": "astro preview",
+    "format": "prettier --write --list-different .",
+    "start": "node --env-file-if-exists=.env scripts/start.mjs",
     "astro": "astro"
   },
   "dependencies": {
