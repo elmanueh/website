@@ -11,32 +11,24 @@ async function getProjectEntries() {
   const projectIds = new Set<string>()
 
   for (const project of projectDefinitions) {
-    if (projectIds.has(project.slug))
-      throw new Error(`Duplicate project slug: ${project.slug}`)
+    if (projectIds.has(project.slug)) throw new Error(`Duplicate project slug: ${project.slug}`)
     projectIds.add(project.slug)
     for (const locale of projectLocales) {
       if (!contentById.has(`${project.slug}/${locale}`)) {
-        throw new Error(
-          `Missing ${locale} project content for: ${project.slug}`
-        )
+        throw new Error(`Missing ${locale} project content for: ${project.slug}`)
       }
     }
   }
   for (const entry of content) {
     if (!projectIds.has(entry.id.split('/')[0])) {
-      throw new Error(
-        `Missing project definition in projects.ts for: ${entry.id}`
-      )
+      throw new Error(`Missing project definition in projects.ts for: ${entry.id}`)
     }
   }
 
   return contentById
 }
 
-function toProject(
-  definition: ProjectDefinition,
-  content: CollectionEntry<'projects'>
-): Project {
+function toProject(definition: ProjectDefinition, content: CollectionEntry<'projects'>): Project {
   return {
     ...definition,
     title: content.data.title,
@@ -47,9 +39,7 @@ function toProject(
 
 export async function getProjects(locale: Locale): Promise<Project[]> {
   const contentById = await getProjectEntries()
-  return projectDefinitions.map((project) =>
-    toProject(project, contentById.get(`${project.slug}/${locale}`)!)
-  )
+  return projectDefinitions.map((project) => toProject(project, contentById.get(`${project.slug}/${locale}`)!))
 }
 
 export async function getProjectSlugs(): Promise<string[]> {
@@ -57,10 +47,7 @@ export async function getProjectSlugs(): Promise<string[]> {
   return projectDefinitions.map(({ slug }) => slug)
 }
 
-export async function getProjectBySlug(
-  slug: string,
-  locale: Locale
-): Promise<Project | undefined> {
+export async function getProjectBySlug(slug: string, locale: Locale): Promise<Project | undefined> {
   return (await getProjects(locale)).find((project) => project.slug === slug)
 }
 

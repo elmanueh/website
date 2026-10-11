@@ -12,7 +12,10 @@ export const GET: APIRoute = async ({ params }) => {
   try {
     const metadata = await getRepositoryMetadata(repository, getSecret('GITHUB_TOKEN'))
     return new Response(JSON.stringify(metadata), {
-      headers: { ...headers, 'Cache-Control': `private, max-age=${getRepositoryMetadataMaxAge(repository)}, must-revalidate` }
+      headers: {
+        ...headers,
+        'Cache-Control': `private, max-age=${getRepositoryMetadataMaxAge(repository)}, must-revalidate`
+      }
     })
   } catch {
     return new Response(JSON.stringify({ error: 'Repository metadata unavailable' }), { status: 503, headers })

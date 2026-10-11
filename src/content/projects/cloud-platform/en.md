@@ -1,11 +1,11 @@
 ---
-title: "Cloud Platform"
-description: "A personal infrastructure platform that follows GitOps principles to host, publish and update applications from versioned, reproducible configuration that can be applied automatically, independently of the cloud provider."
+title: 'Cloud Platform'
+description: 'A personal infrastructure platform that follows GitOps principles to host, publish and update applications from versioned, reproducible configuration that can be applied automatically, independently of the cloud provider.'
 tags:
-  - "Ansible"
-  - "Docker"
-  - "Nginx"
-  - "Certbot"
+  - 'Ansible'
+  - 'Docker'
+  - 'Nginx'
+  - 'Certbot'
 ---
 
 ## Reproducible infrastructure
@@ -90,11 +90,11 @@ Each application brings together its manifest, its Docker Compose definition and
 
 <div class="case-study-table">
 
-| Configuration | Responsibility |
-| --- | --- |
-| Application manifest | Describes how the application integrates with the platform. |
-| Docker Compose definition | Defines the application's runtime environment. |
-| Nginx template | Configures public access to the service. |
+| Configuration             | Responsibility                                              |
+| ------------------------- | ----------------------------------------------------------- |
+| Application manifest      | Describes how the application integrates with the platform. |
+| Docker Compose definition | Defines the application's runtime environment.              |
+| Nginx template            | Configures public access to the service.                    |
 
 </div>
 

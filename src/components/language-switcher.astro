@@ -9,15 +9,24 @@ const languageLinks = i18n.languageLinks()
   <ul class="m-0 flex list-none items-center gap-1 p-0 font-mono text-xs font-semibold">
     {languageLinks.map((link, index) => (
       <li class="flex items-center gap-1">
-        {index > 0 && <span class="text-border" aria-hidden="true">/</span>}
+        {index > 0 && (
+          <span class="text-border" aria-hidden="true">
+            /
+          </span>
+        )}
         <a
           href={link.href}
-          class:list={['rounded px-1.5 py-1 no-underline outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-ring', link.locale === locale ? 'text-brand' : 'text-muted-foreground hover:text-foreground']}
+          class:list={[
+            'rounded px-1.5 py-1 no-underline outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-ring',
+            link.locale === locale ? 'text-brand' : 'text-muted-foreground hover:text-foreground'
+          ]}
           aria-current={link.locale === locale ? 'page' : undefined}
           aria-label={link.label}
           lang={link.locale}
           hreflang={link.locale}
-        >{link.locale.toUpperCase()}</a>
+        >
+          {link.locale.toUpperCase()}
+        </a>
       </li>
     ))}
   </ul>

@@ -5,7 +5,8 @@ export const en = {
   meta: {
     home: {
       title: 'Manuel Bernabé Rodríguez | Backend Software Engineer (.NET)',
-      description: 'Portfolio of Manuel Bernabé Rodríguez, a .NET backend developer. Experience building APIs and integrations, with projects in architecture, testing and automation.',
+      description:
+        'Portfolio of Manuel Bernabé Rodríguez, a .NET backend developer. Experience building APIs and integrations, with projects in architecture, testing and automation.',
       imageAlt: 'Manuel Bernabé Rodríguez’s portfolio, Backend Software Engineer (.NET). C# · .NET · ASP.NET Core.'
     },
     clashOfClans: {
@@ -25,7 +26,8 @@ export const en = {
   },
   hero: {
     location: 'Orihuela, Alicante, Spain',
-    summary: 'I design and build maintainable REST APIs and enterprise software, with a particular interest in software architecture, automation and infrastructure.',
+    summary:
+      'I design and build maintainable REST APIs and enterprise software, with a particular interest in software architecture, automation and infrastructure.',
     stackLead: 'My core stack is',
     downloadCv: 'Download CV',
     profileAria: 'Profile of Manuel Bernabé Rodríguez',
@@ -66,7 +68,7 @@ export const en = {
     publicRepository: 'Public',
     privateRepository: 'Private',
     latestRelease: 'Version',
-    noReleases: 'No version',
+    noReleases: 'No version'
   },
   social: {
     github: "Manuel's GitHub profile",
@@ -86,7 +88,16 @@ export const en = {
     searchHighlight: 'clan',
     searchButton: 'SEARCH',
     columns: {
-      Clan: 'Clan', Player: 'Player', Name: 'Name', Role: 'Role', TownHall: 'TH', LootCapital: 'Capital +', AddCapital: 'Capital -', ClanGames: 'Games', WarPreference: 'War', WarAttacks: 'War attacks'
+      Clan: 'Clan',
+      Player: 'Player',
+      Name: 'Name',
+      Role: 'Role',
+      TownHall: 'TH',
+      LootCapital: 'Capital +',
+      AddCapital: 'Capital -',
+      ClanGames: 'Games',
+      WarPreference: 'War',
+      WarAttacks: 'War attacks'
     },
     values: { member: 'Member', admin: 'Elder', coLeader: 'Co-leader', leader: 'Leader', in: 'Yes', out: 'No' },
     fetchError: 'The clan data could not be loaded.'

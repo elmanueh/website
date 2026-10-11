@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react'
 import type { RepositoryMetadata } from '@/types/github'
 
-type GitHubState =
-  | { status: 'loading' }
-  | { status: 'ready'; metadata: RepositoryMetadata }
-  | { status: 'unavailable' }
+type GitHubState = { status: 'loading' } | { status: 'ready'; metadata: RepositoryMetadata } | { status: 'unavailable' }
 
 const pending = new Map<string, Promise<RepositoryMetadata>>()
 

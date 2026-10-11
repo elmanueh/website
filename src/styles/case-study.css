@@ -25,8 +25,7 @@
     flex: 0 0 auto;
     min-width: 2rem;
     color: var(--brand);
-    font-family:
-      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 0.95rem;
     font-weight: 600;
     letter-spacing: 0.13em;

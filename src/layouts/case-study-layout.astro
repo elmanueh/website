@@ -27,28 +27,41 @@ const hasTocItems = tocItems.length > 0
 
 <main>
   <article class="mx-auto w-full max-w-255 px-6 py-12 max-[680px]:px-4 max-[680px]:py-6">
-    <a class="mb-8 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground no-underline transition-colors duration-200 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring" href={`${i18n.path()}#${t.anchors.projects}`}>
+    <a
+      class="mb-8 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground no-underline transition-colors duration-200 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+      href={`${i18n.path()}#${t.anchors.projects}`}
+    >
       <Icon name="lucide:arrow-left" size={16} aria-hidden="true" />
       {t.projectDetail.backToProjects}
     </a>
 
     <ProjectHero project={project} />
 
-    {hasContent ? <div class:list={[
-      'mt-16 grid justify-center gap-18 max-[900px]:mt-12 max-[900px]:grid-cols-1',
-      hasTocItems ? 'grid-cols-[180px_minmax(0,720px)]' : 'grid-cols-[minmax(0,720px)]',
-    ]}>
-      {hasTocItems && <ProjectTableOfContents items={tocItems} />}
+    {hasContent ? (
+      <div
+        class:list={[
+          'mt-16 grid justify-center gap-18 max-[900px]:mt-12 max-[900px]:grid-cols-1',
+          hasTocItems ? 'grid-cols-[180px_minmax(0,720px)]' : 'grid-cols-[minmax(0,720px)]'
+        ]}
+      >
+        {hasTocItems && <ProjectTableOfContents items={tocItems} />}
 
-      <div class="case-study-sections min-w-0">
-        <slot />
+        <div class="case-study-sections min-w-0">
+          <slot />
+        </div>
       </div>
-    </div> : <section class="px-4 pt-10 pb-2 text-center" aria-labelledby="project-empty-title">
-      <p class="m-0 text-sm leading-relaxed text-muted-foreground">
-        <span id="project-empty-title" class="font-medium text-brand">{t.projectDetail.emptyTitle}</span>
-        <span class="mx-2" aria-hidden="true">·</span>
-        {t.projectDetail.emptyDescription}
-      </p>
-    </section>}
+    ) : (
+      <section class="px-4 pt-10 pb-2 text-center" aria-labelledby="project-empty-title">
+        <p class="m-0 text-sm leading-relaxed text-muted-foreground">
+          <span id="project-empty-title" class="font-medium text-brand">
+            {t.projectDetail.emptyTitle}
+          </span>
+          <span class="mx-2" aria-hidden="true">
+            ·
+          </span>
+          {t.projectDetail.emptyDescription}
+        </p>
+      </section>
+    )}
   </article>
 </main>

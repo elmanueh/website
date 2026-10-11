@@ -12,11 +12,13 @@ const projects = defineCollection({
       return `${match[1]}/${match[2]}`
     }
   }),
-  schema: z.object({
-    title: z.string().trim().min(1),
-    description: z.string().trim().min(1),
-    tags: z.array(z.string().trim().min(1)).min(1)
-  }).strict()
+  schema: z
+    .object({
+      title: z.string().trim().min(1),
+      description: z.string().trim().min(1),
+      tags: z.array(z.string().trim().min(1)).min(1)
+    })
+    .strict()
 })
 
 export const collections = { projects }

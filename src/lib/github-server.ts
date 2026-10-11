@@ -20,8 +20,11 @@ async function github(path: string, token: string | undefined, timeout = REQUEST
     },
     signal: AbortSignal.timeout(timeout)
   })
-  if (response.status === 429 || (response.status === 403 &&
-    (response.headers.has('retry-after') || response.headers.get('x-ratelimit-remaining') === '0'))) {
+  if (
+    response.status === 429 ||
+    (response.status === 403 &&
+      (response.headers.has('retry-after') || response.headers.get('x-ratelimit-remaining') === '0'))
+  ) {
     const delay = Number(response.headers.get('retry-after'))
     const reset = Number(response.headers.get('x-ratelimit-reset')) * 1000 || 0
     retryAt = delay > 0 ? Date.now() + delay * 1000 : Math.max(reset, Date.now() + 60_000)
@@ -29,17 +32,23 @@ async function github(path: string, token: string | undefined, timeout = REQUEST
   return response
 }
 
-async function fetchMonthlyActivity(path: string, token: string | undefined, hasCommits: boolean): Promise<RepositoryMetadata['monthlyActivity']> {
+async function fetchMonthlyActivity(
+  path: string,
+  token: string | undefined,
+  hasCommits: boolean
+): Promise<RepositoryMetadata['monthlyActivity']> {
   // Eleven completed calendar months plus the current month to date, in UTC.
   const now = new Date()
   const end = now.getTime()
   const start = Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - ACTIVITY_MONTHS + 1, 1)
   const months = Array.from({ length: ACTIVITY_MONTHS }, (_, index) => ({
-    month: new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - ACTIVITY_MONTHS + 1 + index, 1)).toISOString().slice(0, 7),
+    month: new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - ACTIVITY_MONTHS + 1 + index, 1))
+      .toISOString()
+      .slice(0, 7),
     commits: 0
   }))
   if (!hasCommits) return months
-  const monthsByDate = new Map(months.map(month => [month.month, month]))
+  const monthsByDate = new Map(months.map((month) => [month.month, month]))
   const query = new URLSearchParams({
     since: new Date(start).toISOString(),
     until: now.toISOString(),
@@ -54,7 +63,7 @@ async function fetchMonthlyActivity(path: string, token: string | undefined, has
     const response = await github(`${path}/commits?${query}&page=${page}`, token, Math.min(REQUEST_TIMEOUT, remaining))
     if (response.status === 409) return page === 1 ? months : null
     if (!response.ok) return null
-    const commits = await response.json() as { commit?: { committer?: { date?: unknown } } }[]
+    const commits = (await response.json()) as { commit?: { committer?: { date?: unknown } } }[]
     if (!Array.isArray(commits)) return null
     for (const commit of commits) {
       const date = commit.commit?.committer?.date
@@ -73,7 +82,7 @@ async function fetchMetadata(repository: string, token: string | undefined): Pro
   // Refresh visibility on cache misses; expired metadata is never served.
   const response = await github(path, token)
   if (!response.ok) throw new Error('Repository metadata is unavailable')
-  const repo = await response.json() as { private?: unknown }
+  const repo = (await response.json()) as { private?: unknown }
   if (typeof repo.private !== 'boolean') throw new Error('Invalid repository visibility')
 
   const updatedAt = await fetchLatestCommitDate(path, token)
@@ -92,7 +101,7 @@ async function fetchLatestCommitDate(path: string, token: string | undefined): P
   const response = await github(`${path}/commits?per_page=1`, token)
   if (response.status === 409) return null
   if (!response.ok) throw new Error('Repository commits are unavailable')
-  const commits = await response.json() as { commit?: { committer?: { date?: unknown } } }[]
+  const commits = (await response.json()) as { commit?: { committer?: { date?: unknown } } }[]
   const date = commits[0]?.commit?.committer?.date
   if (typeof date !== 'string' || Number.isNaN(Date.parse(date))) {
     throw new TypeError('Invalid commit date')
@@ -104,7 +113,7 @@ async function fetchLatestRelease(path: string, token: string | undefined): Prom
   const response = await github(`${path}/releases/latest`, token)
   if (response.status === 404) return '' // No published stable release; null means unavailable.
   if (!response.ok) return null
-  const release = await response.json() as { tag_name?: unknown }
+  const release = (await response.json()) as { tag_name?: unknown }
   return typeof release.tag_name === 'string' && release.tag_name.trim() ? release.tag_name : null
 }
 
@@ -113,10 +122,12 @@ export function getRepositoryMetadata(repository: string, token: string | undefi
   if (cached && cached.expiresAt > Date.now()) return Promise.resolve(cached.data)
   const existing = pending.get(repository)
   if (existing) return existing
-  const request = fetchMetadata(repository, token).then(data => {
-    cache.set(repository, { data, expiresAt: Date.now() + TTL })
-    return data
-  }).finally(() => pending.delete(repository))
+  const request = fetchMetadata(repository, token)
+    .then((data) => {
+      cache.set(repository, { data, expiresAt: Date.now() + TTL })
+      return data
+    })
+    .finally(() => pending.delete(repository))
   pending.set(repository, request)
   return request
 }

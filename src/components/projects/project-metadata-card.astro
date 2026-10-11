@@ -18,7 +18,8 @@ const localizeHref = (href: string) => {
   const [path, fragment] = href.split('#', 2)
   return `${i18n.path(path)}${fragment ? `#${fragment}` : ''}`
 }
-const linkClass = 'flex min-h-12 min-w-0 flex-1 items-center gap-2 px-5 py-3 text-xs font-medium text-muted-foreground no-underline transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring max-[680px]:px-4'
+const linkClass =
+  'flex min-h-12 min-w-0 flex-1 items-center gap-2 px-5 py-3 text-xs font-medium text-muted-foreground no-underline transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring max-[680px]:px-4'
 ---
 
 {(project.repository || project.appUrl) && (
@@ -28,7 +29,12 @@ const linkClass = 'flex min-h-12 min-w-0 flex-1 items-center gap-2 px-5 py-3 tex
         <GithubStats client:load slug={project.slug} locale={locale} />
       </div>
     )}
-    <div class:list={['flex flex-wrap bg-background/30 [&>astro-island]:contents', { 'border-t border-border': project.repository }]}>
+    <div
+      class:list={[
+        'flex flex-wrap bg-background/30 [&>astro-island]:contents',
+        { 'border-t border-border': project.repository }
+      ]}
+    >
       {project.repository && (
         <GithubButton
           client:load

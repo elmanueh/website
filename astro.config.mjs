@@ -29,8 +29,7 @@ export default defineConfig({
       i18n: { defaultLocale: 'es', locales: { es: 'es', en: 'en' } },
       serialize(item) {
         const defaultLink = item.links?.find((link) => link.lang === 'en')
-        if (defaultLink)
-          item.links = [...(item.links ?? []), { lang: 'x-default', url: defaultLink.url }]
+        if (defaultLink) item.links = [...(item.links ?? []), { lang: 'x-default', url: defaultLink.url }]
         return item
       }
     })

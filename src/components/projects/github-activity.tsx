@@ -1,11 +1,4 @@
-import {
-  Area,
-  AreaChart,
-  ReferenceDot,
-  ReferenceLine,
-  XAxis,
-  YAxis
-} from 'recharts'
+import { Area, AreaChart, ReferenceDot, ReferenceLine, XAxis, YAxis } from 'recharts'
 import { useGithubActivity } from '@/hooks/use-github-activity'
 import { en } from '@/i18n/en'
 import { es } from '@/i18n/es'
@@ -19,8 +12,7 @@ export default function GithubActivity({
   months: NonNullable<RepositoryMetadata['monthlyActivity']>
   locale: Locale
 }>) {
-  const { current, isSelected, previewMonth, resetSelection, handleKeyDown } =
-    useGithubActivity(months.length)
+  const { current, isSelected, previewMonth, resetSelection, handleKeyDown } = useGithubActivity(months.length)
   const labels = (locale === 'en' ? en : es).github
   const numbers = new Intl.NumberFormat(locale)
   const dates = new Intl.DateTimeFormat(locale, {
@@ -48,20 +40,13 @@ export default function GithubActivity({
       onKeyDown={handleKeyDown}
     >
       <div className="flex min-h-5 flex-wrap items-center justify-between gap-x-4 gap-y-2">
-        <span className="font-mono text-xs leading-4 text-foreground">
-          {monthLabel}
-        </span>
+        <span className="font-mono text-xs leading-4 text-foreground">{monthLabel}</span>
         <span className="flex shrink-0 items-baseline gap-2 whitespace-nowrap">
-          <span className="font-mono text-lg leading-none text-foreground tabular-nums">
-            {count}
-          </span>
+          <span className="font-mono text-lg leading-none text-foreground tabular-nums">{count}</span>
           <span className="text-xs text-muted-foreground">commits</span>
         </span>
       </div>
-      <div
-        className="h-10 w-full min-w-0 shrink-0 touch-pan-y"
-        aria-hidden="true"
-      >
+      <div className="h-10 w-full min-w-0 shrink-0 touch-pan-y" aria-hidden="true">
         <AreaChart
           responsive
           height={40}
@@ -88,26 +73,13 @@ export default function GithubActivity({
           />
           {isSelected && (
             <>
-              <ReferenceLine
-                x={month.month}
-                stroke="var(--brand)"
-                strokeWidth={2}
-                strokeOpacity={0.5}
-              />
-              <ReferenceDot
-                x={month.month}
-                y={month.commits}
-                r={4}
-                fill="var(--brand)"
-                stroke="var(--card)"
-              />
+              <ReferenceLine x={month.month} stroke="var(--brand)" strokeWidth={2} strokeOpacity={0.5} />
+              <ReferenceDot x={month.month} y={month.commits} r={4} fill="var(--brand)" stroke="var(--card)" />
             </>
           )}
         </AreaChart>
       </div>
-      <span className="text-xs leading-4 text-muted-foreground">
-        {labels.activityPeriod}
-      </span>
+      <span className="text-xs leading-4 text-muted-foreground">{labels.activityPeriod}</span>
     </div>
   )
 }

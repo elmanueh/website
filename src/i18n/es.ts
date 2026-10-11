@@ -5,7 +5,8 @@ export const es = {
   meta: {
     home: {
       title: 'Manuel Bernabé Rodríguez | Backend Software Engineer (.NET)',
-      description: 'Portfolio de Manuel Bernabé Rodríguez, desarrollador backend .NET. Experiencia en APIs e integraciones y proyectos de arquitectura, testing y automatización.',
+      description:
+        'Portfolio de Manuel Bernabé Rodríguez, desarrollador backend .NET. Experiencia en APIs e integraciones y proyectos de arquitectura, testing y automatización.',
       imageAlt: 'Portfolio de Manuel Bernabé Rodríguez, Backend Software Engineer (.NET). C# · .NET · ASP.NET Core.'
     },
     clashOfClans: {
@@ -25,7 +26,8 @@ export const es = {
   },
   hero: {
     location: 'Orihuela, Alicante, España',
-    summary: 'Diseño y desarrollo APIs REST y software empresarial mantenible, con especial interés en arquitectura de software, automatización e infraestructura.',
+    summary:
+      'Diseño y desarrollo APIs REST y software empresarial mantenible, con especial interés en arquitectura de software, automatización e infraestructura.',
     stackLead: 'Mi stack principal es',
     downloadCv: 'Descargar CV',
     profileAria: 'Perfil de Manuel Bernabé Rodríguez',
@@ -66,7 +68,7 @@ export const es = {
     publicRepository: 'Público',
     privateRepository: 'Privado',
     latestRelease: 'Versión',
-    noReleases: 'Sin versión',
+    noReleases: 'Sin versión'
   },
   social: {
     github: 'GitHub de Manuel',
@@ -76,7 +78,8 @@ export const es = {
   notFound: {
     eyebrow: 'Página no encontrada',
     heading: 'Esta página no existe.',
-    description: 'Puede que se haya movido o que la dirección no sea correcta. En cualquier caso, aquí no hay nada que mostrar.',
+    description:
+      'Puede que se haya movido o que la dirección no sea correcta. En cualquier caso, aquí no hay nada que mostrar.',
     backHome: 'Volver al inicio',
     navigationAria: 'Opción para continuar'
   },
@@ -86,7 +89,16 @@ export const es = {
     searchHighlight: 'clan',
     searchButton: 'BUSCAR',
     columns: {
-      Clan: 'Clan', Player: 'Jugador', Name: 'Nombre', Role: 'Rango', TownHall: 'TH', LootCapital: 'Capital +', AddCapital: 'Capital -', ClanGames: 'Juegos', WarPreference: 'Guerra', WarAttacks: 'Guerra Atq.'
+      Clan: 'Clan',
+      Player: 'Jugador',
+      Name: 'Nombre',
+      Role: 'Rango',
+      TownHall: 'TH',
+      LootCapital: 'Capital +',
+      AddCapital: 'Capital -',
+      ClanGames: 'Juegos',
+      WarPreference: 'Guerra',
+      WarAttacks: 'Guerra Atq.'
     },
     values: { member: 'Miembro', admin: 'Veterano', coLeader: 'Colíder', leader: 'Líder', in: 'Sí', out: 'No' },
     fetchError: 'No se pudieron cargar los datos del clan.'

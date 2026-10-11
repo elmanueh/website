@@ -10,9 +10,7 @@ export function useGithubActivity(monthCount: number) {
   const previewMonth = (event: MouseHandlerDataParam) => {
     if (event.activeTooltipIndex == null) return resetSelection()
     const index = Number(event.activeTooltipIndex)
-    setSelected(
-      Number.isInteger(index) && index >= 0 && index < monthCount ? index : null
-    )
+    setSelected(Number.isInteger(index) && index >= 0 && index < monthCount ? index : null)
   }
 
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
