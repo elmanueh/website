@@ -11,6 +11,7 @@
     "dev": "astro dev",
     "check": "astro check",
     "build": "astro build",
+    "format": "prettier --write .",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -35,6 +36,8 @@
     "@types/node": "^24.19.1",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "prettier": "3.9.10",
+    "prettier-plugin-astro": "1.1.1",
     "semantic-release": "25.0.9",
     "typescript": "^6.0.3"
   }
