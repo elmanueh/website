@@ -3,6 +3,7 @@ import { existsSync } from 'node:fs'
 import { loadEnvFile } from 'node:process'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@astrojs/react'
+import sitemap from '@astrojs/sitemap'
 import { defineConfig } from 'astro/config'
 import icon from 'astro-icon'
 import node from '@astrojs/node'
@@ -21,7 +22,19 @@ export default defineConfig({
       prefixDefaultLocale: false
     }
   },
-  integrations: [react(), icon({ iconDir: 'public' })],
+  integrations: [
+    react(),
+    icon({ iconDir: 'public' }),
+    sitemap({
+      i18n: { defaultLocale: 'es', locales: { es: 'es', en: 'en' } },
+      serialize(item) {
+        const defaultLink = item.links?.find((link) => link.lang === 'en')
+        if (defaultLink)
+          item.links = [...(item.links ?? []), { lang: 'x-default', url: defaultLink.url }]
+        return item
+      }
+    })
+  ],
   vite: {
     plugins: [tailwindcss()]
   }

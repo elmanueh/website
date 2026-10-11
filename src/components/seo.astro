@@ -1,0 +1,43 @@
+---
+import { I18n } from '@/i18n'
+import { getProfile } from '@/data/profile'
+import type { ImageMetadata } from 'astro'
+
+export type Props = {
+  title: string
+  description: string
+  type?: 'website' | 'article'
+} & (
+  | {
+      noindex?: false
+      image: Pick<ImageMetadata, 'src' | 'width' | 'height'> & { alt: string }
+    }
+  | { noindex: true; image?: never }
+)
+
+const { title, description, image, type = 'website', noindex = false } = Astro.props
+const { locale, t } = I18n.from(Astro)
+const url = new URL(Astro.url.pathname.replace(/\/+$/, '') + '/', Astro.site).href
+const imageUrl = image && new URL(image.src, Astro.site).href
+const profile = getProfile(t.hero)
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="author" content={profile.name} />
+{noindex && <meta name="robots" content="noindex, follow" />}
+{!noindex && image && <>
+  <link rel="canonical" href={url} />
+  <meta property="og:type" content={type} />
+  <meta property="og:site_name" content={profile.name} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={url} />
+  <meta property="og:locale" content={locale === 'es' ? 'es_ES' : 'en_US'} />
+  <meta property="og:locale:alternate" content={locale === 'es' ? 'en_US' : 'es_ES'} />
+  <meta property="og:image" content={imageUrl} />
+  <meta property="og:image:alt" content={image.alt} />
+  <meta property="og:image:width" content={String(image.width)} />
+  <meta property="og:image:height" content={String(image.height)} />
+  <meta name="twitter:card" content="summary_large_image" />
+</>}

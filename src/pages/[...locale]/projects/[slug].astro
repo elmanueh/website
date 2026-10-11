@@ -1,5 +1,6 @@
 ---
 import type { GetStaticPaths } from 'astro'
+import { getImage } from 'astro:assets'
 import { getProjectCaseStudy, getProjectSlugs } from '@/services/projects'
 import { I18n } from '@/i18n'
 import CaseStudyLayout from '@/layouts/case-study-layout.astro'
@@ -11,12 +12,19 @@ export const getStaticPaths = (async () => (await getProjectSlugs()).flatMap((sl
 ])) satisfies GetStaticPaths
 
 const i18n = I18n.from(Astro)
-const { locale } = i18n
+const { locale, t } = i18n
 const slug = Astro.params.slug ?? ''
 const { project, Content, headings, hasContent } = await getProjectCaseStudy(slug, locale)
+const socialImage = await getImage({ src: project.image, format: 'jpg', quality: 85 })
+const image = {
+  ...project.image,
+  ...socialImage.attributes,
+  src: socialImage.src,
+  alt: `${t.projects.previewAlt} ${project.title}`
+}
 ---
 
-<Layout title={`${project.title} | elmanueh`} description={project.subtitle}>
+<Layout title={`${project.title} | Manuel Bernabé Rodríguez`} description={project.subtitle} type="article" image={image}>
   <CaseStudyLayout project={project} headings={headings} hasContent={hasContent}>
     <Content />
   </CaseStudyLayout>

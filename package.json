@@ -17,6 +17,7 @@
   "dependencies": {
     "@astrojs/node": "^11.1.6",
     "@astrojs/react": "^7.0.0",
+    "@astrojs/sitemap": "^3.7.4",
     "@iconify-json/lucide": "^1.2.136",
     "@iconify-json/simple-icons": "^1.2.97",
     "@tailwindcss/vite": "^4.3.3",

@@ -4,7 +4,9 @@ export const en = {
   anchors: { home: 'home', projects: 'projects' },
   meta: {
     home: {
-      title: 'elmanueh | Software Engineer'
+      title: 'Manuel Bernabé Rodríguez | Backend Software Engineer (.NET)',
+      description: 'Portfolio of Manuel Bernabé Rodríguez, a .NET backend developer. Experience building APIs and integrations, with projects in architecture, testing and automation.',
+      imageAlt: 'Manuel Bernabé Rodríguez’s portfolio, Backend Software Engineer (.NET). C# · .NET · ASP.NET Core.'
     },
     clashOfClans: {
       title: 'Clash of Clans API | elmanueh'

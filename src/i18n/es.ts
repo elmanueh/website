@@ -4,7 +4,9 @@ export const es = {
   anchors: { home: 'inicio', projects: 'proyectos' },
   meta: {
     home: {
-      title: 'elmanueh | Software Engineer'
+      title: 'Manuel Bernabé Rodríguez | Backend Software Engineer (.NET)',
+      description: 'Portfolio de Manuel Bernabé Rodríguez, desarrollador backend .NET. Experiencia en APIs e integraciones y proyectos de arquitectura, testing y automatización.',
+      imageAlt: 'Portfolio de Manuel Bernabé Rodríguez, Backend Software Engineer (.NET). C# · .NET · ASP.NET Core.'
     },
     clashOfClans: {
       title: 'API Clash of Clans | elmanueh'

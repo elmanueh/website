@@ -7,7 +7,7 @@ export type Locale = 'es' | 'en'
 export interface Translations {
   anchors: Record<'home' | 'projects', string>
   meta: {
-    home: { title: string }
+    home: { title: string; description: string; imageAlt: string }
     clashOfClans: { title: string }
     notFound: { title: string }
   }

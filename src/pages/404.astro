@@ -7,7 +7,7 @@ const i18n = I18n.from(Astro)
 const { t } = i18n
 ---
 
-<Layout title={t.meta.notFound.title}>
+<Layout title={t.meta.notFound.title} description={t.notFound.description} noindex>
   <main class="mx-auto flex min-h-[calc(100vh-4rem-110px)] w-full max-w-255 items-center px-6 py-16 max-[680px]:px-4 max-[680px]:py-12">
     <section class="mx-auto w-full max-w-175 max-[680px]:text-center" aria-labelledby="error-title">
       <div class="mb-10 flex items-center text-[9rem] leading-[.75] font-light tracking-[-.075em] text-foreground/[.07] max-[680px]:justify-center max-[680px]:text-[7rem]" aria-hidden="true">

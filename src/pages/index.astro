@@ -4,12 +4,31 @@ import ProjectCard from '@/components/project-card.astro'
 import { getProjects } from '@/services/projects'
 import { I18n } from '@/i18n'
 import Layout from '@/layouts/layout.astro'
+import { getProfile } from '@/data/profile'
+import { getSocialLinks } from '@/data/social-links'
+import portfolioImage from '@public/og/portfolio.png'
 
 const { locale, t } = I18n.from(Astro)
 const projects = await getProjects(locale)
+const image = {
+  ...portfolioImage,
+  src: '/og/portfolio.png',
+  alt: t.meta.home.imageAlt
+}
+const profile = getProfile(t.hero)
+const schema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': new URL('/#person', Astro.site).href,
+  name: profile.name,
+  url: new URL('/', Astro.site).href,
+  jobTitle: profile.role,
+  sameAs: getSocialLinks(t.social).filter(({ external }) => external).map(({ href }) => href)
+}).replace(/</g, '\\u003c')
 ---
 
-<Layout title={t.meta.home.title}>
+<Layout title={t.meta.home.title} description={t.meta.home.description} image={image}>
+  <script slot="head" type="application/ld+json" is:inline set:html={schema} />
   <main>
     <div class="mx-auto w-full max-w-255 px-6 max-[680px]:px-4">
       <Hero />
