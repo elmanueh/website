@@ -1,7 +1,9 @@
 import type { RepositoryMetadata } from '@/types/github'
 
 const TTL = 15 * 60 * 1000
-const ACTIVITY_MONTHS = 12
+const ACTIVITY_BLOCKS = 14
+const ACTIVITY_INTERVAL = 14 * 24 * 60 * 60 * 1000
+const ACTIVITY_ANCHOR = Date.UTC(1970, 0, 5)
 const REQUEST_TIMEOUT = 10_000
 const ACTIVITY_TIMEOUT = 20_000
 const MAX_ACTIVITY_PAGES = 50
@@ -32,23 +34,33 @@ async function github(path: string, token: string | undefined, timeout = REQUEST
   return response
 }
 
-async function fetchMonthlyActivity(
+function getActivityBlockStart(timestamp: number): number {
+  return ACTIVITY_ANCHOR + Math.floor((timestamp - ACTIVITY_ANCHOR) / ACTIVITY_INTERVAL) * ACTIVITY_INTERVAL
+}
+
+function createActivityPeriods(timestamp: number) {
+  // Fixed Monday-to-Sunday fortnights. Shift the window only when a new block begins.
+  const currentStart = getActivityBlockStart(timestamp)
+  // Thirteen completed blocks (182 days) plus the current block approximate six months.
+  const start = currentStart - (ACTIVITY_BLOCKS - 1) * ACTIVITY_INTERVAL
+  const periods = Array.from({ length: ACTIVITY_BLOCKS }, (_, index) => ({
+    start: new Date(start + index * ACTIVITY_INTERVAL).toISOString(),
+    end: new Date(start + (index + 1) * ACTIVITY_INTERVAL - 1).toISOString(),
+    isCurrent: start + index * ACTIVITY_INTERVAL === currentStart,
+    commits: 0
+  }))
+  return { start, periods }
+}
+
+async function fetchActivity(
   path: string,
   token: string | undefined,
   hasCommits: boolean
-): Promise<RepositoryMetadata['monthlyActivity']> {
-  // Eleven completed calendar months plus the current month to date, in UTC.
+): Promise<RepositoryMetadata['activity']> {
   const now = new Date()
   const end = now.getTime()
-  const start = Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - ACTIVITY_MONTHS + 1, 1)
-  const months = Array.from({ length: ACTIVITY_MONTHS }, (_, index) => ({
-    month: new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - ACTIVITY_MONTHS + 1 + index, 1))
-      .toISOString()
-      .slice(0, 7),
-    commits: 0
-  }))
-  if (!hasCommits) return months
-  const monthsByDate = new Map(months.map((month) => [month.month, month]))
+  const { start, periods } = createActivityPeriods(end)
+  if (!hasCommits) return periods
   const query = new URLSearchParams({
     since: new Date(start).toISOString(),
     until: now.toISOString(),
@@ -61,7 +73,7 @@ async function fetchMonthlyActivity(
     const remaining = deadline - Date.now()
     if (remaining <= 0) return null
     const response = await github(`${path}/commits?${query}&page=${page}`, token, Math.min(REQUEST_TIMEOUT, remaining))
-    if (response.status === 409) return page === 1 ? months : null
+    if (response.status === 409) return page === 1 ? periods : null
     if (!response.ok) return null
     const commits = (await response.json()) as { commit?: { committer?: { date?: unknown } } }[]
     if (!Array.isArray(commits)) return null
@@ -69,10 +81,12 @@ async function fetchMonthlyActivity(
       const date = commit.commit?.committer?.date
       const timestamp = typeof date === 'string' ? Date.parse(date) : Number.NaN
       if (Number.isNaN(timestamp)) return null
-      const month = monthsByDate.get(new Date(timestamp).toISOString().slice(0, 7))
-      if (month && timestamp >= start && timestamp <= end) month.commits++
+      if (timestamp >= start && timestamp <= end) {
+        const period = periods[Math.floor((timestamp - start) / ACTIVITY_INTERVAL)]
+        period.commits++
+      }
     }
-    if (!response.headers.get('link')?.includes('rel="next"')) return months
+    if (!response.headers.get('link')?.includes('rel="next"')) return periods
   }
   return null
 }
@@ -86,14 +100,14 @@ async function fetchMetadata(repository: string, token: string | undefined): Pro
   if (typeof repo.private !== 'boolean') throw new Error('Invalid repository visibility')
 
   const updatedAt = await fetchLatestCommitDate(path, token)
-  const monthlyActivity = await fetchMonthlyActivity(path, token, updatedAt !== null).catch(() => null)
+  const activity = await fetchActivity(path, token, updatedAt !== null).catch(() => null)
   const releaseVersion = await fetchLatestRelease(path, token).catch(() => null)
   return {
     updatedAt,
     sourceUrl: repo.private ? null : `https://github.com/${repository}`,
     visibility: repo.private ? 'private' : 'public',
     releaseVersion,
-    monthlyActivity
+    activity
   }
 }
 

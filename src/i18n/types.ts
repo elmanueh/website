@@ -53,6 +53,7 @@ export interface Translations {
     valueUnavailable: string
     noCommits: string
     activityPeriod: string
+    present: string
     publicRepository: string
     repository: string
     privateRepository: string

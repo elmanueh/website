@@ -3,5 +3,5 @@ export interface RepositoryMetadata {
   sourceUrl: string | null
   visibility: 'public' | 'private'
   releaseVersion: string | null
-  monthlyActivity: { month: string; commits: number }[] | null
+  activity: { start: string; end: string; isCurrent: boolean; commits: number }[] | null
 }

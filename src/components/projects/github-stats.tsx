@@ -92,8 +92,8 @@ export default function GithubStats({ slug, locale }: Readonly<GithubStatsProps>
 
   return (
     <GithubStatsLayout>
-      {metadata.monthlyActivity?.length ? (
-        <GithubActivity months={metadata.monthlyActivity} locale={locale} />
+      {metadata.activity?.length ? (
+        <GithubActivity periods={metadata.activity} locale={locale} />
       ) : (
         <div className="flex min-h-22 min-w-0 flex-col justify-center gap-3">
           <span className="text-xs leading-4 text-muted-foreground">{labels.activityPeriod}</span>
