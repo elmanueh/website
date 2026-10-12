@@ -50,25 +50,28 @@ export default function GithubStats({ slug, locale }: Readonly<GithubStatsProps>
     return (
       <GithubStatsLayout loading>
         <output className="sr-only">{labels.loadingData}</output>
-        <div className="flex min-h-22 min-w-0 flex-col gap-3" aria-hidden="true">
-          <div className="flex min-h-9 items-center justify-between gap-4">
-            <div className="flex flex-col gap-1">
-              <span className="text-xs leading-4 text-muted-foreground">{labels.activityPeriod}</span>
-              <Skeleton className="h-4 w-16" />
-            </div>
-            <Skeleton className="h-6 w-20" />
+        <div className="flex w-full min-w-0 flex-col gap-3" aria-hidden="true">
+          <div className="flex min-h-5 flex-wrap items-center justify-between gap-x-4 gap-y-2">
+            <Skeleton className="h-4 w-56 max-w-full" />
+            <span className="flex shrink-0 items-baseline gap-2 whitespace-nowrap">
+              <span className="font-mono text-lg leading-none">
+                <Skeleton className="h-[1em] w-8" />
+              </span>
+              <span className="text-xs text-muted-foreground">commits</span>
+            </span>
           </div>
-          <Skeleton className="h-10 w-full" />
+          <Skeleton className="h-10 w-full shrink-0" />
+          <span className="text-xs leading-4 text-muted-foreground">{labels.activityPeriod}</span>
         </div>
         <dl className="m-0 grid min-w-0 grid-cols-3 gap-x-5 gap-y-4 max-[680px]:grid-cols-1">
           <GithubStatItem icon={Globe} label={labels.repository}>
-            <Skeleton className="h-[1.75em] w-14" />
+            <Skeleton className="h-4 w-14" />
           </GithubStatItem>
           <GithubStatItem icon={Tag} label={labels.latestRelease}>
-            <Skeleton className="h-[1.75em] w-16" />
+            <Skeleton className="h-4 w-16" />
           </GithubStatItem>
           <GithubStatItem icon={RefreshCw} label={labels.lastCommit}>
-            <Skeleton className="h-[1.75em] w-28" />
+            <Skeleton className="h-4 w-28" />
           </GithubStatItem>
         </dl>
       </GithubStatsLayout>
