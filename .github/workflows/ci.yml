@@ -39,5 +39,8 @@ jobs:
           context: .
           push: false
           platforms: linux/amd64
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: |
+            type=gha,scope=docker-ci
+            type=gha,scope=docker-release-amd64
+          # Release builds write to a separate cache for each architecture.
+          cache-to: type=gha,scope=docker-ci,mode=max

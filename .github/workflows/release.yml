@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: release
+  group: release-actions-${{ github.repository }}
   cancel-in-progress: false
 
 permissions:
@@ -16,105 +16,60 @@ jobs:
     uses: ./.github/workflows/ci.yml
 
   release:
-    name: Publish semantic release
+    name: Create release
     needs: ci
     runs-on: ubuntu-24.04
+
     permissions:
       contents: write
-      packages: write
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      IMAGE_NAME: ghcr.io/${{ github.repository }}
+      packages: read
+
     steps:
-      - name: Checkout complete history
+      - name: Checkout
         uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
-      - name: Set up pnpm and Node
-        uses: pnpm/setup@v3
+      - name: Create release
+        uses: elmanueh/release-actions@v1
         with:
-          runtime: node@24
-          cache: true
-          require-lockfile: true
+          operation: create-release
 
-      - name: Analyze commits and publish the release
-        run: pnpm exec semantic-release
+  build:
+    name: Build on ${{ matrix.runner }}
+    needs: release
+    runs-on: ${{ matrix.runner }}
 
-      - name: Resolve the published release version
-        id: release
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          tag="$(git tag --points-at HEAD --list 'v[0-9]*.[0-9]*.[0-9]*' --sort=-v:refname | head -n 1)"
-          if [[ -z "$tag" ]]; then
-            echo "semantic-release did not create a release for this revision." >&2
-            exit 1
-          fi
-          gh release view "$tag" --json tagName >/dev/null
-          version="${tag#v}"
-          if [[ ! "$version" =~ ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
-            echo "Invalid stable release version: $version" >&2
-            exit 1
-          fi
-          echo "version=$version" >> "$GITHUB_OUTPUT"
-          echo "tag=v$version" >> "$GITHUB_OUTPUT"
+    permissions:
+      contents: read
+      packages: write
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v4
+    strategy:
+      fail-fast: false
+      matrix:
+        runner:
+          - ubuntu-24.04
+          - ubuntu-24.04-arm
 
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Build image
+        uses: elmanueh/release-actions@v1
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          operation: build-image
 
-      - name: Reject an existing immutable image
-        env:
-          RELEASE_TAG: ${{ steps.release.outputs.tag }}
-        run: |
-          if docker manifest inspect "${IMAGE_NAME}:${RELEASE_TAG}" >/dev/null 2>&1; then
-            echo "${IMAGE_NAME}:${RELEASE_TAG} already exists; it will not be overwritten." >&2
-            exit 1
-          fi
+  publish:
+    name: Publish image
+    needs: build
+    runs-on: ubuntu-24.04
 
-      - name: Generate Docker metadata
-        id: metadata
-        uses: docker/metadata-action@v6
+    permissions:
+      packages: write
+
+    steps:
+      - name: Publish image
+        uses: elmanueh/release-actions@v1
         with:
-          images: ${{ env.IMAGE_NAME }}
-          tags: type=raw,value=${{ steps.release.outputs.tag }}
-          labels: |
-            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
-            org.opencontainers.image.revision=${{ github.sha }}
-            org.opencontainers.image.version=${{ steps.release.outputs.version }}
-
-      - name: Build and publish release image
-        id: image
-        uses: docker/build-push-action@v7
-        with:
-          context: .
-          push: true
-          platforms: linux/amd64,linux/arm64
-          tags: ${{ steps.metadata.outputs.tags }}
-          labels: ${{ steps.metadata.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-
-      - name: Verify the published image digest
-        env:
-          RELEASE_TAG: ${{ steps.release.outputs.tag }}
-          EXPECTED_DIGEST: ${{ steps.image.outputs.digest }}
-        run: |
-          published_digest="$(docker buildx imagetools inspect "${IMAGE_NAME}:${RELEASE_TAG}" --format '{{json .Manifest.Digest}}' | tr -d '"')"
-          if [[ "$published_digest" != "$EXPECTED_DIGEST" ]]; then
-            echo "Published digest mismatch: expected $EXPECTED_DIGEST, got $published_digest" >&2
-            exit 1
-          fi
-          {
-            echo "### Published image"
-            echo '```text'
-            echo "${IMAGE_NAME}:${RELEASE_TAG}@${published_digest}"
-            echo '```'
-          } >> "$GITHUB_STEP_SUMMARY"
+          operation: publish-image
