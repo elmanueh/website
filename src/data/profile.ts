@@ -18,7 +18,7 @@ const profileDefinition: ProfileDefinition = {
   role: 'Backend Software Engineer',
   email: 'contacto@elmanueh.es',
   stack: ['.NET', 'C#', 'ASP.NET Core', 'SQL Server'],
-  cvUrl: '/CV_Manuel_Bernabe_Rodriguez.pdf'
+  cvUrl: '/cv.pdf'
 }
 
 export function getProfile(translation: ProfileTranslation): Profile {
