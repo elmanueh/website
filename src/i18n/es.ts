@@ -29,7 +29,7 @@ export const es = {
     summary:
       'Diseño y desarrollo APIs REST y software empresarial mantenible, con especial interés en arquitectura de software, automatización e infraestructura.',
     stackLead: 'Mi stack principal es',
-    downloadCv: 'Descargar CV',
+    cvLabel: 'Consultar CV',
     profileAria: 'Perfil de Manuel Bernabé Rodríguez',
     profileAlt: 'Retrato de Manuel Bernabé Rodríguez',
     focusEyebrow: 'Enfoque',

@@ -21,7 +21,7 @@ export interface Translations {
   }
   hero: ProfileTranslation & {
     stackLead: string
-    downloadCv: string
+    cvLabel: string
     profileAria: string
     profileAlt: string
     focusEyebrow: string

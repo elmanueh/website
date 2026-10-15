@@ -29,7 +29,7 @@ export const en = {
     summary:
       'I design and build maintainable REST APIs and enterprise software, with a particular interest in software architecture, automation and infrastructure.',
     stackLead: 'My core stack is',
-    downloadCv: 'Download CV',
+    cvLabel: 'View CV',
     profileAria: 'Profile of Manuel Bernabé Rodríguez',
     profileAlt: 'Portrait of Manuel Bernabé Rodríguez',
     focusEyebrow: 'Focus',
