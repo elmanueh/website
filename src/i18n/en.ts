@@ -66,7 +66,7 @@ export const en = {
     activityUnavailable: 'Project activity could not be loaded.',
     valueUnavailable: 'Unavailable',
     noCommits: 'No commits',
-    activityPeriod: 'Activity over the last 6 months',
+    activityPeriod: 'Activity over the last 3 months',
     present: 'Present',
     repository: 'Repository',
     publicRepository: 'Public',

@@ -1,8 +1,8 @@
 import type { RepositoryMetadata } from '@/types/github'
 
 const TTL = 15 * 60 * 1000
-const ACTIVITY_BLOCKS = 14
-const ACTIVITY_INTERVAL = 14 * 24 * 60 * 60 * 1000
+const ACTIVITY_BLOCKS = 13
+const ACTIVITY_INTERVAL = 7 * 24 * 60 * 60 * 1000
 const ACTIVITY_ANCHOR = Date.UTC(1970, 0, 5)
 const REQUEST_TIMEOUT = 10_000
 const ACTIVITY_TIMEOUT = 20_000
@@ -39,9 +39,9 @@ function getActivityBlockStart(timestamp: number): number {
 }
 
 function createActivityPeriods(timestamp: number) {
-  // Fixed Monday-to-Sunday fortnights. Shift the window only when a new block begins.
+  // Fixed Monday-to-Sunday weeks. Shift the window only when a new block begins.
   const currentStart = getActivityBlockStart(timestamp)
-  // Thirteen completed blocks (182 days) plus the current block approximate six months.
+  // Twelve completed weeks (84 days) plus the current week approximate three months.
   const start = currentStart - (ACTIVITY_BLOCKS - 1) * ACTIVITY_INTERVAL
   const periods = Array.from({ length: ACTIVITY_BLOCKS }, (_, index) => ({
     start: new Date(start + index * ACTIVITY_INTERVAL).toISOString(),
