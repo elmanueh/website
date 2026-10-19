@@ -54,7 +54,10 @@ export const en = {
     backToProjects: 'Back to projects',
     openCaseStudy: 'View case study for',
     emptyTitle: 'Coming soon',
-    emptyDescription: 'More details about this project.'
+    emptyDescription: 'More details about this project.',
+    enlargeImage: 'Enlarge image',
+    closeImage: 'Close image',
+    imagePreview: 'Enlarged image'
   },
   github: {
     lastCommit: 'Last updated',

@@ -44,6 +44,9 @@ export interface Translations {
     openCaseStudy: string
     emptyTitle: string
     emptyDescription: string
+    enlargeImage: string
+    closeImage: string
+    imagePreview: string
   }
   github: {
     lastCommit: string

@@ -2,6 +2,7 @@
 import { Icon } from 'astro-icon/components'
 import ProjectHero from '@/components/projects/project-hero.astro'
 import ProjectTableOfContents from '@/components/projects/project-table-of-contents.astro'
+import ProjectImageViewer from '@/components/projects/project-image-viewer.astro'
 import type { Project } from '@/types/project'
 import { I18n } from '@/i18n'
 import '@/styles/case-study.css'
@@ -64,4 +65,5 @@ const hasTocItems = tocItems.length > 0
       </section>
     )}
   </article>
+  {hasContent && <ProjectImageViewer />}
 </main>
