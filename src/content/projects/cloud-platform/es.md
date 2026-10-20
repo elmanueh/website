@@ -27,7 +27,12 @@ La arquitectura tiene dos recorridos: el que permite desplegar cambios y el que 
 - **Nginx** recibe las visitas y las dirige a la aplicación correspondiente según el dominio.
 - **Certbot e IONOS** permiten obtener y renovar los certificados que utiliza Nginx para ofrecer HTTPS.
 
+<figure>
+
 ![Arquitectura de Cloud Platform: GitHub Actions ejecuta Ansible por SSH, el servidor aloja aplicaciones Docker detrás de Nginx y Certbot gestiona certificados mediante IONOS](../../../assets/projects/cloud-platform-banner.png)
+
+<figcaption>Arquitectura de la plataforma: despliegue automatizado y publicación de aplicaciones con HTTPS.</figcaption>
+</figure>
 
 Una imagen de contenedor es el paquete con el que se distribuye una aplicación. Cloud Platform descarga imágenes ya publicadas en GitHub Container Registry (GHCR). La construcción del código pertenece al repositorio de cada aplicación. Esta separación permite actualizar un servicio sin mezclar su desarrollo con la configuración de la infraestructura.
 
