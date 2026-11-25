@@ -35,7 +35,7 @@
 }
 
 @theme inline {
-  --container-page: 63.75rem;
+  --container-page: 65rem;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
